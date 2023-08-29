@@ -1,4 +1,4 @@
-# Project Title
+# Joker Nightlife App
 
 This is a school Project for our professional qualification at BBS Wirtschaft Lingen.
 
