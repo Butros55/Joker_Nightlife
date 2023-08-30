@@ -10,7 +10,7 @@ This is a school Project for our professional qualification at BBS Wirtschaft Li
 
 ### Dependencies
 
-* To run the App you need Kivy and Python
+* To run the App you need React Native and expo
 * ex. Windows 10/11
 * ex. macOS
 
