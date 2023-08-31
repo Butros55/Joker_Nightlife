@@ -15,27 +15,23 @@ This is a school Project for our professional qualification at BBS Wirtschaft Li
 * ex. macOS
 
 ### Installing
+* You can download the App with the code below
+```
+git clone https://github.com/Butros55/Joker_Nightlife
+```
 
-* Will be availiable in the future on the AppStore and GooglePlay
+Will be availiable in the future on AppStore and GooglePlay
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+* cd in the Joker_Nightlife folder
+* execute the App with
 ```
-code blocks for commands
+npm start
 ```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+* scan the QR-Code with ur Expo-Go App or start a virtual Phone with Android or IOS
 
 ## Authors
-
-Contributors names and contact info
 
 ex. Maciej
 ex. Leonie
@@ -49,4 +45,4 @@ ex. Geret Wessling
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+
