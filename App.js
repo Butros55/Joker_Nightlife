@@ -3,16 +3,26 @@ import { Image } from 'expo-image';
 import joker_logo from './assets/pictures/logo.png';
 import apple_button from './assets/pictures/apple_button.png';
 import { Video, ResizeMode } from 'expo-av';
+import { useState , useEffect } from 'react';
 import React from 'react';
-
+import * as AppleAuthentication from 'expo-apple-authentication';
 
 export default function App() {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
 
+  //check if Apple login is available
+  const [isAppleLoginAvailable, setIsAppleLoginAvailable] = useState(false);
+
+  useEffect(() => {
+      AppleAuthentication.isAvailableAsync().then(setIsAppleLoginAvailable);
+  }, []);
+
   return (
     <View style={styles.wrapper}>
+
       <View style={styles.container}>
+
         <Video
           ref={video}
           style={styles.video}
@@ -24,19 +34,49 @@ export default function App() {
           isMuted={true}
           shouldPlay={true}
           />
+
+          
+          {isAppleLoginAvailable && (
+            <AppleAuthentication.AppleAuthenticationButton
+              buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+              buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+              cornerRadius={5}
+              style={styles.button}
+              onPress={async () => {
+                try {
+                  const credential = await AppleAuthentication.signInAsync({
+                    requestedScopes: [
+                      AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                      AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                    ],
+                  });
+                  // signed in
+                } catch (e) {
+                  if (e.code === 'ERR_REQUEST_CANCELED') {
+                    // handle that the user canceled the sign-in flow
+                  } else {
+                    // handle other errors
+                  }
+                }
+              }}
+            />
+          )}
+
+
           <Image 
             source={joker_logo}
             style={styles.joker_logo}
             contentFit='contain'
           />
-          <Image
-            source={apple_button}
-            style={styles.apple_button}
-            contentFit='contain'
-          />
+
           <Text style={{ fontSize: 15, position: 'absolute', color: 'white',  textAlign: 'center', top: '84%'}}>
-            - or - {'\n'}{'\n'} SIGN IN WITH E-MAIL
+            - or -
           </Text>
+
+          <Text style={{ fontSize: 15, position: 'absolute', color: 'white',  textAlign: 'center', top: '88%'}}>
+            SIGN IN WITH E-MAIL
+          </Text>
+
         </View>
     </View>
   );
@@ -45,6 +85,14 @@ export default function App() {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+  },
+
+  button: {
+    flex: 1,
+    position: 'absolute',
+    top: '77%',
+    width: 300,
+    height: 32
   },
 
   container: {
@@ -73,7 +121,7 @@ const styles = StyleSheet.create({
 
   video: {
     flex: 1,
-    width: '400%',
+    width: '390%',
     opacity: 0.7
   },
 
