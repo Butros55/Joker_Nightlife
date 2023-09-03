@@ -1,4 +1,3 @@
-import { Joker_Logo_Big, StyledContainer, Wrapper } from "../components/styles";
 import { Image } from 'expo-image';
 import {
     Colors,
@@ -7,7 +6,7 @@ import {
     Joker_Logo_Big,
   } from '../components/styles';
 
-const Home = () => {
+const HomeScreen = () => {
     return(
         <Wrapper>
             <StyledContainer>
@@ -17,6 +16,6 @@ const Home = () => {
             </StyledContainer>
         </Wrapper>
     );
-}
+};
 
 export default HomeScreen;

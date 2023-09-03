@@ -4,11 +4,9 @@ import joker_logo from './../assets/pictures/logo.png';
 import { Video, ResizeMode } from 'expo-av';
 import { useState , useEffect } from 'react';
 import * as AppleAuthentication from 'expo-apple-authentication';
-import { router } from 'expo-router';
 
 //styles
 import {
-  Colors,
   StyledContainer,
   Wrapper,
   Joker_Logo_Big,
@@ -68,11 +66,6 @@ const Login = () => {
         //logged in
         const decoded = jwtDecode(userToken.identityToken);
         const current_date = Date.now() / 1000;
-
-
-        //übergang zu Home geht noch nicht
-
-
       }
     };
   
