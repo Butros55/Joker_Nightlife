@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import styled from 'styled-components/native';
 import { Image } from 'expo-image';
 import { Video } from 'expo-av';
@@ -27,9 +27,27 @@ export const Wrapper = styled.View`
 export const Joker_Logo_Big = styled.Image`
     alignContent: center;
     width: 80%;
-    height: 10%;
+    height:10%;
     position: absolute;
-    top: 20%;
+    top: 15%;
     tintColor: white;
+`;
+
+export const LoginWithEmailButton = styled.TouchableOpacity`
+    textAlign: center;
+    position: absolute;
+    top: 89%;
+`;
+
+export const InputContainer = styled.View`
+    position: absolute;
+    width: 80%;
+`;
+
+export const ButtonContainer = styled.View`
+    position: absolute;
+    width: 60%;
+    top: 60%;
+    alignItem: center;
 `;
 

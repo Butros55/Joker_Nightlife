@@ -1,74 +1,25 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import joker_logo from './../assets/pictures/logo.png';
 import { Video, ResizeMode } from 'expo-av';
 import { useState , useEffect } from 'react';
-import * as AppleAuthentication from 'expo-apple-authentication';
 
 //styles
 import {
   StyledContainer,
   Wrapper,
   Joker_Logo_Big,
+  LoginWithEmailButton,
 } from '../components/styles';
-import jwtDecode from 'jwt-decode';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Login = () => {
+
+  const navigation = useNavigation
   
   const video = React.useRef(null);
-  const [status, setStatus] = React.useState({});
-  const [userToken, setUserToken] = useState();
-  
-  //check if Apple login is available
-  const [isAppleLoginAvailable, setIsAppleLoginAvailable] = useState(false);
 
-  useEffect(() => {
-    const checkAvailable = async () => {
-      const isAvailable = await AppleAuthentication.isAvailableAsync();
-      setIsAppleLoginAvailable(isAvailable);
-    }
-    checkAvailable();
-  }, []);
-
-  const login = async () => {
-    try {
-      const credential = await AppleAuthentication.signInAsync({
-        requestedScopes: [
-          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ],
-      });
-      // signed in
-      console.log(credential);
-      setUserToken(credential);
-
-    } catch (e) {
-      if (e.code === 'ERR_REQUEST_CANCELED') {
-        // handle that the user canceled the sign-in flow
-      } else {
-        // handle other errors
-      }
-    }
-  };
-
-  const getAppleAuthContent = () => {
-    if (!userToken) {
-        return <AppleAuthentication.AppleAuthenticationButton
-          buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-          buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
-          cornerRadius={5}
-          style={styles.apple_button}
-          onPress={login}
-          />
-    }
-      else {
-        //logged in
-        const decoded = jwtDecode(userToken.identityToken);
-        const current_date = Date.now() / 1000;
-      }
-    };
-  
 
   return (
     <Wrapper>
@@ -86,7 +37,7 @@ const Login = () => {
           shouldPlay={true}
         />
 
-        <Joker_Logo_Big 
+        <Joker_Logo_Big
           source={joker_logo}
         />
 
@@ -94,16 +45,14 @@ const Login = () => {
           - or -
         </Text>
 
-        <Text style={{ fontSize: 15, position: 'absolute', color: 'white',  textAlign: 'center', top: '88%'}}>
-          SIGN IN WITH E-MAIL
-        </Text>
-
-        {
-          isAppleLoginAvailable
-            ? getAppleAuthContent()
-            : <Text>Apple auth unavailable</Text>
-        }
-
+          <LoginWithEmailButton
+            onPress={() => router.replace('SignInWithEmail') }
+            >
+            <Text style={{ fontSize: 15, color: 'white'}}>
+              SIGN IN WITH E-MAIL
+            </Text>
+          </LoginWithEmailButton>
+          
       </StyledContainer>
     </Wrapper>
   );
