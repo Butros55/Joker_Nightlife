@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-nativ
 import joker_logo from './../assets/pictures/logo.png';
 import { Video, ResizeMode } from 'expo-av';
 import { useState , useEffect } from 'react';
+import * as AppleAuthentication from 'expo-apple-authentication';
 
 //styles
 import {
@@ -13,13 +14,10 @@ import {
 } from '../components/styles';
 import { useNavigation } from '@react-navigation/native';
 
-
 const Login = () => {
 
-  const navigation = useNavigation
-  
+  const navigation = useNavigation();
   const video = React.useRef(null);
-
 
   return (
     <Wrapper>
@@ -42,17 +40,48 @@ const Login = () => {
         />
 
         <Text style={{ fontSize: 15, position: 'absolute', color: 'white',  textAlign: 'center', top: '84%'}}>
-          - or -
+          - oder -
         </Text>
 
           <LoginWithEmailButton
-            onPress={() => router.replace('SignInWithEmail') }
+            onPress={() => navigation.navigate('SignInWithEmail') }
             >
             <Text style={{ fontSize: 15, color: 'white'}}>
-              SIGN IN WITH E-MAIL
+              MIT EMAIL ANMELDEN
             </Text>
           </LoginWithEmailButton>
-          
+
+
+
+
+        <AppleAuthentication.AppleAuthenticationButton
+        buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+        buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+        cornerRadius={5}
+        style={styles.apple_button}
+        onPress={async () => {
+          try {
+            const credential = await AppleAuthentication.signInAsync({
+              requestedScopes: [
+                AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                AppleAuthentication.AppleAuthenticationScope.EMAIL,
+              ],
+            });
+            // signed in
+            navigation.navigate('Home')
+          } catch (e) {
+            if (e.code === 'ERR_REQUEST_CANCELED') {
+              // handle that the user canceled the sign-in flow
+            } else {
+              // handle other errors
+            }
+          }
+        }}
+      />
+
+
+
+
       </StyledContainer>
     </Wrapper>
   );
@@ -71,7 +100,7 @@ apple_button: {
 video: {
   flex: 1,
   width: '390%',
-  opacity: 0.7
+  opacity: 0.5
 },
 });
 

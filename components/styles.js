@@ -51,3 +51,15 @@ export const ButtonContainer = styled.View`
     alignItem: center;
 `;
 
+
+
+
+
+//kann wieder weg!!
+export const Test = styled.Image`
+    alignContent: center;
+    width: 80%;
+    height: 50%;
+    position: absolute;
+    top: 23%;
+`;

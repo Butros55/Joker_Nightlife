@@ -1,17 +1,18 @@
 import { Image } from 'expo-image';
 import {
-    Colors,
+    Test,
     StyledContainer,
     Wrapper,
-    Joker_Logo_Big,
   } from '../components/styles';
+
+import test from '../assets/pictures/ok.png'
 
 const HomeScreen = () => {
     return(
         <Wrapper>
             <StyledContainer>
-                <Joker_Logo_Big
-                    source={'./../assets/pictures/ok.png'}
+                <Test
+                    source={test}
                 />
             </StyledContainer>
         </Wrapper>
