@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,11 +5,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
 //screens
-import LoginScreen from './screens/Login';
-import HomeScreen from './screens/HomeScreen';
-import SignInWithEmail from './screens/SingInWithEmail'
+import LoginScreen from '../screens/Login';
+import HomeScreen from '../screens/HomeScreen';
+import SignInWithEmail from '../screens/SignInWithEmail'
 
-export default function App() {
+const Navigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -21,3 +20,5 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+export default Navigator;
