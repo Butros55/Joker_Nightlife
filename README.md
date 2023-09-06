@@ -104,10 +104,11 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 <br>
+
 * React and Expo
   <br>
-  if you dont have Ract already installed we reccomend following the instructions from
-  <p>(<a href="https://reactnative.dev/docs/environment-setup">React Native</a>)</p>.
+  if you dont have Ract already installed we reccomend following the instructions from:
+  <p>(<a href="https://reactnative.dev/docs/environment-setup">React Native</a>)</p>
   
 * npm
   ```sh
