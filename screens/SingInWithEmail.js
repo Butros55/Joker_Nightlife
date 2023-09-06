@@ -21,17 +21,15 @@ const SignInWithEmail = () => {
         <Wrapper>
         <StyledContainer>
 
-        <Video
-          ref={video}
-          style={styles.video}
-          source={
-            require('./../assets/videos/login_video.mp4')
-          }
-          resizeMode={ResizeMode.CONTAIN}
-          isLooping={true}
-          isMuted={true}
-          shouldPlay={true}
-        />
+        <ButtonContainer_login>
+            <TouchableOpacity
+                  onPress={() => {this._panel.show()}}
+                  >
+                <Text style={styles.backbuttonText}>zurück</Text>
+            </TouchableOpacity>
+          </ButtonContainer_login>
+
+
 
           <InputContainer>
             <TextInput
@@ -45,6 +43,9 @@ const SignInWithEmail = () => {
                 secureTextEntry
                 />
             </InputContainer>
+
+
+
 
             <ButtonContainer>
                 <TouchableOpacity
@@ -67,9 +68,8 @@ const SignInWithEmail = () => {
                 </TouchableOpacity>
             </ButtonContainer>
 
-            <Joker_Logo_Big
-              source={joker_logo}
-            />
+
+
 
         </StyledContainer>
         </Wrapper>

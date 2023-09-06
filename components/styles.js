@@ -39,16 +39,23 @@ export const LoginWithEmailButton = styled.TouchableOpacity`
     top: 89%;
 `;
 
-export const InputContainer = styled.View`
+export const InputContainer_login = styled.View`
     position: absolute;
     width: 80%;
-    top: 10%;
+    top: 55%;
 `;
 
-export const ButtonContainer = styled.View`
+export const ButtonContainer_start = styled.View`
     position: absolute;
     width: 60%;
     top: 9%;
+    alignItem: center;
+`;
+
+export const ButtonContainer_login = styled.View`
+    position: absolute;
+    width: 60%;
+    top: 50%;
     alignItem: center;
 `;
 

@@ -13,8 +13,10 @@ import {
   Joker_Logo_Big,
   LoginWithEmailButton,
   Panel_Up,
-  InputContainer,
-  ButtonContainer
+  InputContainer_login,
+  ButtonContainer_start,
+  ButtonContainer_login
+
 } from '../components/styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -89,24 +91,36 @@ const Login = () => {
         >
           <Panel_Up style={{borderRadius: 25}}>
             <View style={styles.line}></View>
-            <ButtonContainer>
-              <Text style={{ color: 'black', textAlign: 'center'}}>Anmeldung mit E-Mail</Text>
-              <TouchableOpacity
-                onPress={() => {  }}
-                style={styles.button}
-              >
-              <Text style={styles.buttonText}>Anmelden</Text>
+              <ButtonContainer_start>
+
+                <Text style={{ color: 'black', textAlign: 'center'}}>Anmeldung mit E-Mail</Text>
+                <TouchableOpacity
+                  onPress={() => {  }}
+                  style={styles.button}
+                >
+                <Text style={styles.buttonText}>Anmelden</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => {}}
-                style={[styles.button, styles.buttonOutline]}
+                  onPress={() => {  }}
+                  style={[styles.button, styles.buttonOutline]}
                 >
-                <Text style={styles.buttonOutlineText}>Registrieren</Text>
-              </TouchableOpacity>
-            </ButtonContainer>
+                  <Text style={styles.buttonOutlineText}>Registrieren</Text>
+                </TouchableOpacity>
 
+            </ButtonContainer_start>
           </Panel_Up>
         </SlidingUpPanel>
+
+
+          <ButtonContainer_login>
+            <TouchableOpacity
+                  onPress={() => {this._panel.show()}}
+                  >
+                <Text style={styles.backbuttonText}>zurück</Text>
+            </TouchableOpacity>
+          </ButtonContainer_login>
+
+
         <Joker_Logo_Big
           source={joker_logo}
         />
@@ -172,7 +186,12 @@ line: {
   width: 75,
   height: 5,
   borderRadius: 20
-}
+},
+
+backbuttonText: {
+  color: 'rgb(0, 0, 0)',
+  height: 20
+},
 
 });
 
