@@ -27,7 +27,8 @@ const Login = () => {
 
   const { height } = Dimensions.get("window");
 
-  _draggedValue = new Animated.Value(0);
+  panelValue = new Animated.Value(0);
+  loginPanelValue = new Animated.Value(0);
 
   return (
     <Wrapper>
@@ -85,9 +86,9 @@ const Login = () => {
         <SlidingUpPanel
           ref={c => (this._panel = c)}
           draggableRange={{ top: height * 0.35, bottom: 0 }}
-          animatedValue={this._draggedValue}
+          animatedValue={this.panelValue}
           snappingPoints={[height * 0.35]}
-          friction={0.5}
+          friction={0.7}
         >
           <Panel_Up style={{borderRadius: 25}}>
             <View style={styles.line}></View>
@@ -95,7 +96,7 @@ const Login = () => {
 
                 <Text style={{ color: 'black', textAlign: 'center'}}>Anmeldung mit E-Mail</Text>
                 <TouchableOpacity
-                  onPress={() => {  }}
+                  onPress={() => {[this._loginPanel.show()]}}
                   style={styles.button}
                 >
                 <Text style={styles.buttonText}>Anmelden</Text>
@@ -111,15 +112,24 @@ const Login = () => {
           </Panel_Up>
         </SlidingUpPanel>
 
-
-          <ButtonContainer_login>
-            <TouchableOpacity
-                  onPress={() => {this._panel.show()}}
-                  >
-                <Text style={styles.backbuttonText}>zurück</Text>
-            </TouchableOpacity>
-          </ButtonContainer_login>
-
+        <SlidingUpPanel
+          ref={c => (this._loginPanel = c)}
+          draggableRange={{ top: height, bottom: 0 }}
+          animatedValue={this.loginPanelValue}
+          snappingPoints={[height]}
+          friction={0.7}
+          allowDragging={false}
+        >
+          <Panel_Up style={{borderRadius: 25}}>
+            <ButtonContainer_login>
+              <TouchableOpacity
+                    onPress={() => {[this._panel.show(), this._loginPanel.hide()]}}
+                    >
+                  <Text style={styles.backbuttonText}>zurück</Text>
+              </TouchableOpacity>
+            </ButtonContainer_login>
+          </Panel_Up>
+        </SlidingUpPanel>
 
         <Joker_Logo_Big
           source={joker_logo}
