@@ -103,8 +103,6 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-<br>
-
 * React and Expo
   <br>
   if you dont have Ract already installed we reccomend following the instructions from:
