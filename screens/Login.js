@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import joker_logo from './../assets/pictures/logo.png';
 import { Video, ResizeMode } from 'expo-av';
 import { useState , useEffect } from 'react';
 import * as AppleAuthentication from 'expo-apple-authentication';
+import SlidingUpPanel from 'rn-sliding-up-panel';
 
 //styles
 import {
@@ -11,6 +12,9 @@ import {
   Wrapper,
   Joker_Logo_Big,
   LoginWithEmailButton,
+  Panel_Up,
+  InputContainer,
+  ButtonContainer
 } from '../components/styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,6 +22,10 @@ const Login = () => {
 
   const navigation = useNavigation();
   const video = React.useRef(null);
+
+  const { height } = Dimensions.get("window");
+
+  _draggedValue = new Animated.Value(0);
 
   return (
     <Wrapper>
@@ -35,52 +43,73 @@ const Login = () => {
           shouldPlay={true}
         />
 
-        <Joker_Logo_Big
-          source={joker_logo}
-        />
-
         <Text style={{ fontSize: 15, position: 'absolute', color: 'white',  textAlign: 'center', top: '84%'}}>
           - oder -
         </Text>
 
-          <LoginWithEmailButton
-            onPress={() => navigation.navigate('SignInWithEmail') }
+          <AppleAuthentication.AppleAuthenticationButton
+            buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+            buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+            cornerRadius={5}
+            style={styles.apple_button}
+            onPress={async () => {
+              try {
+                const credential = await AppleAuthentication.signInAsync({
+                  requestedScopes: [
+                    AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                    AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                  ],
+                });
+                // signed in
+                navigation.navigate('Home')
+              } catch (e) {
+                if (e.code === 'ERR_REQUEST_CANCELED') {
+                  // handle that the user canceled the sign-in flow
+                } else {
+                  // handle other errors
+                }
+              }
+            }}
+          />
+
+        <LoginWithEmailButton
+            onPress={() => this._panel.show() }
             >
             <Text style={{ fontSize: 15, color: 'white'}}>
               MIT EMAIL ANMELDEN
             </Text>
-          </LoginWithEmailButton>
+        </LoginWithEmailButton>
+        
+        <SlidingUpPanel
+          ref={c => (this._panel = c)}
+          draggableRange={{ top: height * 0.35, bottom: 0 }}
+          animatedValue={this._draggedValue}
+          snappingPoints={[height * 0.35]}
+          friction={0.5}
+        >
+          <Panel_Up style={{borderRadius: 25}}>
+            <View style={styles.line}></View>
+            <ButtonContainer>
+              <Text style={{ color: 'black', textAlign: 'center'}}>Anmeldung mit E-Mail</Text>
+              <TouchableOpacity
+                onPress={() => {  }}
+                style={styles.button}
+              >
+              <Text style={styles.buttonText}>Anmelden</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {}}
+                style={[styles.button, styles.buttonOutline]}
+                >
+                <Text style={styles.buttonOutlineText}>Registrieren</Text>
+              </TouchableOpacity>
+            </ButtonContainer>
 
-
-
-
-        <AppleAuthentication.AppleAuthenticationButton
-        buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-        buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
-        cornerRadius={5}
-        style={styles.apple_button}
-        onPress={async () => {
-          try {
-            const credential = await AppleAuthentication.signInAsync({
-              requestedScopes: [
-                AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-                AppleAuthentication.AppleAuthenticationScope.EMAIL,
-              ],
-            });
-            // signed in
-            navigation.navigate('Home')
-          } catch (e) {
-            if (e.code === 'ERR_REQUEST_CANCELED') {
-              // handle that the user canceled the sign-in flow
-            } else {
-              // handle other errors
-            }
-          }
-        }}
-      />
-
-
-
+          </Panel_Up>
+        </SlidingUpPanel>
+        <Joker_Logo_Big
+          source={joker_logo}
+        />
 
       </StyledContainer>
     </Wrapper>
@@ -100,8 +129,51 @@ apple_button: {
 video: {
   flex: 1,
   width: '390%',
-  opacity: 0.5
+  opacity: 0.6
 },
+
+input: {
+  backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  height: 40,
+  borderRadius: 32,
+  margin: 4,
+  paddingLeft: 10,
+  fontSize: 20,
+},
+
+buttonText: {
+  color: 'white',
+},
+
+button: {
+  width: '100%',
+  height: 45,
+  backgroundColor: 'rgba(0, 48, 135, 0.7)',
+  alignItems: 'center',
+  padding: 15,
+  borderRadius: 32,
+  margin: 4
+},
+
+buttonOutline: {
+  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  borderColor: 'rgb(0, 48, 135)',
+  borderWidth: 1,
+},
+
+buttonOutlineText: {
+  color: 'rgb(0, 48, 135)',
+  height: 20
+},
+
+line: {
+  top: 5,
+  backgroundColor: 'rgba(60, 60, 60, 1)',
+  width: 75,
+  height: 5,
+  borderRadius: 20
+}
+
 });
 
 export default Login;

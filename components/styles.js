@@ -42,13 +42,21 @@ export const LoginWithEmailButton = styled.TouchableOpacity`
 export const InputContainer = styled.View`
     position: absolute;
     width: 80%;
+    top: 10%;
 `;
 
 export const ButtonContainer = styled.View`
     position: absolute;
     width: 60%;
-    top: 60%;
+    top: 9%;
     alignItem: center;
+`;
+
+export const Panel_Up = styled.View`
+    backgroundColor: rgba(255, 255, 255, 1);
+    flex: 1;
+    alignItems: center;
+    alignContent: center;
 `;
 
 
