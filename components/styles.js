@@ -59,7 +59,6 @@ export const ButtonContainer = styled.View`
 export const Test = styled.Image`
     alignContent: center;
     width: 80%;
-    height: 50%;
+    height: 70%;
     position: absolute;
-    top: 23%;
 `;
