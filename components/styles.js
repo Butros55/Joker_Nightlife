@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
 import styled from 'styled-components/native';
 import { Image } from 'expo-image';
 import { Video } from 'expo-av';
@@ -24,15 +24,7 @@ export const Wrapper = styled.View`
     flex: 1;
 `;
 
-export const Joker_Logo_Big = styled.Image`
-    alignContent: center;
-    width: 80%;
-    height:10%;
-    position: absolute;
-    top: 15%;
-    tintColor: white;
-`;
-
+// Buttons
 export const LoginWithEmailButton = styled.TouchableOpacity`
     textAlign: center;
     position: absolute;
@@ -41,17 +33,33 @@ export const LoginWithEmailButton = styled.TouchableOpacity`
 
 export const InputContainer = styled.View`
     position: absolute;
-    width: 80%;
+    width: 100%;
+    top: 100%;
+    alignItem: center;
+    alignContent: center;
 `;
 
-export const ButtonContainer = styled.View`
+export const ButtonContainer_start = styled.View`
     position: absolute;
     width: 60%;
-    top: 60%;
+    top: 9%;
     alignItem: center;
 `;
 
+export const ButtonContainer_login = styled.View`
+    position: absolute;
+    width: 60%;
+    top: 50%;
+    alignItem: center;
+`;
 
+//Panels
+export const Panel_Up = styled.KeyboardAvoidingView`
+    backgroundColor: rgba(255, 255, 255, 1);
+    flex: 1;
+    alignItems: center;
+    alignContent: center;
+`;
 
 
 
