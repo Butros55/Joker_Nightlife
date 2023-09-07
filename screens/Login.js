@@ -1,12 +1,12 @@
 import React from 'react';
 import logo_source from './../files/pictures/logo.png'
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Dimensions, Animated } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import { Image } from 'expo-image';
-import { useState } from 'react';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import { useNavigation } from '@react-navigation/native';
+import { Input, Icon, Button } from '@rneui/themed';
 
 //styles
 import {
@@ -18,6 +18,7 @@ import {
   ButtonContainer_start,
   ButtonContainer_login
 } from '../components/styles';
+import { styled } from 'styled-components';
 
 const Login = () => {
 
@@ -81,6 +82,12 @@ const Login = () => {
             }}
           />
 
+        {/* Joker Logo white */}
+        <Image
+          source={logo_source}
+          style={styles.joker_logo_white}
+        />
+
         {/* Login with Email Button on Start site */}
         <LoginWithEmailButton
             onPress={() => this._panel.show() }
@@ -101,26 +108,27 @@ const Login = () => {
         >
           <Panel_Up style={{borderRadius: 25}}>
             <View style={styles.line}></View>
+                <Text style={{ textAlign: 'center', fontSize: 25, top: '5%'}}>Anmeldung mit E-Mail</Text>
+
+
               <ButtonContainer_start>
-
-                <Text style={{ color: 'black', textAlign: 'center'}}>Anmeldung mit E-Mail</Text>
-
                 {/* Login Button */}
-                <TouchableOpacity
-                  onPress={() => {[this._loginPanel.show(), this._panel.hide()]}}
-                  style={styles.button}
+                <Button
+                  onPress={() => {[this._loginPanel.show()]}}
+                  buttonStyle={styles.button}
+                  title='Anmelden'
+                  containerStyle={{paddingBottom: 10}}
                 >
-                <Text style={styles.buttonText}>Anmelden</Text>
-                </TouchableOpacity>
+                </Button>
 
                 {/* Register Button */}
-                <TouchableOpacity
-                  onPress={() => {this._registerPanel.show(), this._panel.hide()}}
-                  style={[styles.button, styles.buttonOutline]}
+                <Button
+                  onPress={() => {this._registerPanel.show()}}
+                  buttonStyle={[styles.button, styles.buttonOutline]}
+                  title='Registrieren'
+                  titleStyle={styles.buttonOutlineText}
                 >
-                  <Text style={styles.buttonOutlineText}>Registrieren</Text>
-                </TouchableOpacity>
-
+                </Button>
             </ButtonContainer_start>
           </Panel_Up>
         </SlidingUpPanel>
@@ -130,29 +138,79 @@ const Login = () => {
         <SlidingUpPanel
           ref={c => (this._loginPanel = c)}
           animatedValue={this.loginPanelValue}
-          friction={0.5}
+          friction={0.8}
           allowDragging={false}
+          draggableRange={{top:height, bottom:0}}
+          height={height}
         >
           <Panel_Up style={{borderRadius: 25}}>
+
+            {/* back button */}
+            <TouchableOpacity
+                  onPress={() => {[this._loginPanel.hide()]}}
+                  style={{alignSelf: 'flex-start', paddingLeft: 30, top: 40}}
+                  >
+                <Text style={styles.backbuttonIcon}>
+                  <Icon
+                    type='font-awesome'
+                    name='chevron-left'
+                    size={30}
+                  />
+                </Text>
+            </TouchableOpacity>
+
+            <Text style={{fontSize: 40, top: 180}}>Wilkommen zurück</Text>
+            <Text style={{fontSize: 15, top: 190}}>Melde dich mit deinem Konto an</Text>
+
+            {/* Login Button */}
             <ButtonContainer_login>
-              <TouchableOpacity
-                    onPress={() => {[this._panel.show(), this._loginPanel.hide()]}}
+              <Button
+                onPress={() => {}}
+                buttonStyle={styles.button}
+                title='Anmelden'
+                loading={false}
+                loadingProps={{
+                  size: 'small',
+                  color: 'white',
+                }}
+                >
+              </Button>
+
+              <View style={{flexDirection: 'row', padding: '2%', justifyContent: 'center'}}>
+                <View></View>
+                  <Text>Du hast noch kein Konto?</Text>
+                <View/>
+                <View style={{paddingLeft: '5%'}}>
+                    <TouchableOpacity
+                      /* onPress={{  }} */
                     >
-                  <Text style={styles.backbuttonText}>zurück</Text>
-                  {/* User Inputs for Login */}
-                  <InputContainer>
-                    <TextInput
-                      placeholder='Email oder Handynummer'
-                      style={styles.input}
-                    />
-                    <TextInput 
-                      placeholder='Password'
-                      style={styles.input}
-                      secureTextEntry
-                    />
-                  </InputContainer>
-              </TouchableOpacity>
+                      <Text style={{color: 'blue'}}>Registrieren</Text>
+                    </TouchableOpacity>
+                </View>
+              </View>
             </ButtonContainer_login>
+
+            {/* User Inputs for Login */}
+            <InputContainer>
+              <Input
+                placeholder='Email oder Handynummer'
+                inputStyle={styles.input}
+                leftIcon={{name: 'mail-outline'}}
+              />
+              <Input 
+                placeholder='Passwort'
+                inputStyle={styles.input}
+                secureTextEntry
+                leftIcon={{name: 'lock-outline'}}
+              />
+              {/* forgot password button */}
+              <TouchableOpacity
+                /* onPress={{  }} */
+              >
+                <Text style={{alignSelf: 'flex-end', paddingRight: 10, color: 'blue'}}>Passwort vergessen?</Text>
+              </TouchableOpacity>
+
+            </InputContainer>
           </Panel_Up>
         </SlidingUpPanel>
 
@@ -161,18 +219,15 @@ const Login = () => {
         <SlidingUpPanel
           ref={c => (this._registerPanel = c)}
           animatedValue={this.registerPanelValue}
-          friction={0.5}
+          friction={0.8}
           allowDragging={false}
+          draggableRange={{top:height, bottom:0}}
+          height={height}
         >
           <Panel_Up style={{borderRadius: 25}}>
-            {/* Joker Logo white */}
-            <Image
-              source={logo_source}
-              style={styles.joker_logo_black}
-            />
             <ButtonContainer_login>
               <TouchableOpacity
-                    onPress={() => {[this._panel.show(), this._registerPanel.hide()]}}
+                    onPress={() => {[this._registerPanel.hide()]}}
                     >
                   <Text style={styles.backbuttonText}>zurück</Text>
               </TouchableOpacity>
@@ -180,11 +235,6 @@ const Login = () => {
           </Panel_Up>
         </SlidingUpPanel>
             
-        {/* Joker Logo white */}
-        <Image
-          source={logo_source}
-          style={styles.joker_logo_white}
-        />
 
       </StyledContainer>
     </Wrapper>
@@ -210,25 +260,17 @@ video: {
 },
 
 input: {
-  backgroundColor: 'rgba(0, 0, 0, 0.3)',
-  borderRadius: 32,
+  backgroundColor: 'rgba(255, 255, 255, 1)',
+  borderRadius: 25,
   margin: 4,
   paddingLeft: 10,
   fontSize: 20,
 },
 
-buttonText: {
-  color: 'white',
-},
-
 button: {
-  width: '100%',
   height: 45,
   backgroundColor: 'rgba(0, 48, 135, 0.7)',
-  alignItems: 'center',
-  padding: 15,
-  borderRadius: 32,
-  margin: 4
+  borderRadius: 25
 },
 
 buttonOutline: {
@@ -250,10 +292,9 @@ line: {
   borderRadius: 20
 },
 
-backbuttonText: {
+backbuttonIcon: {
   color: 'rgb(0, 0, 0)',
-  height: 20,
-  textAlign: 'center'
+  height: 30,
 },
 
 joker_logo_white: {
@@ -265,7 +306,7 @@ joker_logo_white: {
   tintColor: 'white'
 },
 
-joker_logo: {
+joker_logo_black: {
   alignContent: 'center',
   width: '80%',
   height: '10%',

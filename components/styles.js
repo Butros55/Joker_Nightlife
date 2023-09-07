@@ -31,25 +31,21 @@ export const LoginWithEmailButton = styled.TouchableOpacity`
     top: 89%;
 `;
 
-export const InputContainer = styled.View`
-    position: absolute;
-    width: 100%;
-    top: 100%;
-    alignItem: center;
-    alignContent: center;
+export const InputContainer = styled.KeyboardAvoidingView`
+    alignSelf: center;
+    width: 80%;
+    top: 20%;
 `;
 
 export const ButtonContainer_start = styled.View`
-    position: absolute;
-    width: 60%;
-    top: 9%;
+    width: 70%;
+    top: 8.5%;
     alignItem: center;
 `;
 
 export const ButtonContainer_login = styled.View`
-    position: absolute;
-    width: 60%;
-    top: 50%;
+    width: 75%;
+    top: 70%;
     alignItem: center;
 `;
 
