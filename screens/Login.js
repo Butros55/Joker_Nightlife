@@ -14,7 +14,8 @@ import {
   Wrapper,
   LoginWithEmailButton,
   Panel_Up,
-  InputContainer,
+  InputContainer_login,
+  InputContainer_register,
   ButtonContainer_start,
   ButtonContainer_login
 } from '../components/styles';
@@ -106,7 +107,9 @@ const Login = () => {
           snappingPoints={[height * 0.35]}
           friction={0.7}
         >
-          <Panel_Up style={{borderRadius: 25}}>
+          <Panel_Up 
+            style={{borderRadius: 25}}
+          >
             <View style={styles.line}></View>
                 <Text style={{ textAlign: 'center', fontSize: 25, top: '5%'}}>Anmeldung mit E-Mail</Text>
 
@@ -141,9 +144,12 @@ const Login = () => {
           friction={0.8}
           allowDragging={false}
           draggableRange={{top:height, bottom:0}}
-          height={height}
+          height={height + 20}
         >
-          <Panel_Up style={{borderRadius: 25}}>
+          <Panel_Up 
+            style={{borderRadius: 25}}
+            behavior={Platform.OS === 'ios' ? 'padding' : "height"}
+          >
 
             {/* back button */}
             <TouchableOpacity
@@ -159,8 +165,8 @@ const Login = () => {
                 </Text>
             </TouchableOpacity>
 
-            <Text style={{fontSize: 40, top: 180}}>Wilkommen zurück</Text>
-            <Text style={{fontSize: 15, top: 190}}>Melde dich mit deinem Konto an</Text>
+            <Text style={{fontSize: 40, top: 130}}>Wilkommen zurück</Text>
+            <Text style={{fontSize: 15, top: 140}}>Melde dich mit deinem Konto an</Text>
 
             {/* Login Button */}
             <ButtonContainer_login>
@@ -176,13 +182,13 @@ const Login = () => {
                 >
               </Button>
 
-              <View style={{flexDirection: 'row', padding: '2%', justifyContent: 'center'}}>
+              <View style={{flexDirection: 'row', padding: '3.5%', justifyContent: 'center'}}>
                 <View></View>
                   <Text>Du hast noch kein Konto?</Text>
                 <View/>
                 <View style={{paddingLeft: '5%'}}>
                     <TouchableOpacity
-                      /* onPress={{  }} */
+                      onPress={() => {[this._loginPanel.hide(), this._registerPanel.show()]}}
                     >
                       <Text style={{color: 'blue'}}>Registrieren</Text>
                     </TouchableOpacity>
@@ -191,9 +197,9 @@ const Login = () => {
             </ButtonContainer_login>
 
             {/* User Inputs for Login */}
-            <InputContainer>
+            <InputContainer_login>
               <Input
-                placeholder='Email oder Handynummer'
+                placeholder='Email'
                 inputStyle={styles.input}
                 leftIcon={{name: 'mail-outline'}}
               />
@@ -210,7 +216,7 @@ const Login = () => {
                 <Text style={{alignSelf: 'flex-end', paddingRight: 10, color: 'blue'}}>Passwort vergessen?</Text>
               </TouchableOpacity>
 
-            </InputContainer>
+            </InputContainer_login>
           </Panel_Up>
         </SlidingUpPanel>
 
@@ -222,16 +228,83 @@ const Login = () => {
           friction={0.8}
           allowDragging={false}
           draggableRange={{top:height, bottom:0}}
-          height={height}
+          height={height + 20}
         >
-          <Panel_Up style={{borderRadius: 25}}>
+          <Panel_Up 
+            style={{borderRadius: 25}}
+            behavior={Platform.OS === 'ios' ? 'height' : "height"}
+          >
+            {/* back button */}
+            <TouchableOpacity
+                  onPress={() => {[this._registerPanel.hide()]}}
+                  style={{alignSelf: 'flex-start', paddingLeft: 30, top: 40}}
+                  >
+                <Text style={styles.backbuttonIcon}>
+                  <Icon
+                    type='font-awesome'
+                    name='chevron-left'
+                    size={30}
+                  />
+                </Text>
+            </TouchableOpacity>
+
+            <Text style={{fontSize: 40, top: 130}}>Registrieren</Text>
+            <Text style={{fontSize: 15, top: 140}}>Erstelle dein eigenes Konto</Text>
+
+            {/* Login Button */}
             <ButtonContainer_login>
-              <TouchableOpacity
-                    onPress={() => {[this._registerPanel.hide()]}}
+              <Button
+                onPress={() => {}}
+                buttonStyle={styles.button}
+                title='Registrieren'
+                loading={false}
+                loadingProps={{
+                  size: 'small',
+                  color: 'white',
+                }}
+                >
+              </Button>
+
+              <View style={{flexDirection: 'row', padding: '3.5%', justifyContent: 'center'}}>
+                <View></View>
+                  <Text>Du hast bereits ein Konto?</Text>
+                <View/>
+                <View style={{paddingLeft: '5%'}}>
+                    <TouchableOpacity
+                      onPress={() => {[this._loginPanel.show(), this._registerPanel.hide()]}}
                     >
-                  <Text style={styles.backbuttonText}>zurück</Text>
-              </TouchableOpacity>
+                      <Text style={{color: 'blue'}}>Anmelden</Text>
+                    </TouchableOpacity>
+                </View>
+              </View>
             </ButtonContainer_login>
+
+            {/* User Inputs for Login */}
+            <InputContainer_register>
+              <Input 
+                placeholder='Benutzername'
+                inputStyle={styles.input}
+                secureTextEntry
+                leftIcon={{name: 'person-outline'}}
+              />
+              <Input
+                placeholder='Email'
+                inputStyle={styles.input}
+                leftIcon={{name: 'mail-outline'}}
+              />
+              <Input 
+                placeholder='Passwort'
+                inputStyle={styles.input}
+                secureTextEntry
+                leftIcon={{name: 'lock-outline'}}
+              />
+              <Input 
+                placeholder='Passwort bestätigen'
+                inputStyle={styles.input}
+                secureTextEntry
+                leftIcon={{name: 'lock-outline'}}
+              />
+            </InputContainer_register>
           </Panel_Up>
         </SlidingUpPanel>
             
@@ -281,7 +354,7 @@ buttonOutline: {
 
 buttonOutlineText: {
   color: 'rgb(0, 48, 135)',
-  height: 20
+  height: 22
 },
 
 line: {

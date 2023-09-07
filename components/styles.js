@@ -31,10 +31,16 @@ export const LoginWithEmailButton = styled.TouchableOpacity`
     top: 89%;
 `;
 
-export const InputContainer = styled.KeyboardAvoidingView`
+export const InputContainer_login = styled.View`
     alignSelf: center;
     width: 80%;
     top: 20%;
+`;
+
+export const InputContainer_register = styled.View`
+    alignSelf: center;
+    width: 80%;
+    top: 15%;
 `;
 
 export const ButtonContainer_start = styled.View`
