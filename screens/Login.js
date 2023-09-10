@@ -284,7 +284,6 @@ const Login = () => {
               <Input 
                 placeholder='Benutzername'
                 inputStyle={styles.input}
-                secureTextEntry
                 leftIcon={{name: 'person-outline'}}
               />
               <Input
