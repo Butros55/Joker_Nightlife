@@ -1,5 +1,5 @@
 import React from 'react';
-import logo_source from './../files/pictures/logo.png'
+import logo_source from './../assets/pictures/logo.png'
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import { Image } from 'expo-image';
@@ -44,7 +44,7 @@ const Login = () => {
           ref={video}
           style={styles.video}
           source={
-            require('./../files/videos/login_video.mp4')
+            require('./../assets/videos/login_video.mp4')
           }
           resizeMode={ResizeMode.CONTAIN}
           isLooping={true}

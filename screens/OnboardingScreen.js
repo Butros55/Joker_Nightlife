@@ -1,114 +1,32 @@
-import React, { useRef } from 'react'
-import { StyleSheet, View, Text , Dimensions} from 'react-native'
-import Onboarding from 'react-native-onboarding-swiper';
-import LottieView from 'lottie-react-native';
-import { useNavigation } from '@react-navigation/native';
-
-
-
-
-const OnboardingScreen = () => {
-
-const navigation = useNavigation();
-
-const handledone = () => {
-    navigation.navigate('Login')
-}
-    
-  return (
-    <View style={styles.container}>
-        <Onboarding
-            onSkip={handledone}
-            onDone={handledone}
-            pages={[
-                {
-                    backgroundColor: '#eeeee4',
-                    image: (
-                        <LottieView
-                            source={require('../files/animations/welcome.json')}
-                            autoPlay
-                            style={{
-                                width: 300,
-                                height: 300
-                            }}
-                        />
-                    ),
-                    title: 'Wilkommen',
-                    subtitle: 'bei der Joker Nightlife App',
-                },
-                {
-                    backgroundColor: '#F6DCBC',
-                    image: (
-                        <LottieView
-                            source={require('../files/animations/news.json')}
-                            autoPlay
-                            style={{
-                                width: 200,
-                                height: 200
-                            }}
-                        />
-                    ),
-                    title: 'Aktuelle News',
-                    subtitle: 'Immer auf den aktuellen stand von Joker bleiben',
-                },
-                {
-                    backgroundColor: '#B4B9BC',
-                    image: (
-                        <LottieView
-                            source={require('../files/animations/fotos.json')}
-                            autoPlay
-                            style={{
-                                width: 220,
-                                height: 220
-                            }}
-                        />
-                    ),
-                    title: 'Fotos',
-                    subtitle: 'Siehe alle neuen Fotos auf einem Blick',
-                },
-                {
-                    backgroundColor: '#DBBCE3',
-                    image: (
-                        <LottieView
-                            source={require('../files/animations/kalendar.json')}
-                            autoPlay
-                            style={{
-                                width: 300,
-                                height: 300
-                            }}
-                        />
-                    ),
-                    title: 'Events',
-                    subtitle: 'Behalte alle Termine im Blick',
-                },
-                {
-                    backgroundColor: '#16242D',
-                    image: (
-                        <LottieView
-                            source={require('../files/animations/party.json')}
-                            autoPlay
-                            style={{
-                                width: 300,
-                                height: 300
-                            }}
-                        />
-                    ),
-                    title: 'Los Geht´s',
-                    subtitle: 'Viel spaß beim Feiern!!',
-                },
-            ]}
-        />
-    </View>
-  )
-}
-
-const styles = StyleSheet.create ({
-
-    container: {
-        flex: 1,
-        backgroundColor: 'white'
+export default [
+    {
+        id: '1',
+        title: 'Starte Heute noch deine Party',
+        description: 'Erlebe Joker Nightlife jetzt auch Digital und erhalte sofort viele vorteile wie Coupons, News, Fotos, Events, uvm.',
+        image : require('../assets/pictures/disco.png')
+    },
+    {
+        id: '2',
+        title: 'Aktuelle Fotos',
+        description: 'Aktuelle Fotos welche von Joker Nightlife hochgeladen werde kannst du di hier sofort ansehen',
+        image : require('../assets/pictures/pictures.png')
+    },
+    {
+        id: '3',
+        title: 'Immer auf den neusten Stand',
+        description: 'Die brandaktuellen News von Joker Nightlife bekommst du jetzt auch sofort auf dein Handy',
+        image : require('../assets/pictures/news.png')
+    },
+    {
+        id: '4',
+        title: 'Einzigartige Coupons',
+        description: 'Erhalte Coupons welche du gegen Getränke, Eintritt oder ähnliches eintauschen kannst',
+        image : require('../assets/pictures/discount.png')
+    },
+    {
+        id: '5',
+        title: 'Und los geht`s',
+        description: 'Es geht los beginne deine Tour durch unsere digitale version von Joker Nightlife',
+        image : require('../assets/pictures/beer.png')
     }
-
-});
-
-export default OnboardingScreen
+];

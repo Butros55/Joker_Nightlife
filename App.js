@@ -8,7 +8,7 @@ ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
 //screens
 import LoginScreen from './screens/Login';
-import OnboardingScreen from './screens/OnboardingScreen';
+import OnboardingScreen from './components/Onboarding';
 
 export default function App() {
   return (
