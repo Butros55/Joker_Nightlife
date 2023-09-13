@@ -6,6 +6,7 @@ import { getItem } from '../components/asyncStorage';
 //screens
 import LoginScreen from './../screens/Login';
 import OnboardingScreen from './../components/Onboarding';
+import HomeScreen from '../screens/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,9 +36,10 @@ const Navigator = () => {
   if(showOnboarding) {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='OnboardingScreen'>
-          <Stack.Screen options={{headerShown: false }}  name="OnboardingScreen" component={OnboardingScreen} />
+        <Stack.Navigator initialRouteName='Onboarding'>
+          <Stack.Screen options={{headerShown: false }}  name="Onboarding" component={OnboardingScreen} />
           <Stack.Screen options={{headerShown: false }} name="Login" component={LoginScreen} />
+          <Stack.Screen options={{headerShown: false }} name="Home" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     )
@@ -45,8 +47,9 @@ const Navigator = () => {
     return (
       <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen options={{headerShown: false }}  name="OnboardingScreen" component={OnboardingScreen} />
+        <Stack.Screen options={{headerShown: false }}  name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen options={{headerShown: false }} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{headerShown: false }} name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     )
