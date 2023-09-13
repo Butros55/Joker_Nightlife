@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import slides from '../screens/OnboardingScreen'
 import OnboardingItems from './OnboardingItems';
 import Paginator from './Paginator';
+import { setItem } from './asyncStorage';
 
 
 const OnboardingScreen = () => {
@@ -29,6 +30,7 @@ const OnboardingScreen = () => {
         }
         else {
             navigation.navigate('Login');
+            setItem('onboarded', 'true');
         }
     };
 
