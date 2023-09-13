@@ -6,7 +6,7 @@ export default OnboardingItems = ({item}) => {
     const { width, height } = useWindowDimensions();
 
     return (
-        <View style={[styles.container, { width, height, backgroundColor: 'white' }]}>
+        <View style={[styles.container, { width, height: height * 1.1, backgroundColor: 'white' }]}>
 
             <Image source={item.image} style={[styles.image, { width , resizeMode: 'contain'}]} />
 

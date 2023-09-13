@@ -327,7 +327,7 @@ apple_button: {
 
 video: {
   flex: 1,
-  width: '390%',
+  width: '200%',
   opacity: 0.6
 },
 

@@ -3,7 +3,7 @@ export default [
         id: '1',
         title: 'Starte Heute noch deine Party',
         description: 'Erlebe Joker Nightlife jetzt auch Digital und erhalte sofort viele vorteile wie Coupons, News, Fotos, Events, uvm.',
-        image : require('../assets/pictures/disco.png')
+        image : require('../assets/pictures/having_fun.png')
     },
     {
         id: '2',
