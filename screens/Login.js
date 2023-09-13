@@ -327,7 +327,7 @@ apple_button: {
 
 video: {
   flex: 1,
-  width: '200%',
+  width: '120%',
   opacity: 0.6
 },
 
@@ -341,12 +341,12 @@ input: {
 
 button: {
   height: 45,
-  backgroundColor: 'rgba(0, 48, 135, 0.7)',
+  backgroundColor: 'rgba(0, 48, 135, 1)',
   borderRadius: 25
 },
 
 buttonOutline: {
-  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  backgroundColor: 'rgba(255, 255, 255, 1)',
   borderColor: 'rgb(0, 48, 135)',
   borderWidth: 1,
 },
