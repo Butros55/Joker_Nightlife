@@ -1,5 +1,5 @@
 import React from 'react';
-import logo_source from './../files/pictures/logo.png'
+import logo_source from './../assets/pictures/logo.png'
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import { Image } from 'expo-image';
@@ -44,7 +44,7 @@ const Login = () => {
           ref={video}
           style={styles.video}
           source={
-            require('./../files/videos/login_video.mp4')
+            require('./../assets/videos/login_video.mp4')
           }
           resizeMode={ResizeMode.CONTAIN}
           isLooping={true}
@@ -284,7 +284,6 @@ const Login = () => {
               <Input 
                 placeholder='Benutzername'
                 inputStyle={styles.input}
-                secureTextEntry
                 leftIcon={{name: 'person-outline'}}
               />
               <Input
@@ -328,7 +327,7 @@ apple_button: {
 
 video: {
   flex: 1,
-  width: '390%',
+  width: '120%',
   opacity: 0.6
 },
 
@@ -342,12 +341,12 @@ input: {
 
 button: {
   height: 45,
-  backgroundColor: 'rgba(0, 48, 135, 0.7)',
+  backgroundColor: 'rgba(0, 48, 135, 1)',
   borderRadius: 25
 },
 
 buttonOutline: {
-  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  backgroundColor: 'rgba(255, 255, 255, 1)',
   borderColor: 'rgb(0, 48, 135)',
   borderWidth: 1,
 },
