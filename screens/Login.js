@@ -7,6 +7,10 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import { useNavigation } from '@react-navigation/native';
 import { Input, Icon, Button } from '@rneui/themed';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
+import { firebase_auth } from '../components/firebaseConfig';
+
 
 //styles
 import {
@@ -22,6 +26,38 @@ import {
 import { styled } from 'styled-components';
 
 const Login = () => {
+
+const [repeatPassword, setrepeatPassword] = useState('');
+const [username, setusername] = useState('');
+const [email, setemail] = useState('');
+const [password, setpassword] = useState('');
+const [loading, setloading] = useState(false);
+const auth = firebase_auth;
+
+ const handleLogin = async () => {
+  setloading(true);
+  try {
+    if (password == repeatPassword) {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+    }else{
+    }
+  }catch (error){
+    console.log(error);
+  }finally{
+    setloading(false);
+  }
+}
+
+const handleSignUp = async () => {
+  setloading(true);
+  try {
+    const response = await createUserWithEmailAndPassword(auth, email, password);
+  }catch (error){
+    console.log(error);
+  }finally{
+    setloading(false);
+  }
+}
 
 
   const navigation = useNavigation();
@@ -171,10 +207,10 @@ const Login = () => {
             {/* Login Button */}
             <ButtonContainer_login>
               <Button
-                onPress={() => {}}
+                onPress={() => {handleLogin()}}
                 buttonStyle={styles.button}
                 title='Anmelden'
-                loading={false}
+                loading={loading}
                 loadingProps={{
                   size: 'small',
                   color: 'white',
@@ -202,12 +238,16 @@ const Login = () => {
                 placeholder='Email'
                 inputStyle={styles.input}
                 leftIcon={{name: 'mail-outline'}}
+                value={email}
+                onChangeText={(text) => setemail(text)}
               />
               <Input 
                 placeholder='Passwort'
                 inputStyle={styles.input}
                 secureTextEntry
                 leftIcon={{name: 'lock-outline'}}
+                value={password}
+                onChangeText={(text) => setpassword(text)}
               />
               {/* forgot password button */}
               <TouchableOpacity
@@ -251,10 +291,10 @@ const Login = () => {
             <Text style={{fontSize: 40, top: 130}}>Registrieren</Text>
             <Text style={{fontSize: 15, top: 140}}>Erstelle dein eigenes Konto</Text>
 
-            {/* Login Button */}
+            {/* Register Button */}
             <ButtonContainer_login>
               <Button
-                onPress={() => {}}
+                onPress={() => {handleSignUp()}}
                 buttonStyle={styles.button}
                 title='Registrieren'
                 loading={false}
@@ -285,23 +325,31 @@ const Login = () => {
                 placeholder='Benutzername'
                 inputStyle={styles.input}
                 leftIcon={{name: 'person-outline'}}
+                value={username}
+                onChangeText={(text) => setusername(text)}
               />
               <Input
                 placeholder='Email'
                 inputStyle={styles.input}
                 leftIcon={{name: 'mail-outline'}}
+                value={email}
+                onChangeText={(text) => setemail(text)}
               />
               <Input 
                 placeholder='Passwort'
                 inputStyle={styles.input}
                 secureTextEntry
                 leftIcon={{name: 'lock-outline'}}
+                value={password}
+                onChangeText={(text) => setpassword(text)}
               />
               <Input 
                 placeholder='Passwort bestätigen'
                 inputStyle={styles.input}
                 secureTextEntry
                 leftIcon={{name: 'lock-outline'}}
+                value={repeatPassword}
+                onChangeText={(text) => setrepeatPassword(text)}
               />
             </InputContainer_register>
           </Panel_Up>
