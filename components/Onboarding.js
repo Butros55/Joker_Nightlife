@@ -25,7 +25,7 @@ const OnboardingScreen = () => {
     }).current;
 
     const scrollTo = () => {
-        if (currentIndex < slides.length - 1) {
+        if (currentIndex < slides.length - 2) {
             slidesRef.current.scrollToIndex({ index: currentIndex + 1});
         }
         else {
