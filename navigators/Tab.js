@@ -27,7 +27,7 @@ const Home = () => {
               tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
 
-                if (route.name === 'Startseite') {
+                if (route.name === 'Mein Joker') {
                   iconName = focused
                     ? 'home'
                     : 'home-outline';
@@ -43,7 +43,7 @@ const Home = () => {
               tabBarInactiveTintColor: 'gray',
             })}
         >
-          <Tab.Screen name="Startseite" component={HomeScreen} />
+          <Tab.Screen name="Mein Joker" component={HomeScreen} />
           <Tab.Screen name="Coupons" component={Coupons} />
           <Tab.Screen name="Aktuelles" component={News} />
         </Tab.Navigator>

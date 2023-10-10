@@ -6,7 +6,7 @@ import { Image } from 'expo-image';
 
 //screens
 import Settings from '../screens/Settings';
-import Home from './Tab';
+import Tab from './Tab';
 
 
 const Drawer = createDrawerNavigator();
@@ -23,7 +23,7 @@ const Draw = () => {
               headerTitle: () => <Image style={{ width: 180, height: 42}} source={require('../assets/pictures/logo.png')}></Image>
           }}
       >
-        <Drawer.Screen name='Startseite' component={Home} />
+        <Drawer.Screen name='Startseite' component={Tab} />
         <Drawer.Screen name='Einstellungen' component={Settings} />
       </Drawer.Navigator>
   )

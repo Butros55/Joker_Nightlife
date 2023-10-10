@@ -1,44 +1,44 @@
 export default [
     {
         id: '1',
-        title: 'Starte Heute noch deine Party',
-        description: 'Erlebe Joker Nightlife jetzt auch Digital und erhalte sofort viele vorteile wie Coupons, News, Fotos, Events, uvm.',
+        title: 'Doppette am 20.10.23',
+        description: 'Einlass ab 18 Jahren...',
         image : require('../assets/pictures/test/doppette.jpeg')
     },
     {
         id: '2',
-        title: 'Aktuelle Fotos',
-        description: 'Aktuelle Fotos welche von Joker Nightlife hochgeladen werde kannst du di hier sofort ansehen',
+        title: 'Freitag der 13.',
+        description: 'Einlass ab 18 Jahren...',
         image : require('../assets/pictures/test/freitagder13..jpeg')
     },
     {
         id: '3',
-        title: 'Immer auf den neusten Stand',
-        description: 'Die brandaktuellen News von Joker Nightlife bekommst du jetzt auch sofort auf dein Handy',
+        title: 'Fünf vor Zwölf am 14.10.23',
+        description: 'Einlass ab 18 Jahren...',
         image : require('../assets/pictures/test/fünf.jpeg')
     },
     {
         id: '4',
-        title: 'Einzigartige Coupons',
-        description: 'Erhalte Coupons welche du gegen Getränke, Eintritt oder ähnliches eintauschen kannst',
+        title: 'Halloween Night am 27.10.22',
+        description: 'Einlass ab 18 Jahren...',
         image : require('../assets/pictures/test/halloween.jpeg')
     },
     {
         id: '5',
-        title: 'Und los geht`s',
-        description: 'Es geht los beginne deine Tour durch unsere digitale version von Joker Nightlife',
+        title: 'Mädelsabend am 03.11.23',
+        description: 'Einlass ab 18 Jahren...',
         image : require('../assets/pictures/test/mädels.jpeg')
     },
     {
         id: '6',
-        title: 'Und los geht`s',
-        description: 'Es geht los beginne deine Tour durch unsere digitale version von Joker Nightlife',
+        title: 'Sternzeichen am 21.10.23',
+        description: 'Einlass ab 18 Jahren...',
         image : require('../assets/pictures/test/sternzeichen.jpeg')
     },
     {
         id: '7',
-        title: 'Und los geht`s',
-        description: 'Es geht los beginne deine Tour durch unsere digitale version von Joker Nightlife',
+        title: '1Euro Party am 30.10.23',
+        description: 'Einlass ab 18 Jahren...',
         image : require('../assets/pictures/test/1euro.jpeg')
     }
 ];
