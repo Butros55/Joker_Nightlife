@@ -61,7 +61,7 @@ const RegisterRef = useRef(null);
    verifyUserDataLogin();
   try {
     const response = await signInWithEmailAndPassword(auth, email, password);
-    navigation.navigate('Home');
+    navigation.navigate('Drawer');
   }catch (e){
     console.log(e);
     if (e.code == 'auth/invalid-email' | e.code == 'auth/wrong-password') {
@@ -192,7 +192,7 @@ const resetInvalid = () => {
                   ],
                 });
                 // signed in
-                navigation.navigate('Home')
+                navigation.navigate('Drawer')
               } catch (e) {
                 if (e.code === 'ERR_REQUEST_CANCELED') {
                   // handle that the user canceled the sign-in flow

@@ -1,11 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import { A } from '@expo/html-elements';
 
 const Home = () => {
     return (
-        <View style={{ alignItems: 'center', top: '45%'}}>
-            <Text>Start</Text>
-        </View>
+        <A href="https://google.com">Go to Google</A>;
     )
 }
 
