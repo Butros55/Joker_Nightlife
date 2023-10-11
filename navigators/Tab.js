@@ -15,6 +15,7 @@ import Pictures from '../screens/Pictures'
 import {
     ButtonContainer_login
   } from '../components/styles';
+import { white } from 'color-name';
 
 const Home = () => {
 
@@ -25,6 +26,10 @@ const Home = () => {
         <Tab.Navigator
             screenOptions={({ route }) => ({
               headerShown: false,
+              headerTransparent: false,
+              headerStatusBarHeight: 20,
+              headerTitleAlign: 'left',
+              headerShadowVisible: false,
               tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
 
@@ -37,7 +42,7 @@ const Home = () => {
                 } else if (route.name === 'Coupons') {
                   iconName = focused ? 'gift' : 'gift-outline';
                 } else if (route.name === 'Fotos') {
-                  iconName = focused ? 'picture' : 'picture-outline'
+                  iconName = focused ? 'images' : 'images-outline'
                 } 
                 // You can return any component that you like here!
                 return <Ionicons name={iconName} size={size} color={color} />;

@@ -1,9 +1,9 @@
-import { View, Text } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
 
 const Pictures = () => {
   return (
-    <View>
+    <View style={{ backgroundColor: 'white', flex: 1 }}>
       <Text>Pictures</Text>
     </View>
   )
