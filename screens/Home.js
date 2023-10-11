@@ -38,6 +38,7 @@ import {
     return (
         <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'white'}}>
             <BottomSheetModalProvider>
+                <Text style={{ fontSize: 25, alignSelf: 'center', top: 50, fontWeight: 900 }}>Unsere Events</Text>
                 <Carousel
                     loop={true}
                     width={width}
@@ -57,9 +58,9 @@ import {
                         >
                             <TouchableOpacity
                                 onPress={() => {[openEvents( item ), ModalRef.current?.present()]}}
-                                style={{ height: '91%', top: '20%'}}
+                                style={{ height: '95%', top: '20%'}}
                                 >
-                                <Image source={item.image} style={[styles.image, { width: '90%', borderRadius: 25}]} />
+                                <Image source={item.image} style={[styles.image, { width: '100%', borderRadius: 25}]} />
                             </TouchableOpacity>
 
                         </View>

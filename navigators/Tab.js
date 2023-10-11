@@ -8,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/Home';
 import Coupons from '../screens/Coupons';
 import News from '../screens/News';
+import Pictures from '../screens/Pictures'
 
 
 //styles
@@ -35,17 +36,20 @@ const Home = () => {
                   iconName = focused ? 'md-newspaper' : 'md-newspaper-outline';
                 } else if (route.name === 'Coupons') {
                   iconName = focused ? 'gift' : 'gift-outline';
-                }
+                } else if (route.name === 'Fotos') {
+                  iconName = focused ? 'picture' : 'picture-outline'
+                } 
                 // You can return any component that you like here!
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
-              tabBarActiveTintColor: 'blue',
+              tabBarActiveTintColor: 'black',
               tabBarInactiveTintColor: 'gray',
             })}
         >
           <Tab.Screen name="Mein Joker" component={HomeScreen} />
           <Tab.Screen name="Coupons" component={Coupons} />
           <Tab.Screen name="Aktuelles" component={News} />
+          <Tab.Screen name="Fotos" component={Pictures} />
         </Tab.Navigator>
     );
   }
