@@ -66,13 +66,13 @@ function Carousels({list, width}) {
                 backgroundStyle={{ backgroundColor: 'rgba(0.0.0.0)' }}
             >
                 <Panel_Up 
-                    style={{ borderRadius: 40, backgroundColor: 'rgb(13, 0, 26)' }}
+                    style={{ borderRadius: 40, backgroundColor: 'rgb(20, 20, 20)' }}
                     behavior={Platform.OS === 'ios' ? 'padding' : "height"}
                 >
                     <View style={{flex: 0.5}}>
                         <Image source={Images} style={[styles.image, { width, borderRadius: 30}]} />
                     </View>
-                    <View style={{flex: 1, backgroundColor: 'rgb(13, 0, 26)', width}}>
+                    <View style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
                         <Text style={styles.headtext}>{Title}</Text>
                         <Text style={styles.descriptiontext}>{Description}</Text>
                     </View>

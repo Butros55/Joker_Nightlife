@@ -4,8 +4,8 @@ import Carousel from '../components/carousel'
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler'
 import carouselList from '../components/carouselItems'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
-import VIPList from '../components/VIPList'
-import VIPListItems from '../components/VIPListItems'
+import VIPList from '../components/UnsereBereiche'
+import VIPListItems from '../components/UnsereBereicheItems'
 import { useState, useRef } from 'react';
 
 const width = Dimensions.get('window').width;
@@ -29,7 +29,9 @@ const Home = () => {
     return (
         <GestureHandlerRootView style={{flex: 1}}>
         <BottomSheetModalProvider>
-            <ScrollView style={{backgroundColor: 'white'}}>
+            <ScrollView 
+                style={{backgroundColor: 'white'}}
+            >
                 <Text style={{ fontSize: 20, top: 20, fontWeight: 400, alignSelf: 'center'}}>Unsere Events</Text>
                 <Carousel list={carouselList} width={width} />
                 <VIPList list={VIPListItems} width={width}/>

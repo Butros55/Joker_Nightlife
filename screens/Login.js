@@ -490,18 +490,18 @@ input: {
 
 button: {
   height: 45,
-  backgroundColor: 'rgba(0, 48, 135, 1)',
+  backgroundColor: 'rgb(20,20,20)',
   borderRadius: 25
 },
 
 buttonOutline: {
   backgroundColor: 'rgba(255, 255, 255, 1)',
-  borderColor: 'rgb(0, 48, 135)',
+  borderColor: 'rgb(20,20,20)',
   borderWidth: 1,
 },
 
 buttonOutlineText: {
-  color: 'rgb(0, 48, 135)',
+  color: 'rgb(20,20,20)',
   height: 22
 },
 
