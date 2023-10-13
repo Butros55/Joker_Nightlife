@@ -7,14 +7,21 @@ import {
 } from './styles';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import Carousel from 'react-native-reanimated-carousel';
-import Paginator from '../components/Paginator'
 
+
+
+let nextId = 0;
 const CARD_WIDTH = 160;
 const CARD_HEIGHT = 220;
 
 const VIPList = ({list, width}) => {
-
-
+  
+  const [Images, setImages] = useState('');
+  const [Title, setTitle] = useState('');
+  const [Description, setDescription] = useState('');
+  const [CarouselImageList, setCarouselImageList] = useState([]);
+  const [image, setimage] = useState();
+  
   const test = useRef(null);
   const openEvents = ( item ) => {
       setImages(item.imageHome);
@@ -36,12 +43,6 @@ const VIPList = ({list, width}) => {
       }
     }
 
-  const [Images, setImages] = useState('');
-  const [Title, setTitle] = useState('');
-  const [Description, setDescription] = useState('');
-  const [CarouselImageList, setCarouselImageList] = useState([]);
-  const [image, setimage] = useState();
-  let nextId = 0;
   
 
   return (

@@ -8,9 +8,8 @@ import {
     ButtonContainer_login
   } from '../components/styles';
 
-const Settings = () => {
+const Settings = ({navigation}) => {
 
-    const navigation = useNavigation();
 
   return (
     <View style={{ alignItems: 'center', top: '45%'}}>

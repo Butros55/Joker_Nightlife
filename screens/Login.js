@@ -27,7 +27,7 @@ import { styled } from 'styled-components';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { FirebaseError } from 'firebase/app';
 
-const Login = () => {
+const Login = ({navigation}) => {
 
 //useStates
 const [repeatPassword, setrepeatPassword] = useState('');
@@ -148,7 +148,6 @@ const resetInvalid = () => {
 }
 
 
-  const navigation = useNavigation();
   const video = React.useRef(null);
 
   const { height } = Dimensions.get("window");

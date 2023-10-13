@@ -17,7 +17,7 @@ import {
   } from '../components/styles';
 import { white } from 'color-name';
 
-const Home = () => {
+const Tabs = () => {
 
     const navigation = useNavigation();
     const Tab = createBottomTabNavigator();
@@ -39,7 +39,7 @@ const Home = () => {
                     : 'home-outline';
                 } else if (route.name === 'Aktuelles') {
                   iconName = focused ? 'md-newspaper' : 'md-newspaper-outline';
-                } else if (route.name === 'Coupons') {
+                } else if (route.name === 'CouponsTab') {
                   iconName = focused ? 'gift' : 'gift-outline';
                 } else if (route.name === 'Fotos') {
                   iconName = focused ? 'images' : 'images-outline'
@@ -51,12 +51,19 @@ const Home = () => {
               tabBarInactiveTintColor: 'gray',
             })}
         >
-          <Tab.Screen name="Mein Joker" component={HomeScreen} />
-          <Tab.Screen name="Coupons" component={Coupons} />
-          <Tab.Screen name="Aktuelles" component={News} />
-          <Tab.Screen name="Fotos" component={Pictures} />
+          <Tab.Screen name="StartTab"
+            component={HomeScreen}
+            options={{tabBarLabel: 'Mein Joker' }}
+          />
+          <Tab.Screen
+            name="CouponsTab"
+            component={Coupons}
+            options={{tabBarLabel: 'Coupons'}}
+          />
+          <Tab.Screen name="AktuellesTab" component={News} />
+          <Tab.Screen name="FotosTab" component={Pictures} />
         </Tab.Navigator>
     );
   }
 
-export default Home
+export default Tabs
