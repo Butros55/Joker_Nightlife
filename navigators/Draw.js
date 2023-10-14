@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerItem, createDrawerNavigator } from '@react-navigation/drawer';
 import { Image } from 'expo-image';
 
 //screens
 import Coupons from '../screens/Coupons';
 import Settings from '../screens/Settings';
 import Tabs from './Tabs';
-import { useNavigation } from '@react-navigation/native';
+import CoustomDrawer from '../components/CoustomDrawer';
 
 
 const Drawer = createDrawerNavigator();
@@ -19,12 +19,7 @@ const Draw = ({navigation}) => {
   return (
       <Drawer.Navigator 
           initialRouteName='Start'
-          screenListeners={{
-            drawerItemPress: () => {
-              navigation.navigate('Start', {screen: 'CouponsTab'})
-              console.log('test')
-            }
-          }}
+          drawerContent={props => <CoustomDrawer {...props}/>}
           screenOptions={{
               swipeEnabled: false, 
               drawerType: 'slide',

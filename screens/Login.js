@@ -23,9 +23,8 @@ import {
   ButtonContainer_start,
   ButtonContainer_login
 } from '../components/styles';
-import { styled } from 'styled-components';
+
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { FirebaseError } from 'firebase/app';
 
 const Login = ({navigation}) => {
 

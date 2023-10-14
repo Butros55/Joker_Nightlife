@@ -125,6 +125,7 @@ const VIPList = ({list, width}) => {
                         style={{
                           flex: 1,
                           justifyContent: 'center',
+                          alignItems: 'center'
                         }}
                         >
                         <Image key={item.id} source={item.image} style={[styles.image, { width: '100%', borderRadius: 10}]} />
@@ -142,7 +143,7 @@ const VIPList = ({list, width}) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   card: {
     width: CARD_WIDTH,
@@ -152,7 +153,10 @@ const styles = StyleSheet.create({
     shadowRadius: 25,
     shadowColor: 'black',
     shadowOpacity: 0.2,
-    shadowOffset: 40
+    shadowOffset: 40,
+  },
+  imageHome: {
+    resizeMode: 'stretch',
   },
   imageBox: {
     width: CARD_WIDTH,
@@ -160,7 +164,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     overflow: 'hidden',
-    alignSelf: 'center'
   },
   image: {
     width: CARD_WIDTH,
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     marginLeft: 22,
-    marginBottom: 40
+    marginBottom: 40,
   },
   imagePanel: {
       flex: 1,

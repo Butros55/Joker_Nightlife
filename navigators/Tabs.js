@@ -33,15 +33,15 @@ const Tabs = () => {
               tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
 
-                if (route.name === 'Mein Joker') {
+                if (route.name === 'StartTab') {
                   iconName = focused
                     ? 'home'
                     : 'home-outline';
-                } else if (route.name === 'Aktuelles') {
+                } else if (route.name === 'AktuellesTab') {
                   iconName = focused ? 'md-newspaper' : 'md-newspaper-outline';
                 } else if (route.name === 'CouponsTab') {
                   iconName = focused ? 'gift' : 'gift-outline';
-                } else if (route.name === 'Fotos') {
+                } else if (route.name === 'FotosTab') {
                   iconName = focused ? 'images' : 'images-outline'
                 } 
                 // You can return any component that you like here!
@@ -60,8 +60,14 @@ const Tabs = () => {
             component={Coupons}
             options={{tabBarLabel: 'Coupons'}}
           />
-          <Tab.Screen name="AktuellesTab" component={News} />
-          <Tab.Screen name="FotosTab" component={Pictures} />
+          <Tab.Screen name="AktuellesTab"
+            component={News}
+            options={{tabBarLabel: 'Aktuelles'}}
+          />
+          <Tab.Screen name="FotosTab"
+            component={Pictures}
+            options={{tabBarLabel: 'Nightshots'}}
+          />
         </Tab.Navigator>
     );
   }
