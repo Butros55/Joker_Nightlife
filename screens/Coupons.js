@@ -1,9 +1,14 @@
-import { View, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Button } from '@rneui/base'
 
 const Coupons = ({navigation}) => {
-  return console.log('test2')
+
+
+  return (
+    <View style={{ alignItems: 'center', backgroundColor: 'white', flex: 1}}>
+      <Text style={{top: '50%'}}>Aktuell sind keine Coupons verfügbar</Text>
+    </View>
+  )
 }
 
 export default Coupons

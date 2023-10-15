@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   cardContainer: {
-    marginLeft: 22,
+    marginLeft: '11%',
     marginBottom: 40,
   },
   imagePanel: {

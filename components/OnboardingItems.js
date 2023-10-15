@@ -1,20 +1,25 @@
-import { StyleSheet, Text, View, Image, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
 import React from 'react'
+import { Video, ResizeMode } from 'expo-av';
 
 export default OnboardingItems = ({item}) => {
 
     const { width, height } = useWindowDimensions();
 
     return (
-        <View style={[styles.container, { width, height: height * 1.1, backgroundColor: 'white' }]}>
-
-            <Image source={item.image} style={[styles.image, { width , resizeMode: 'contain'}]} />
-
-            <View style={{ flex: 0.6 }}>
+        <View style={[styles.container, { width, height, backgroundColor: 'white' }]}>
+                <Video 
+                    style={[styles.image, {width, height}]}
+                    source={item.image}
+                    resizeMode={ResizeMode.COVER}
+                    isLooping={true}
+                    isMuted={true}
+                    shouldPlay={true}
+                />
+            <View style={{ flex: 0.1, top: '12%' }}>
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.description}>{item.description}</Text>
             </View>
-
         </View>
     )
 }
@@ -28,22 +33,22 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        flex: 0.7,
-        justifyContent: 'center',
+        flex: 1,
+        position: 'absolute'
     },
 
     title: {
         fontWeight: '800',
         fontSize: 28,
-        color: 'rgb(0, 48, 135)',
+        color: 'white',
         textAlign: 'center',
         marginBottom: 10,
     },
 
     description: {
         textAlign: 'center',
-        fontWeight: '300',
-        color: 'black',
+        fontWeight: '200',
+        color: 'white',
         paddingHorizontal: 64
     }
 

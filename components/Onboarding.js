@@ -12,7 +12,6 @@ import OnboardingItems from './OnboardingItems';
 import Paginator from './Paginator';
 import { setItem } from './asyncStorage';
 
-
 const OnboardingScreen = () => {
 
     const [buttonText, setbuttonText] = useState('Weiter');
@@ -25,7 +24,7 @@ const OnboardingScreen = () => {
     }).current;
 
     const scrollTo = () => {
-        if (currentIndex < slides.length - 2) {
+        if (currentIndex < slides.length - 1) {
             slidesRef.current.scrollToIndex({ index: currentIndex + 1});
         }
         else {
@@ -44,7 +43,7 @@ const OnboardingScreen = () => {
     }
 
     const slidesRef = useRef(null);
-
+    const video = React.useRef(null);
     const viewConfig = useRef({viewAreaCoveragePrecentThreshold: 58}).current;
 
     return (
@@ -65,7 +64,7 @@ const OnboardingScreen = () => {
                     viewabilityConfig={viewConfig.current}
                     ref={slidesRef}
                     onMomentumScrollEnd={checkLastPage}
-                    />
+                />
                 </View>
                 <View style={{position: 'absolute', alignSelf: 'center', top: '82%'}}>
                     <Button
@@ -98,5 +97,10 @@ const styles = StyleSheet.create ({
         height: 40,
         width: 190,
         backgroundColor: 'black'
-    }
+    },
+    image: {
+        flex: 1,
+        width: '100%',
+        opacity: 0.6
+    },
 })
