@@ -1,7 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
-import { DrawerItem, createDrawerNavigator } from '@react-navigation/drawer';
+import React from 'react'
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Image } from 'expo-image';
+import themeContext from '../theme/themeContext';
+import { useContext } from 'react';
+
 
 //screens
 import Settings from '../screens/Settings';
@@ -13,7 +16,8 @@ const Drawer = createDrawerNavigator();
 
 
 const Draw = () => {
-  
+
+  const theme = useContext(themeContext)
 
   return (
       <Drawer.Navigator 
@@ -22,9 +26,12 @@ const Draw = () => {
           screenOptions={({
             swipeEnabled: true, 
             drawerType: 'slide',
-            headerTintColor: 'black',
             headerTitleAlign: 'center',
-            headerTitle: () => <Image style={{ width: 180, height: 42}} source={require('../assets/pictures/logo.png')}></Image>,
+            headerStyle: {
+              backgroundColor: theme.layout
+            },
+            headerTintColor: theme.text,
+            headerTitle: () => <Image style={{ width: 180, height: 42, backgroundColor: theme.layout, tintColor: theme.text}} source={require('../assets/pictures/logo.png')}></Image>,
           })
         }
       >
@@ -33,7 +40,6 @@ const Draw = () => {
           component={Tabs}
           options={{drawerLabel: 'Mein Joker'}}
         />
-        <Drawer.Screen name='Settings' component={Settings} />
       </Drawer.Navigator>
   )
 }

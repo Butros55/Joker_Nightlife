@@ -7,6 +7,8 @@ import {
 } from './styles';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import Carousel from 'react-native-reanimated-carousel';
+import themeContext from '../theme/themeContext';
+import { useContext } from 'react';
 
 
 
@@ -21,6 +23,8 @@ const VIPList = ({list, width}) => {
   const [Description, setDescription] = useState('');
   const [CarouselImageList, setCarouselImageList] = useState([]);
   const [image, setimage] = useState();
+
+  const theme = useContext(themeContext)
   
   const test = useRef(null);
   const openEvents = ( item ) => {
@@ -47,7 +51,7 @@ const VIPList = ({list, width}) => {
 
   return (
     <View style={{paddingVertical: 55}}>
-      <Text style={{ fontSize: 20, top: -5, fontWeight: 400, alignSelf: 'center', paddingBottom: 10 }}>Unsere Locations</Text>
+      <Text style={{ fontSize: 20, top: -5, fontWeight: 400, alignSelf: 'center', paddingBottom: 10, color: theme.text}}>Unsere Locations</Text>
       <View style={styles.container}>
 
         {list.map((item, index) => {
@@ -57,14 +61,14 @@ const VIPList = ({list, width}) => {
               onPress={() => {[openEvents( item ), setCarouselImages({ item }, test.current?.present())]}}
               style={styles.cardContainer}
             >
-            <View style={styles.card}>
+            <View style={[styles.card, {backgroundColor: theme.overlay}]}>
               <View style={styles.imageBox}>
                 <Image style={styles.imageHome} source={item.imageHome}/>
               </View>
               <View>
                 <View>
-                  <Text style={{paddingLeft: 10, fontWeight: 800, fontSize: 20, top: '20%'}}>{item.name}</Text>
-                  <Text style={{paddingLeft: 10, fontWeight: 500, fontSize: 15, top: '20%'}}>{item.music}</Text>
+                  <Text style={{paddingLeft: 10, fontWeight: 800, fontSize: 20, top: '20%', color: theme.text}}>{item.name}</Text>
+                  <Text style={{paddingLeft: 10, fontWeight: 500, fontSize: 15, top: '20%', color: theme.text}}>{item.music}</Text>
                 </View>
               </View>
             </View>

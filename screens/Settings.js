@@ -1,22 +1,21 @@
 import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import React from 'react'
 import { Icon } from '@rneui/themed';
 import { GestureHandlerRootView, ScrollView, Switch } from 'react-native-gesture-handler';
 import SETTINGITEMS from '../components/settingsItems';
+import { EventRegister } from 'react-native-event-listeners';
+import themeContext from '../theme/themeContext';
 
 const Settings = ({navigation}) => {
 
-  const [settings, setsettings] = useState({
-    darkMode: true,
-    darkMode2: true
-  }
-  );
+  const theme = useContext(themeContext)
+  const [darkMode, setdarkMode] = useState(false);
 
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <View style={{flex: 0.3, backgroundColor: 'white'}}>
+      <View style={{flex: 0.3, backgroundColor: theme.background}}>
           {/* back button */}
           <TouchableOpacity
             onPress={() => {[navigation.goBack()]}}
@@ -27,6 +26,7 @@ const Settings = ({navigation}) => {
                 type='font-awesome'
                 name='chevron-left'
                 size={30}
+                color={theme.text}
               />
             </Text>
         </TouchableOpacity>
@@ -34,25 +34,26 @@ const Settings = ({navigation}) => {
           style={[styles.profilepicture, {top: 20}]}
           //change profile picture onPress
         >
-          <Image source={require('../assets/pictures/icon.png')} style={styles.profilepicture} />
+          <Image source={require('../assets/pictures/icon.png')} style={[styles.profilepicture, {borderColor: 'white', borderWidth: 1}]} />
         </TouchableOpacity>
-        <Text style={[styles.profilename, {fontWeight: 500}]}>Joker Nightlife</Text>
-        <Text style={[styles.profileadress, {fontWeight: 200}]}>Schwarzer Weg 20, 49809 Lingen (Ems)</Text>
+        <Text style={[styles.profilename, {fontWeight: 500, color: theme.text}]}>Joker Nightlife</Text>
+        <Text style={[styles.profileadress, {fontWeight: 200, color: theme.text}]}>Schwarzer Weg 20, 49809 Lingen (Ems)</Text>
       </View>
 
-      <View style={{backgroundColor: 'black', height: 1, opacity: 0.1}} />
+      <View style={{height: 0.2, opacity: 1}} />
 
-      <ScrollView style={{backgroundColor: 'white', flex: 0.7}}>
+      <ScrollView style={{backgroundColor: theme.background, flex: 0.7}}>
         {SETTINGITEMS.map(({ header, items }) => {
           return (
-            <View style={styles.section} key={header}>
+            <View style={[styles.section, {backgroundColor: theme.background}]} key={header}>
               <Text style={styles.settingssubTitle}>{header}</Text>
-              {items.map(({ id, label, type, icon, color }) => {
+              {items.map(({ id, label, type, icon, color, onpress }) => {
                 return (
                 <TouchableOpacity
                   key={icon}
+                  onPress={onpress}
                 >
-                  <View style={styles.row}>
+                  <View style={[styles.row, {backgroundColor: theme.button}]}>
                     <View style={[styles.rowIcon, {backgroundColor: color}]}>
                       <Icon
                         type='font-awesome-5'
@@ -61,19 +62,23 @@ const Settings = ({navigation}) => {
                         iconStyle={{color: 'white'}}
                       />
                     </View>
-                    <Text style={styles.rowLabel}>{label}</Text>
+                    <Text style={[styles.rowLabel, {color: theme.text}]}>{label}</Text>
                     <View style={{flex: 1}}/>
 
                     {type === 'toggle' && 
                       <Switch 
-                        value={settings[id]}
-                        onValueChange={value => setsettings({ ...settings, [id]: value })}
-                    />}
+                        value={darkMode}
+                        onValueChange={(value) => {
+                          setdarkMode(value);
+                          EventRegister.emit('ChangeTheme', value)
+                      }}
+                      />}
                     {type === 'link' &&
                       <Icon
                         type='font-awesome'
                         name='chevron-right'
                         size={10}
+                        iconStyle={{color: theme.text}}
                       />
                     }
                   </View>
@@ -90,7 +95,6 @@ const Settings = ({navigation}) => {
 
 const styles = StyleSheet.create({
   profilename: {
-    color: 'black',
     alignSelf: 'center',
     fontSize: 20,
     top: 35
@@ -123,14 +127,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     height: 50,
-    backgroundColor: '#f2f2f2',
     borderRadius: 8,
     marginBottom: 12,
     paddingHorizontal: 12
   },
   rowLabel: {
     fontSize: 17,
-    color: '#0c0c0c'
+
   },
   rowIcon: {
     width: 32,

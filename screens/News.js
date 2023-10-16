@@ -1,19 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
-
-
-//styles
-import {
-    ButtonContainer_login
-  } from '../components/styles';
-
+import themeContext from '../theme/themeContext';
+import { useContext } from 'react'
 const News = ({navigation}) => {
-
-
+  
+  const theme = useContext(themeContext)
+  
   return (
-    <View style={{ alignItems: 'center', backgroundColor: 'white', flex: 1}}>
-      <Text style={{top: '50%'}}>Aktuelles</Text>
+    <View style={{ alignItems: 'center', backgroundColor: theme.background, flex: 1}}>
+      <Text style={{top: '50%', color: theme.text}}>Aktuelles</Text>
     </View>
   )
 }

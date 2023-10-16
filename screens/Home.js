@@ -7,12 +7,15 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import VIPList from '../components/UnsereBereiche'
 import VIPListItems from '../components/UnsereBereicheItems'
 import { useState, useRef } from 'react';
+import themeContext from '../theme/themeContext';
+import { useContext } from 'react'
 
 const width = Dimensions.get('window').width;
 
 
 const Home = () => {
-
+    
+    const theme = useContext(themeContext)
 
     const ModalRef = useRef(null);
     const openEvents = ( item ) => {
@@ -30,10 +33,10 @@ const Home = () => {
         <GestureHandlerRootView style={{flex: 1}}>
         <BottomSheetModalProvider>
             <ScrollView 
-                style={{backgroundColor: 'white'}}
+                style={{backgroundColor: theme.background}}
                 showsVerticalScrollIndicator={false}
             >
-                <Text style={{ fontSize: 20, top: 20, fontWeight: 400, alignSelf: 'center'}}>Unsere Events</Text>
+                <Text style={{ fontSize: 20, top: 20, fontWeight: 400, alignSelf: 'center', color: theme.text}}>Unsere Events</Text>
                 <Carousel list={carouselList} width={width} />
                 <VIPList list={VIPListItems} width={width}/>
             </ScrollView>

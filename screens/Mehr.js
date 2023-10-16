@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Input, Icon, Button } from '@rneui/themed';
+import { Icon } from '@rneui/themed';
 
 const Pictures = ({navigation}) => {
 

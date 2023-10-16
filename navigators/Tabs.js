@@ -1,8 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState , useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import themeContext from '../theme/themeContext';
+import { useContext } from 'react';
+
 
 //screens
 import HomeScreen from '../screens/Home';
@@ -11,20 +14,17 @@ import News from '../screens/News';
 import Pictures from '../screens/Pictures'
 
 
-//styles
-import {
-    ButtonContainer_login
-  } from '../components/styles';
-import { white } from 'color-name';
-
 const Tabs = () => {
 
     const navigation = useNavigation();
     const Tab = createBottomTabNavigator();
+    const theme = useContext(themeContext)
+
 
   return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
+              tabBarStyle: {backgroundColor: theme.layout},
               headerShown: false,
               headerTransparent: false,
               headerStatusBarHeight: 20,
@@ -45,10 +45,10 @@ const Tabs = () => {
                   iconName = focused ? 'images' : 'images-outline'
                 } 
                 // You can return any component that you like here!
-                return <Ionicons name={iconName} size={size} color={color} />;
+                return <Ionicons name={iconName} size={size} color={theme.text} />;
               },
-              tabBarActiveTintColor: 'black',
-              tabBarInactiveTintColor: 'gray',
+              tabBarActiveTintColor: theme.text,
+              tabBarInactiveTintColor: theme.text,
             })}
         >
           <Tab.Screen name="StartTab"
