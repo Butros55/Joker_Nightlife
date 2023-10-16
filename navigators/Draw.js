@@ -7,7 +7,6 @@ import { useContext } from 'react';
 
 
 //screens
-import Settings from '../screens/Settings';
 import Tabs from './Tabs';
 import CoustomDrawer from '../components/CoustomDrawer';
 
@@ -24,6 +23,7 @@ const Draw = () => {
           initialRouteName='Start'
           drawerContent={props => <CoustomDrawer {...props}/>}
           screenOptions={({
+            headerShown: false,
             swipeEnabled: true, 
             drawerType: 'slide',
             headerTitleAlign: 'center',

@@ -22,7 +22,6 @@ const VIPList = ({list, width}) => {
   const [Title, setTitle] = useState('');
   const [Description, setDescription] = useState('');
   const [CarouselImageList, setCarouselImageList] = useState([]);
-  const [image, setimage] = useState();
 
   const theme = useContext(themeContext)
   
@@ -51,7 +50,7 @@ const VIPList = ({list, width}) => {
 
   return (
     <View style={{paddingVertical: 55}}>
-      <Text style={{ fontSize: 20, top: -5, fontWeight: 400, alignSelf: 'center', paddingBottom: 10, color: theme.text}}>Unsere Locations</Text>
+      <Text style={{ fontSize: 20, top: -5, fontWeight: 700, alignSelf: 'center', paddingBottom: 10, color: theme.text}}>Unsere Locations</Text>
       <View style={styles.container}>
 
         {list.map((item, index) => {

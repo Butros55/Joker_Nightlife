@@ -3,10 +3,14 @@ import { useState, useRef } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { useNavigation } from '@react-navigation/native';
+import themeContext from '../theme/themeContext';
+import { useContext } from 'react'
+
 import {
     Panel_Up,
   } from './styles';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import theme from '../theme/theme';
 
 //screens
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -14,7 +18,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 function Carousels({list, width}) {
-    
+    const theme = useContext(themeContext)
     const ModalRef = useRef(null);
     const openEvents = ( item ) => {
         setImages(item.image);
@@ -30,7 +34,8 @@ function Carousels({list, width}) {
 
     return (
         
-        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0)'}}>
+        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0)', top: 20}}>
+            <Text style={{ fontSize: 20, top: 20, fontWeight: 700, alignSelf: 'center', color: theme.text}}>Unsere Events</Text>
             <Carousel
                 loop={true}
                 width={width}

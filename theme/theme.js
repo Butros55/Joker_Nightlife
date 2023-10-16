@@ -1,5 +1,6 @@
 const theme = {
     light: {
+        isOn: false,
         theme: 'light',
         text: 'black',
         background: 'white',
@@ -7,9 +8,10 @@ const theme = {
         overlay: 'white',
         focused: 'rgba(20,20,20,0.1)',
         notFocused: 'white',
-        layout: 'white'
+        layout: 'white',
     },
     dark: {
+        isOn: true,
         theme: 'dark',
         text: 'white',
         background: 'rgb(10,10,10)',
@@ -17,7 +19,7 @@ const theme = {
         overlay: 'rgb(20,20,20)',
         focused: 'rgba(20,20,20,1)',
         notFocused: 'rgba(10,10,10,0.1)',
-        layout: 'rgb(10,10,10)'
+        layout: 'rgb(10,10,10)',
     }
 }
 

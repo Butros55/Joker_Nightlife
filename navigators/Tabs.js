@@ -12,6 +12,7 @@ import HomeScreen from '../screens/Home';
 import Coupons from '../screens/Coupons';
 import News from '../screens/News';
 import Pictures from '../screens/Pictures'
+import Settings from '../screens/Settings';
 
 
 const Tabs = () => {
@@ -23,6 +24,7 @@ const Tabs = () => {
 
   return (
         <Tab.Navigator
+            initialRouteName='StartTab'
             screenOptions={({ route }) => ({
               tabBarStyle: {backgroundColor: theme.layout},
               headerShown: false,
@@ -38,11 +40,13 @@ const Tabs = () => {
                     ? 'home'
                     : 'home-outline';
                 } else if (route.name === 'AktuellesTab') {
-                  iconName = focused ? 'md-newspaper' : 'md-newspaper-outline';
+                  iconName = focused ? 'notifications' : 'notifications-outline';
                 } else if (route.name === 'CouponsTab') {
-                  iconName = focused ? 'gift' : 'gift-outline';
+                  iconName = focused ? 'cash' : 'cash-outline';
                 } else if (route.name === 'FotosTab') {
-                  iconName = focused ? 'images' : 'images-outline'
+                  iconName = focused ? 'aperture' : 'aperture-outline'
+                } else if (route.name === 'SettingsOpen') {
+                  iconName = focused ? 'ellipsis-horizontal-outline' : 'ellipsis-horizontal-outline'
                 } 
                 // You can return any component that you like here!
                 return <Ionicons name={iconName} size={size} color={theme.text} />;
@@ -51,22 +55,32 @@ const Tabs = () => {
               tabBarInactiveTintColor: theme.text,
             })}
         >
-          <Tab.Screen name="StartTab"
-            component={HomeScreen}
-            options={{tabBarLabel: 'Mein Joker' }}
+          <Tab.Screen name="SettingsOpen"
+            component={Settings}
+            options={{tabBarShowLabel: false}}
+            listeners={{
+              tabPress: e => {
+                e.preventDefault();
+                navigation.openDrawer();
+              }
+            }}
           />
           <Tab.Screen
             name="CouponsTab"
             component={Coupons}
-            options={{tabBarLabel: 'Coupons'}}
+            options={{tabBarShowLabel: false}}
+          />
+          <Tab.Screen name="StartTab"
+            component={HomeScreen}
+            options={{tabBarShowLabel: false, tabBarIconStyle: {}}}
           />
           <Tab.Screen name="AktuellesTab"
             component={News}
-            options={{tabBarLabel: 'Aktuelles'}}
+            options={{tabBarShowLabel: false}}
           />
           <Tab.Screen name="FotosTab"
             component={Pictures}
-            options={{tabBarLabel: 'Nightshots'}}
+            options={{tabBarShowLabel: false}}
           />
         </Tab.Navigator>
     );

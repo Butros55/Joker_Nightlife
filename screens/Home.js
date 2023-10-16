@@ -32,13 +32,18 @@ const Home = () => {
     return (
         <GestureHandlerRootView style={{flex: 1}}>
         <BottomSheetModalProvider>
-            <ScrollView 
+            <ScrollView
                 style={{backgroundColor: theme.background}}
                 showsVerticalScrollIndicator={false}
             >
-                <Text style={{ fontSize: 20, top: 20, fontWeight: 400, alignSelf: 'center', color: theme.text}}>Unsere Events</Text>
-                <Carousel list={carouselList} width={width} />
-                <VIPList list={VIPListItems} width={width}/>
+                <View style={{flex: .2, height: 150, justifyContent: 'flex-end'}}>
+                    <Text style={{ fontSize: 40, fontWeight: 700, paddingLeft: 25, color: theme.text}}>Hallo,</Text>
+                    <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>Geret</Text>
+                </View>
+                <View style={{flex: .8}}>
+                    <Carousel list={carouselList} width={width} />
+                    <VIPList list={VIPListItems} width={width}/>
+                </View>
             </ScrollView>
         </BottomSheetModalProvider>
     </GestureHandlerRootView>

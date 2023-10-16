@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator();
 const Navigator = () => {
 
 
-  const [darkMode, setdarkMode] = useState(false);
+  const [darkMode, setdarkMode] = useState();
 
   useEffect(() => {
     const listener = EventRegister.addEventListener('ChangeTheme', (data) => {

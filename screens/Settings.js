@@ -67,10 +67,10 @@ const Settings = ({navigation}) => {
 
                     {type === 'toggle' && 
                       <Switch 
-                        value={darkMode}
+                        value={theme.isOn}
                         onValueChange={(value) => {
-                          setdarkMode(value);
                           EventRegister.emit('ChangeTheme', value)
+                          setdarkMode(value);
                       }}
                       />}
                     {type === 'link' &&
