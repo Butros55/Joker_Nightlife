@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, View, useWindowDimensions, Image } from 'react-native'
 import React from 'react'
 import { Video, ResizeMode } from 'expo-av';
 

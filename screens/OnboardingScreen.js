@@ -21,12 +21,12 @@ export default [
         id: '4',
         title: 'Einzigartige Coupons',
         description: 'Erhalte Coupons welche du gegen Getränke, Eintritt oder ähnliches eintauschen kannst',
-        image : require('../assets/pictures/discount.png')
+        image : require('../assets/videos/discount.mp4')
     },
     {
         id: '5',
         title: 'Und los geht`s',
         description: 'Es geht los beginne deine Tour durch unsere digitale version von Joker Nightlife',
-        image : require('../assets/pictures/beer.png')
+        image : require('../assets/videos/beer.mp4')
     }
 ];

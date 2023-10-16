@@ -4,8 +4,6 @@ import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Animated } from '
 import { Video, ResizeMode } from 'expo-av';
 import { Image } from 'expo-image';
 import * as AppleAuthentication from 'expo-apple-authentication';
-import SlidingUpPanel from 'rn-sliding-up-panel';
-import { useNavigation } from '@react-navigation/native';
 import { Input, Icon, Button } from '@rneui/themed';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState, useRef } from 'react';

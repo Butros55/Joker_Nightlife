@@ -38,7 +38,7 @@ const Navigator = () => {
   if(showOnboarding) {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Onboarding' screenOptions={{ gestureEnabled: false }}>
+        <Stack.Navigator initialRouteName='Drawer' screenOptions={{ gestureEnabled: false }}>
           <Stack.Screen options={{headerShown: false }}  name="Onboarding" component={OnboardingScreen} />
           <Stack.Screen options={{headerShown: false }} name="Login" component={LoginScreen} />
           <Stack.Screen options={{headerShown: false }} name="Drawer" component={DrawerScreen} />
@@ -50,7 +50,7 @@ const Navigator = () => {
   }else{
     return (
       <NavigationContainer>
-      <Stack.Navigator initialRouteName='Onboarding' screenOptions={{ gestureEnabled: false }}>
+      <Stack.Navigator initialRouteName='Drawer' screenOptions={{ gestureEnabled: false }}>
         <Stack.Screen options={{headerShown: false }}  name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen options={{headerShown: false }} name="Login" component={LoginScreen} />
         <Stack.Screen options={{headerShown: false }} name="Drawer" component={DrawerScreen} />

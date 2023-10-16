@@ -31,6 +31,7 @@ const Home = () => {
         <BottomSheetModalProvider>
             <ScrollView 
                 style={{backgroundColor: 'white'}}
+                showsVerticalScrollIndicator={false}
             >
                 <Text style={{ fontSize: 20, top: 20, fontWeight: 400, alignSelf: 'center'}}>Unsere Events</Text>
                 <Carousel list={carouselList} width={width} />
