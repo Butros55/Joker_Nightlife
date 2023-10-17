@@ -3,6 +3,7 @@ import React from 'react'
 import { Icon } from '@rneui/themed';
 import themeContext from '../theme/themeContext';
 import { useContext } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Pictures = ({navigation}) => {
 
@@ -15,7 +16,7 @@ const Pictures = ({navigation}) => {
             <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>Nightshots vom Abend</Text>
         </View>
       <View style={{flex: .8}}>
-        <Text style={{top: '40%', alignSelf: 'center', color: theme.text}}>Nightshots</Text>
+        <Text style={{top: '40%', alignSelf: 'center', color: theme.text}}>Coupons</Text>
       </View>
     </View>
   )

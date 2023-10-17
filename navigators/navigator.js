@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getItem } from '../components/asyncStorage';
 import theme from '../theme/theme';
 import themeContext from '../theme/themeContext';
+import { EventRegister } from 'react-native-event-listeners';
 
 //screens
 import LoginScreen from './../screens/Login';
@@ -11,7 +12,7 @@ import OnboardingScreen from './../components/Onboarding';
 import DrawerScreen from './Draw';
 import MehrScreen from '../screens/Mehr'
 import SettingsScreen from '../screens/Settings';
-import { EventRegister } from 'react-native-event-listeners';
+import Muttizettel from '../screens/Mehr/Muttizettel';
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +62,7 @@ const Navigator = () => {
           <Stack.Screen options={{headerShown: false }} name="Drawer" component={DrawerScreen} />
           <Stack.Screen options={{headerShown: false }} name="Mehr" component={MehrScreen} />
           <Stack.Screen options={{headerShown: false }} name="Settings" component={SettingsScreen} />
+          <Stack.Screen options={{headerShown: false }} name="Muttizettel" component={Muttizettel} />
         </Stack.Navigator>
       </NavigationContainer>
       </themeContext.Provider>
@@ -75,6 +77,7 @@ const Navigator = () => {
         <Stack.Screen options={{headerShown: false }} name="Drawer" component={DrawerScreen} />
         <Stack.Screen options={{headerShown: false }} name="Mehr" component={MehrScreen} />
         <Stack.Screen options={{headerShown: false }} name="Settings" component={SettingsScreen} />
+        <Stack.Screen options={{headerShown: false }} name="Muttizettel" component={Muttizettel} />
       </Stack.Navigator>
     </NavigationContainer>
     </themeContext.Provider>
