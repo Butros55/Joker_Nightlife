@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import themeContext from '../theme/themeContext';
 import { useContext } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {  Button } from '@rneui/themed';
+import {  Button, Icon } from '@rneui/themed';
 
 const CoustomDrawer = (props) => {
     
@@ -28,7 +28,7 @@ const CoustomDrawer = (props) => {
                     flex: 0.1,
                     borderBottomRightRadius: 30,
                     borderBottomLeftRadius: 30,
-                    top: '-8%'
+                    top: -60
                 }}
             >
                 <View style={{height: 150, top: '10%', justifyContent: 'center'}}>
@@ -47,16 +47,17 @@ const CoustomDrawer = (props) => {
                 </View>
                 
             </View>
-            <View style={{height: height * 0.6, backgroundColor: theme.background, top: '15%'}}>
-                <View style={{top: -130}}>
-                    {Buttons(focused, setfocused, 'Mein Joker', navigation, 'Start', 'StartTab', theme, 'home', 'home-outline' )}
-                    {Buttons(focused, setfocused, 'Coupons', navigation, 'Start', 'CouponsTab', theme, 'cash', 'cash-outline')}
-                    {Buttons(focused, setfocused, 'Aktuelles', navigation, 'Start', 'AktuellesTab', theme, 'notifications', 'notifications-outline')}
-                    {Buttons(focused, setfocused, 'Nightshots', navigation, 'Start', 'FotosTab', theme, 'aperture', 'aperture-outline')}
-                    {Buttons(focused, setfocused, 'Einstellungen', navigation, 'Settings', '', theme, 'settings', 'settings-outline')}
-                    {Buttons(focused, setfocused, 'Mehr', navigation, 'Mehr', '', theme, 'ellipsis-horizontal-outline', 'ellipsis-horizontal-outline')}
+            <View style={{flex: 1,height: height * 0.68, backgroundColor: theme.background}}>
+                <View style={{top: '-5%'}}>
+                    {Buttons(focused, setfocused, 'Mein Joker', navigation, 'Start', 'StartTab', theme, 'home', 'home-outline', 'ionicon' )}
+                    {Buttons(focused, setfocused, 'Coupons', navigation, 'Start', 'CouponsTab', theme, 'percent', 'percent-outline', 'material-community')}
+                    {Buttons(focused, setfocused, 'Aktuelles', navigation, 'Start', 'AktuellesTab', theme, 'notifications', 'notifications-outline', 'ionicon')}
+                    {Buttons(focused, setfocused, 'Nightshots', navigation, 'Start', 'FotosTab', theme, 'aperture', 'aperture-outline', 'ionicon')}
+                    {Buttons(focused, setfocused, 'Einstellungen', navigation, 'Settings', '', theme, 'settings', 'settings-outline', 'ionicon')}
+                    {Buttons(focused, setfocused, 'Mehr', navigation, 'Mehr', '', theme, 'ellipsis-horizontal-outline', 'ellipsis-horizontal-outline', 'ionicon')}
                 </View>
-                <View style={{top: '30%'}}>
+            </View>
+                <View style={{flex: 0.3,height: 60, justifyContent: 'center'}}>
                     <Button
                         icon={() => <Ionicons name={'log-out-outline'} size={15} color={theme.text} />}
                         type='clear'
@@ -65,7 +66,6 @@ const CoustomDrawer = (props) => {
                             paddingVertical: 15,
                             borderRadius: 5,
                             width: '93%',
-                            top: '10%'
                         }}
                         onPress={() => {navigation.navigate('Login')}}
                     >
@@ -79,13 +79,12 @@ const CoustomDrawer = (props) => {
                         </Text>
                     </Button>
                 </View>
-            </View>
         </DrawerContentScrollView>
     </View>
   )
 }
 
-const Buttons = (focused, setfocused, title, navigation, path, screenpath, theme, icon, iconoutline) => {
+const Buttons = (focused, setfocused, title, navigation, path, screenpath, theme, icon, iconoutline, type) => {
     return(
         <Button
             type='clear'
@@ -104,7 +103,7 @@ const Buttons = (focused, setfocused, title, navigation, path, screenpath, theme
                 width: '93%',
                 justifyContent: 'flex-start',
             }}
-            icon={() => <Ionicons name={focused == title ? icon : iconoutline} size={15} color={theme.text} />}
+            icon={() => <Icon name={focused == title ? icon : iconoutline} size={15} type={type} color={theme.text} />}
             onPress={() => {navigation.navigate(path ,{screen: screenpath}), setfocused(title)}}
         >
             <View>

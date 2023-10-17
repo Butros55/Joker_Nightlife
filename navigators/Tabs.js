@@ -2,9 +2,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useState , useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import themeContext from '../theme/themeContext';
 import { useContext } from 'react';
+import {  Icon } from '@rneui/themed';
 
 
 //screens
@@ -39,17 +39,22 @@ const Tabs = () => {
                   iconName = focused
                     ? 'home'
                     : 'home-outline';
+                  type='ionicon'
                 } else if (route.name === 'AktuellesTab') {
                   iconName = focused ? 'notifications' : 'notifications-outline';
+                  type='ionicon'
                 } else if (route.name === 'CouponsTab') {
-                  iconName = focused ? 'cash' : 'cash-outline';
+                  iconName = focused ? 'percent' : 'percent-outline';
+                  type='material-community'
                 } else if (route.name === 'FotosTab') {
                   iconName = focused ? 'aperture' : 'aperture-outline'
+                  type='ionicon'
                 } else if (route.name === 'SettingsOpen') {
-                  iconName = focused ? 'ellipsis-horizontal-outline' : 'ellipsis-horizontal-outline'
+                  iconName = focused ? 'menu' : 'menu'
+                  type='ionicon'
                 } 
                 // You can return any component that you like here!
-                return <Ionicons name={iconName} size={size} color={theme.text} />;
+                return <Icon name={iconName} size={size} color={theme.text} type={type} />;
               },
               tabBarActiveTintColor: theme.text,
               tabBarInactiveTintColor: theme.text,
