@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo_source from './../assets/pictures/logo.png'
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import { Image } from 'expo-image';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { Input, Icon, Button } from '@rneui/themed';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState, useRef } from 'react';
-import { firebase_auth } from '../components/firebaseConfig';
+import firebase from '../components/firebaseConfig';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { setItem } from './../components/asyncStorage';
 
 //styles
 import {
-  StyledContainer,
-  Wrapper,
   LoginWithEmailButton,
   Panel_Up,
   InputContainer_login,
@@ -37,7 +36,7 @@ const [colormail, setcolormail] = useState('')
 const [coloruser, setcoloruser] = useState('')
 const [colorpas, setcolorpas] = useState('')
 
-const auth = firebase_auth;
+const auth = firebase.auth();
 const passwordRef = React.createRef();
 const passwordrepeatRef = React.createRef();
 const emailRef = React.createRef();
@@ -51,46 +50,63 @@ const LoginRef = useRef(null);
 const RegisterRef = useRef(null);
 
 
+useEffect(() => {
+  const unsubscribe = auth.onAuthStateChanged(user => {
+    if(user) {
+      navigation.navigate('Drawer')
+      console.log('test')
+    }
+  })
+  return unsubscribe
+}, [])
+
+
 
  const handleLogin = async () => {
    setloading(true);
    resetInvalid();
    verifyUserDataLogin();
-  try {
-    const response = await signInWithEmailAndPassword(auth, email, password);
-    navigation.navigate('Drawer');
-  }catch (e){
-    console.log(e);
-    if (e.code == 'auth/invalid-email' | e.code == 'auth/wrong-password') {
-      seterrorMsg('E-Mail Adresse oder Passwort falsch')
-      setcolormail('red')
-      setcolorpas('red')
-      emailRef.current?.shake();
-    }
-  }finally{
-    setloading(false);
-  }
+    auth
+    .signInWithEmailAndPassword(email, password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log('logged in with', user.email)
+    })
+    .catch (e => {
+      console.log(e);
+      if (e.code == 'auth/invalid-email' | e.code == 'auth/wrong-password') {
+        seterrorMsg('E-Mail Adresse oder Passwort falsch')
+        setcolormail('red')
+        setcolorpas('red')
+        emailRef.current?.shake();
+      }})
+    .finally(() => {
+      setloading(false);
+    })
 }
 
 const handleSignUp = async () => {
   setloading(true);
   resetInvalid();
   verifyUserDataRegister();
-  try {
-    const response = await createUserWithEmailAndPassword(auth, email, password);
-  }catch (e) {
-    console.log(e.code);
-    if (e.code == 'auth/email-already-in-use') {
-      seterrorMsg('Diese E-Mail wird bereits verwendet')
-      setcolormail('red')
-      emailRef.current?.shake();
-    } else if (e.code == 'auth/weak-password') {
-      seterrorMsg('Das Passwort muss mindestens 6 Zeichen enthalten')
-      setcolorpas('red')
-    }
-  }finally{
-    setloading(false);
-  }
+   auth
+     .createUserWithEmailAndPassword(email, password)
+     .then(userCredentials => {
+       const user = userCredentials.user;
+       console.log(user.email);
+     })
+     .catch(e => {
+       console.log(e);
+       if (e.code == 'auth/invalid-email' | e.code == 'auth/wrong-password') {
+         seterrorMsg('E-Mail Adresse oder Passwort falsch')
+         setcolormail('red')
+         setcolorpas('red')
+         emailRef.current?.shake();
+       }
+     })
+     .finally(() => {
+       setloading(false);
+   })
 }
 
 const verifyUserDataRegister = () => {

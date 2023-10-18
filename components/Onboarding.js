@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import { FlatList } from 'react-native';
 import { Button } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
+import { setItem } from './asyncStorage';
 
 
 //screens
 import slides from '../screens/OnboardingScreen'
-import OnboardingItems from './OnboardingItems';
+import OnboardingItems from '../Items/OnboardingItems';
 import Paginator from './Paginator';
-import { setItem } from './asyncStorage';
 
 const OnboardingScreen = () => {
 
@@ -24,7 +24,7 @@ const OnboardingScreen = () => {
     }).current;
 
     const scrollTo = () => {
-        if (currentIndex < slides.length - 1) {
+        if (currentIndex < slides.length - 2) {
             slidesRef.current.scrollToIndex({ index: currentIndex + 1});
         }
         else {

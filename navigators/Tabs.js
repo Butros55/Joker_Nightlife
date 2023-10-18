@@ -12,7 +12,7 @@ import HomeScreen from '../screens/Home';
 import Coupons from '../screens/Coupons';
 import News from '../screens/News';
 import Pictures from '../screens/Pictures'
-import Settings from '../screens/Settings';
+import Settings from '../screens/settings/Settings';
 
 
 const Tabs = () => {

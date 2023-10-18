@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Button } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
-import { Icon } from '@rneui/themed';
+import { Icon, Button } from '@rneui/themed';
 import themeContext from '../../theme/themeContext';
 import { useContext } from 'react';
 import * as Print from 'expo-print';
@@ -17,6 +17,7 @@ const Muttizettel = ({navigation}) => {
 }
 
     const [selectedPrinter, setSelectedPrinter] = React.useState();
+    const { height } = Dimensions.get("window");
 
     const print = async () => {
       // On iOS/android prints the given html. On web prints the HTML from the current page.
@@ -27,8 +28,11 @@ const Muttizettel = ({navigation}) => {
     };
 
   return (
-    <View style={{ backgroundColor: theme.background, flex: 1}}>
-        <View style={{flex: .2, justifyContent: 'center', backgroundColor: theme.background}}>
+    <View style={{ backgroundColor: theme.background, flex: 1, height}}>
+            <View style={{flex: 1, alignItems: 'center', top: '15%'}}>
+                {/* <PdfRead /> */}
+            </View>
+        <View style={{ position: 'absolute', top: 40}}>
           {/* back button */}
           <TouchableOpacity
             onPress={() => {[navigation.goBack()]}}
@@ -45,14 +49,20 @@ const Muttizettel = ({navigation}) => {
         </TouchableOpacity>
         </View>
       <View style={{flex: .7}}>
-        <View style={{flex: .9}}>
-            <PdfRead />
-        </View>
-        <View style={{justifyContent: 'flex-start', flex: .1, backgroundColor: 'white'}}>
+        <View style={{alignSelf: 'center', top: '60%'}}>
         <Button
-            style={{backgroundColor: 'black'}}
+            titleStyle={{color: theme.texttfghz, paddingLeft: 5}}
+            buttonStyle={{backgroundColor: theme.button, borderRadius: 8, alignSelf: 'center', width : '90%'}}
             title='Drucken'
             onPress={() => {print()}}
+            icon={
+                <Icon
+                type='ionicon'
+                name='print-outline'
+                size={18}
+                iconStyle={{color: theme.text}}
+              />
+            }
         />
         </View>
       </View>

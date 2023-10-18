@@ -26,8 +26,6 @@ function Carousels({list, width}) {
         setDescription(item.description);
     }
 
-    const navigation = useNavigation();
-
     const [Images, setImages] = useState('');
     const [Title, setTitle] = useState('');
     const [Description, setDescription] = useState('');

@@ -6,13 +6,26 @@ import themeContext from '../theme/themeContext';
 import { useContext } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {  Button, Icon } from '@rneui/themed';
+import firebase from './firebaseConfig';
+import { setItem } from './asyncStorage';
+
 
 const CoustomDrawer = (props) => {
     
     const { height } = Dimensions.get("window");
     const [focused, setfocused] = useState('Mein Joker');
+
+    const auth = firebase.auth();
     const navigation = useNavigation();
     const theme = useContext(themeContext)
+
+    const handleSignOut = () => {
+        auth
+        .signOut()
+        .then(() => {
+            navigation.replace('Login')
+        })
+    }
 
   return (
     <View style={{flex: 1, backgroundColor: theme.layout}}>
@@ -67,7 +80,7 @@ const CoustomDrawer = (props) => {
                             borderRadius: 5,
                             width: '93%',
                         }}
-                        onPress={() => {navigation.navigate('Login')}}
+                        onPress={() => {handleSignOut()}}
                     >
                         <Text style={{
                             paddingLeft: 10,

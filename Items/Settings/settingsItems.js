@@ -2,7 +2,6 @@ export default [
     {
         header: 'Allgemein',
         icon: 'Settings',
-        onpress: () => {{}},
         items: [
             {
                 id: 'darkMode',
@@ -10,20 +9,25 @@ export default [
                 color: 'blue',
                 label: 'Dark Mode',
                 type: 'toggle',
+                icontype: 'font-awesome-5'
             },
             {
                 id: 'news',
                 icon: 'envelope',
                 color: 'green',
                 label: 'Benachrichtigungen',
-                type: 'link'
+                type: 'link',
+                navigate: 'NotificationsSettings',
+                icontype: 'font-awesome-5'
             },
             {
                 id: 'Über uns',
                 icon: 'info',
                 color: 'black',
                 label: 'Über uns',
-                type: 'link'
+                type: 'link',
+                navigate: 'Test',
+                icontype: 'font-awesome-5'
             },
         ]
     },
@@ -32,20 +36,22 @@ export default [
         icon: 'Settings',
         items: [
             {
-                onpress: () => {{console.log('test')}},
-                id: 'Privatsphäre',
-                icon: 'lock',
-                color: 'black',
-                label: 'Privatsphäre',
-                type: 'link',
-            },
-            {
-                onpress: () => {{console.log('test1')}},
                 id: 'Profileinstellungen',
                 icon: 'user',
                 color: 'black',
                 label: 'Profil',
                 type: 'link',
+                navigate: 'ProfileSettings',
+                icontype: 'font-awesome-5'
+            },
+            {
+                id: 'Privatsphäre',
+                icon: 'lock',
+                color: 'black',
+                label: 'Privatsphäre',
+                type: 'link',
+                navigate: 'PrivacySettings',
+                icontype: 'font-awesome'
             },
         ]
     },
