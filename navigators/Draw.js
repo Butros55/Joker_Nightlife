@@ -33,8 +33,8 @@ const Draw = () => {
     .doc(auth.currentUser.uid)
     .onSnapshot(documentSnapshot => {
       console.log('User data: ', documentSnapshot.data());
-      setItem(documentSnapshot.data().vorname);
-      setItem(documentSnapshot.data().nachname);
+      setItem('vorname',documentSnapshot.data().vorname);
+      setItem('nachname',documentSnapshot.data().nachname);
     });
 
   // Stop listening for updates when no longer required

@@ -7,6 +7,7 @@ import themeContext from '../../../context/themeContext';
 import SettingButtons from '../../../components/SettingButtons';
 import ITEMS from '../../../Items/Settings/Profile/profileSettingsItems';
 import firebase  from '../../../components/firebaseConfig';
+import { getItem } from '../../../components/asyncStorage';
 
 
 

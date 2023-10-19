@@ -13,7 +13,6 @@ import { useEffect } from 'react'
 import { getItem } from '../components/asyncStorage';
 
 
-
 const width = Dimensions.get('window').width;
 
 
