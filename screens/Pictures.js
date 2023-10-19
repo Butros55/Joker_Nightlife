@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Icon } from '@rneui/themed';
-import themeContext from '../theme/themeContext';
+import themeContext from '../context/themeContext';
 import { useContext } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 

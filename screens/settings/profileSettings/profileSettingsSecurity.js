@@ -4,7 +4,7 @@ import { Icon } from '@rneui/themed';
 import ITEMS from '../../../Items/Settings/Profile/profileSecurityItems'
 import SettingButtons from '../../../components/SettingButtons'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import themeContext from '../../../theme/themeContext';
+import themeContext from '../../../context/themeContext';
 import { useContext } from 'react';
 
 

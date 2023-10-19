@@ -2,8 +2,11 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Image } from 'expo-image';
-import themeContext from '../theme/themeContext';
-import { useContext } from 'react';
+import themeContext from '../context/themeContext';
+import { useContext, useState } from 'react';
+import firebase  from '../components/firebaseConfig';
+import { useEffect } from 'react';
+import { setItem } from '../components/asyncStorage'
 
 
 //screens
@@ -12,11 +15,32 @@ import CoustomDrawer from '../components/CoustomDrawer';
 
 
 const Drawer = createDrawerNavigator();
+const auth = firebase.auth();
 
 
 const Draw = () => {
-
+  
+  
   const theme = useContext(themeContext)
+  
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    const subscriber = firebase.firestore()
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .onSnapshot(documentSnapshot => {
+      console.log('User data: ', documentSnapshot.data());
+      setItem(documentSnapshot.data().vorname);
+      setItem(documentSnapshot.data().nachname);
+    });
+
+  // Stop listening for updates when no longer required
+  return () => subscriber();
+  }
+
 
   return (
       <Drawer.Navigator 

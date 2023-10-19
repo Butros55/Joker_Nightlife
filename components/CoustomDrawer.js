@@ -1,23 +1,40 @@
 import { View, Text, TouchableOpacity, Dimensions, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DrawerContent, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 import { useNavigation } from '@react-navigation/native';
-import themeContext from '../theme/themeContext';
+import themeContext from '../context/themeContext';
 import { useContext } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {  Button, Icon } from '@rneui/themed';
 import firebase from './firebaseConfig';
-import { setItem } from './asyncStorage';
+import { getItem } from '../components/asyncStorage';
+
 
 
 const CoustomDrawer = (props) => {
     
+    const getUserItems = async () => {
+        console.log(firebase.auth().currentUser.uid)
+      let vorname = await getItem('vorname');
+      let nachname = await getItem('nachname');
+      setvorname(vorname)
+      setnachname(nachname)
+    }
+  
+    useEffect(()=>{
+      getUserItems();
+    },[])
+
     const { height } = Dimensions.get("window");
     const [focused, setfocused] = useState('Mein Joker');
 
     const auth = firebase.auth();
     const navigation = useNavigation();
     const theme = useContext(themeContext)
+    
+    const [vorname, setvorname] = useState();
+    const [nachname, setnachname] = useState();
+  
 
     const handleSignOut = () => {
         auth
@@ -52,8 +69,8 @@ const CoustomDrawer = (props) => {
                             </TouchableOpacity>
                             
                             <Text style={{color: 'white', paddingLeft: 10}}>
-                                Geret{'\n'}
-                                Wessling
+                                {vorname}{'\n'}
+                                {nachname}
                             </Text>
                         </View>
                     </Text>

@@ -7,7 +7,7 @@ import {
 } from './styles';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import Carousel from 'react-native-reanimated-carousel';
-import themeContext from '../theme/themeContext';
+import themeContext from '../context/themeContext';
 import { useContext } from 'react';
 
 

@@ -5,11 +5,11 @@ import { Video, ResizeMode } from 'expo-av';
 import { Image } from 'expo-image';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { Input, Icon, Button } from '@rneui/themed';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState, useRef } from 'react';
 import firebase from '../components/firebaseConfig';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { setItem } from './../components/asyncStorage';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { setItem } from '../components/asyncStorage'
 
 //styles
 import {
@@ -18,16 +18,17 @@ import {
   InputContainer_login,
   InputContainer_register,
   ButtonContainer_start,
-  ButtonContainer_login
+  ButtonContainer_login,
 } from '../components/styles';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Login = ({navigation}) => {
 
-//useStates
+//useState
 const [repeatPassword, setrepeatPassword] = useState('');
-const [username, setusername] = useState('');
+const [vorname, setvorname] = useState('');
+const [nachname, setnachname] = useState('');
 const [email, setemail] = useState('');
 const [password, setpassword] = useState('');
 const [loading, setloading] = useState(false);
@@ -36,11 +37,13 @@ const [colormail, setcolormail] = useState('')
 const [coloruser, setcoloruser] = useState('')
 const [colorpas, setcolorpas] = useState('')
 
+
 const auth = firebase.auth();
 const passwordRef = React.createRef();
 const passwordrepeatRef = React.createRef();
 const emailRef = React.createRef();
-const userRef = React.createRef();
+const vornameRef = React.createRef();
+const nachnameRef = React.createRef();
 const emailLogRef = React.createRef();
 const passwordLogRef = React.createRef();
 
@@ -50,17 +53,17 @@ const LoginRef = useRef(null);
 const RegisterRef = useRef(null);
 
 
+const [Users, setUsers] = useState('');
+
+
 useEffect(() => {
   const unsubscribe = auth.onAuthStateChanged(user => {
     if(user) {
       navigation.navigate('Drawer')
-      console.log('test')
     }
   })
   return unsubscribe
 }, [])
-
-
 
  const handleLogin = async () => {
    setloading(true);
@@ -85,15 +88,26 @@ useEffect(() => {
     })
 }
 
+
 const handleSignUp = async () => {
   setloading(true);
   resetInvalid();
   verifyUserDataRegister();
+  console.log(Users)
    auth
      .createUserWithEmailAndPassword(email, password)
-     .then(userCredentials => {
+     .then(async userCredentials => {
        const user = userCredentials.user;
        console.log(user.email);
+       const db = firebase.firestore();
+
+       await db.collection('users').doc(user.uid)
+          .set({
+            email: email,
+            vorname: vorname,
+            nachname: nachname,
+          });
+        console.log('test')
      })
      .catch(e => {
        console.log(e);
@@ -104,13 +118,13 @@ const handleSignUp = async () => {
          emailRef.current?.shake();
        }
      })
-     .finally(() => {
+     .finally(async () => {
        setloading(false);
    })
 }
 
 const verifyUserDataRegister = () => {
-    if (email == '' | password == '' | repeatPassword == '' | username == '') {
+    if (email == '' | password == '' | repeatPassword == '' | vorname == '') {
       if (email == '') {
         setcolormail('red')
         emailRef.current?.shake();
@@ -122,9 +136,9 @@ const verifyUserDataRegister = () => {
         passwordRef.current?.shake();
         passwordLogRef.current?.shake();
       }
-      if ( username == '') {
+      if ( vorname == '') {
         setcoloruser('red')
-        userRef.current?.shake();
+        vornameRef.current?.shake();
       }
       seterrorMsg('Bitte Füllen Sie die roten Felder aus')
     } else if (password != repeatPassword) {
@@ -372,10 +386,16 @@ const resetInvalid = () => {
             enableHandlePanningGesture={false}
             handleIndicatorStyle={{ display: "none" }}
         >
-          <Panel_Up 
-            style={{borderRadius: 25}}
-            behavior={Platform.OS === 'ios' ? 'height' : "height"}
-          >
+        <KeyboardAwareScrollView
+            contentContainerStyle={{ flex: 1, alignItems: 'center', alignContent: 'center' }}  
+            showsVerticalScrollIndicator={false}
+            enableOnAndroid={true}
+            scrollEnabled={true}
+            extraScrollHeight={20}
+            keyboardShouldPersistTaps='handled'
+            scrollToOverflowEnabled={true}
+            enableAutomaticScroll={true}
+        >
             {/* back button */}
             <TouchableOpacity
                   onPress={() => {RegisterRef.current?.dismiss()}}
@@ -396,7 +416,7 @@ const resetInvalid = () => {
             <Text style={styles.errorMsgRegister}>{errorMsg}</Text>
 
             {/* Register Button */}
-            <ButtonContainer_login>
+            <View style={{top :'70%', flex: 0.4}}>
               <Button
                 onPress={() => {handleSignUp()}}
                 buttonStyle={styles.button}
@@ -422,18 +442,27 @@ const resetInvalid = () => {
                     </TouchableOpacity>
                 </View>
               </View>
-            </ButtonContainer_login>
+            </View>
 
-            {/* User Inputs for Login */}
-            <InputContainer_register>
+            {/* User Inputs for Register */}
+            <View style={{width: '80%', top: '3%'}}>
               <Input 
-                placeholder='Benutzername'
+                placeholder='Vorname'
                 placeholderTextColor={coloruser}
                 inputStyle={styles.input}
                 leftIcon={{name: 'person-outline', color: coloruser}}
-                value={username}
-                onChangeText={(text) => setusername(text)}
-                ref={userRef}
+                value={vorname}
+                onChangeText={(text) => setvorname(text)}
+                ref={vornameRef}
+              />
+              <Input 
+                placeholder='Nachname'
+                placeholderTextColor={coloruser}
+                inputStyle={styles.input}
+                leftIcon={{name: 'person-outline', color: coloruser}}
+                value={nachname}
+                onChangeText={(text) => setnachname(text)}
+                ref={nachnameRef}
               />
               <Input
                 placeholder='Email'
@@ -464,11 +493,9 @@ const resetInvalid = () => {
                 onChangeText={(text) => setrepeatPassword(text)}
                 ref={passwordrepeatRef}
               />
-            </InputContainer_register>
-          </Panel_Up>
+            </View>
+          </KeyboardAwareScrollView>
         </BottomSheetModal>
-            
-
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );

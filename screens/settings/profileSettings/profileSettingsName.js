@@ -4,8 +4,9 @@ import { Icon } from '@rneui/themed';
 import ITEMS from '../../../Items/Settings/Profile/profileSettingsNameItems'
 import SettingButtons from '../../../components/SettingButtons'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import themeContext from '../../../theme/themeContext';
-import { useContext } from 'react';
+import themeContext from '../../../context/themeContext';
+import { useContext, useState } from 'react';
+import { getItem } from '../../../components/asyncStorage'
 
 const ProfileSettingsName = ({navigation}) => {
 

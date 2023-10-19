@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useState , useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import themeContext from '../theme/themeContext';
+import themeContext from '../context/themeContext';
 import { useContext } from 'react';
 import {  Icon } from '@rneui/themed';
 

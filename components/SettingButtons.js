@@ -1,12 +1,13 @@
 import { Text, View, TouchableOpacity, StyleSheet, Image, TextInput, KeyboardAvoidingView } from 'react-native'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import React from 'react'
 import { Icon } from '@rneui/themed';
 import { Switch } from 'react-native-gesture-handler';
 import { EventRegister } from 'react-native-event-listeners';
-import themeContext from '../theme/themeContext';
+import themeContext from '../context/themeContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import firebase from './firebaseConfig';
+import { getItem } from './asyncStorage';
 
 
 const SettingButtons = ({navigation, source}) => {
@@ -15,11 +16,29 @@ const SettingButtons = ({navigation, source}) => {
   const theme = useContext(themeContext)
   const [darkMode, setdarkMode] = useState(false);
 
-  const getValue = (inputType) => {
-    if(inputType === 'email') {
-      return auth.currentUser.email
+  const [vorname, setvorname] = useState();
+  const [nachname, setnachname] = useState();
+
+  const getUserItems = async () => {
+    let vorname = await getItem('vorname');
+    let nachname = await getItem('nachname');
+    setvorname(vorname)
+    setnachname(nachname)
+  }
+
+  useEffect(()=>{
+    getUserItems();
+  },[])
+
+  const getValue = (inputValue) => {
+    if(inputValue === 'email') {
+        return auth.currentUser.email
+    } else if(inputValue === 'vorname') {
+        return vorname
+    } else if(inputValue === 'nachname') {
+        return nachname
     } else {
-      return ''
+        return ''
     }
   }
   
@@ -41,7 +60,7 @@ const SettingButtons = ({navigation, source}) => {
               {header !== 'none' &&
                 <Text style={styles.settingssubTitle}>{header}</Text>
               }
-              {items.map(({ id, label, type, icon, icontype, color, navigate, placeholder, subText, inputType}) => {
+              {items.map(({ id, label, type, icon, icontype, color, navigate, placeholder, subText, inputValue}) => {
                 return (
                 <View>
                   {type === 'link' &&
@@ -130,7 +149,7 @@ const SettingButtons = ({navigation, source}) => {
                             placeholderTextColor={theme.placeholder}
                             textAlign='left'
                             style={{width: 140, alignSelf: 'center', paddingRight: 20, color: theme.text}}
-                            value={getValue(inputType)}
+                            value={getValue(inputValue)}
                           />
                           <Icon
                             type='font-awesome'

@@ -5,7 +5,7 @@ import { Icon } from '@rneui/themed';
 import { GestureHandlerRootView, ScrollView, Switch } from 'react-native-gesture-handler';
 import ITEMS from '../../Items/Settings/settingsItems';
 import SettingButtons from '../../components/SettingButtons';
-import themeContext from '../../theme/themeContext';
+import themeContext from '../../context/themeContext';
 
 const Settings = ({navigation}) => {
 

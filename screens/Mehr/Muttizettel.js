@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
 import { Icon, Button } from '@rneui/themed';
-import themeContext from '../../theme/themeContext';
+import themeContext from '../../context/themeContext';
 import { useContext } from 'react';
 import * as Print from 'expo-print';
 import PdfRead from '../../components/PdfRead';

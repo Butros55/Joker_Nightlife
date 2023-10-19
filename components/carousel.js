@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { useNavigation } from '@react-navigation/native';
-import themeContext from '../theme/themeContext';
+import themeContext from '../context/themeContext';
 import { useContext } from 'react'
 
 import {

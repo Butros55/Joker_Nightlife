@@ -1,21 +1,36 @@
 import { Text, View, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import React from 'react'
 import { Icon, Button } from '@rneui/themed';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import themeContext from '../../../theme/themeContext';
+import themeContext from '../../../context/themeContext';
 import SettingButtons from '../../../components/SettingButtons';
 import ITEMS from '../../../Items/Settings/Profile/profileSettingsItems';
 import firebase  from '../../../components/firebaseConfig';
 
+
+
 const ProfileSettings = ({navigation}) => {
-
-  const theme = useContext(themeContext)
-  const [darkMode, setdarkMode] = useState(false);
-  const { height } = Dimensions.get("window");
+  
   const auth = firebase.auth();
+  const theme = useContext(themeContext)
+  const { height } = Dimensions.get("window");
 
+  const [vorname, setvorname] = useState();
+  const [nachname, setnachname] = useState();
 
+  const getUserItems = async () => {
+    let vorname = await getItem('vorname');
+    let nachname = await getItem('nachname');
+    setvorname(vorname)
+    setnachname(nachname)
+  }
+
+  useEffect(()=>{
+    getUserItems();
+  },[])
+  
+  
   return (
     <GestureHandlerRootView style={{flex: 1, backgroundColor: theme.background}}>
     <View style={{height: height * 0.28, backgroundColor: theme.background}}>
@@ -39,7 +54,7 @@ const ProfileSettings = ({navigation}) => {
       >
         <Image source={require('../../../assets/pictures/profilepicture.png')} style={[styles.profilepicture, {borderColor: 'white', borderWidth: 1}]} />
       </TouchableOpacity>
-      <Text style={[styles.profilename, {fontWeight: 500, color: theme.text}]}>Geret Wessling</Text>
+      <Text style={[styles.profilename, {fontWeight: 500, color: theme.text}]}>{vorname} {nachname}</Text>
       <Text style={[styles.profileadress, {fontWeight: 200, color: theme.text}]}>{auth.currentUser.email}</Text>
     </View>
   

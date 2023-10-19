@@ -9,6 +9,7 @@ export default [
                 color: 'black',
                 label: 'Vorname',
                 type: 'input',
+                inputValue: 'vorname'
             },
             {
                 id: 'Zweiter Name',
@@ -16,7 +17,8 @@ export default [
                 color: 'black',
                 label: 'Zweiter Name',
                 type: 'input',
-                placeholder: 'optional'
+                placeholder: 'optional',
+                inputValue: 'zweitername'
             },
             {
                 id: 'Nachname',
@@ -24,7 +26,8 @@ export default [
                 color: 'black',
                 label: 'Nachname',
                 type: 'input',
-                placeholder: 'optional'
+                placeholder: 'optional',
+                inputValue: 'nachname'
             },
         ]
     },
@@ -38,7 +41,7 @@ export default [
                 color: 'black',
                 label: 'E-Mail',
                 type: 'input',
-                inputType: 'email'         
+                inputValue: 'email'         
             },
             {
                 id: 'Handynummer',
@@ -46,7 +49,8 @@ export default [
                 color: 'black',
                 label: 'Handynummer',
                 type: 'input',
-                placeholder: 'optional'
+                placeholder: 'optional',
+                inputValue: 'phonenumber'
             },
         ]
     }
