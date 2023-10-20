@@ -63,7 +63,7 @@ const CoustomDrawer = (props) => {
                             <Text style={{color: 'white', paddingLeft: 10}}>
                                 {userData.vorname}
                                 {'\n'}
-                                {userData.zweitername !== '' && <Text>{userData.zweitername}{'\n'}</Text>}
+                                {userData.zweitername !== '' || undefined && <Text>{userData.zweitername}{'\n'}</Text>}
                                 {userData.nachname}
                             </Text>
                         </View>

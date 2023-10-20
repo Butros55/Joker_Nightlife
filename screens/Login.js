@@ -181,6 +181,7 @@ const handleSignUp = async () => {
             email: email,
             vorname: vorname,
             nachname: nachname,
+            zweitername: zweitername
           });
         console.log('test')
      })
