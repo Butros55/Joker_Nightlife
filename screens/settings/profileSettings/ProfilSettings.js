@@ -42,7 +42,7 @@ const ProfileSettings = ({navigation}) => {
       >
         <Image source={require('../../../assets/pictures/profilepicture.png')} style={[styles.profilepicture, {borderColor: 'white', borderWidth: 1}]} />
       </TouchableOpacity>
-      <Text style={[styles.profilename, {fontWeight: 500, color: theme.text}]}>{userData.vorname} {userData.nachname}</Text>
+      <Text style={[styles.profilename, {fontWeight: 500, color: theme.text}]}>{userData.vorname} {userData.zweitername !== '' && <Text>{userData.zweitername} </Text>}{userData.nachname}</Text>
       <Text style={[styles.profileadress, {fontWeight: 200, color: theme.text}]}>{auth.currentUser.email}</Text>
     </View>
   

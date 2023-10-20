@@ -41,6 +41,7 @@ const ProfileSettingsName = ({navigation}) => {
             onPress: async () => {
               await userData.setvorname(userData.checkvorname)
               await userData.setnachname(userData.checknachname)
+              await userData.setzweitername(userData.checkzweitername)
               navigation.goBack()},
             style: 'destructive',
           }
@@ -56,15 +57,17 @@ const ProfileSettingsName = ({navigation}) => {
     try {
       await userData.setcheckvorname(userData.vorname)
       await userData.setchecknachname(userData.nachname)
+      await userData.setcheckzweitername(userData.zweitername)
     } finally {
       setloading(false);
     }
   }
 
   const checkSettingsChange = async () => {
-    if(userData.checkvorname !== userData.vorname || userData.checknachname !== userData.nachname) {
+    if(userData.checkvorname !== userData.vorname ||
+      userData.checknachname !== userData.nachname ||
+      userData. checkzweitername !== userData.zweitername) {
       setchanged(true)
-      console.log('test')
     } else {
       setchanged(false)
     }

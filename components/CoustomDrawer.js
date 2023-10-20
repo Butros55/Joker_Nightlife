@@ -61,7 +61,9 @@ const CoustomDrawer = (props) => {
                             </TouchableOpacity>
                             
                             <Text style={{color: 'white', paddingLeft: 10}}>
-                                {userData.vorname}{'\n'}
+                                {userData.vorname}
+                                {'\n'}
+                                {userData.zweitername !== '' && <Text>{userData.zweitername}{'\n'}</Text>}
                                 {userData.nachname}
                             </Text>
                         </View>

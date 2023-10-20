@@ -24,6 +24,8 @@ const SettingButtons = ({navigation, source}) => {
         return userData.vorname
     } else if(inputValue === 'nachname') {
         return userData.nachname
+    } else if(inputValue === 'zweitername') {
+        return userData.zweitername
     } else {
         return ''
     }
@@ -35,7 +37,7 @@ const SettingButtons = ({navigation, source}) => {
   } else if(inputValue === 'nachname') {
       return (text) => userData.setnachname(text)
   } else if(inputValue === 'zweitername') {
-      return (text) => userData.setnachname(text)
+      return (text) => userData.setzweitername(text)
   } else {
       return () => {}
   }
@@ -45,7 +47,6 @@ const SettingButtons = ({navigation, source}) => {
   <KeyboardAwareScrollView
       contentContainerStyle={{ flex: 1 }}  
       showsVerticalScrollIndicator={false}
-      style={{marginBottom:150}}
       enableOnAndroid={true}
       scrollEnabled={true}
       extraScrollHeight={20}

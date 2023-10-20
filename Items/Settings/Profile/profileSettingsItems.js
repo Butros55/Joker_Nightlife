@@ -32,7 +32,7 @@ export default [
                 label: 'E-Mail Benarichtigungen',
                 type: 'toggle',
                 navigate: 'ProfileSettingsName',
-                subText: 'Ich bin damit einverstanden, dass Joker Nightlife mir werbliche Nachrichten in E-Mail form zu schicken. Ich kann die Einwilligung jederzeit wiederrufen.'
+                subText: 'Ich bin damit einverstanden, dass Joker Nightlife mir werbliche Nachrichten in E-Mail form zu schicken darf.\nIch kann diese Einwilligung jederzeit wiederrufen.'
             },
         ]
     },

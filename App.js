@@ -15,9 +15,9 @@ export default function App() {
   const [vorname, setvorname] = useState();
   const [nachname, setnachname] = useState();
   const [zweitername, setzweitername] = useState();
+  const [checkzweitername, setcheckzweitername] = useState();
   const [checkvorname, setcheckvorname] = useState();
   const [checknachname, setchecknachname] = useState();
-  const [checkzweitername, setcheckzweitername] = useState();
 
   const userData = {
     vorname: vorname,
@@ -28,9 +28,9 @@ export default function App() {
     setnachname,
     checknachname: checknachname,
     setchecknachname,
-    zweitername: '',
+    zweitername: zweitername,
     setzweitername,
-    checkzweitername: '',
+    checkzweitername: checkzweitername,
     setcheckzweitername,
   }
 

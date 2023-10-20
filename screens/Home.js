@@ -5,7 +5,7 @@ import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler
 import carouselList from '../Items/carouselItems'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import VIPList from '../components/UnsereBereiche'
-import VIPListItems from '../components/UnsereBereicheItems'
+import VIPListItems from '../Items/UnsereBereicheItems'
 import { useState, useRef } from 'react';
 import themeContext from '../context/themeContext';
 import { useContext } from 'react'

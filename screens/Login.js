@@ -1,27 +1,28 @@
 import React, { useEffect } from 'react';
 import logo_source from './../assets/pictures/logo.png'
-import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Animated } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
-import { Image } from 'expo-image';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { Input, Icon, Button } from '@rneui/themed';
 import { useState, useRef } from 'react';
 import firebase from '../components/firebaseConfig';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { setItem } from '../components/asyncStorage'
+import Carousel from 'react-native-reanimated-carousel';
+import RegisterList from '../Items/RegisterSwapItems'
+
 
 //styles
 import {
   LoginWithEmailButton,
   Panel_Up,
   InputContainer_login,
-  InputContainer_register,
   ButtonContainer_start,
   ButtonContainer_login,
 } from '../components/styles';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { keyframes } from 'styled-components';
 
 const Login = ({navigation}) => {
 
@@ -29,13 +30,20 @@ const Login = ({navigation}) => {
 const [repeatPassword, setrepeatPassword] = useState('');
 const [vorname, setvorname] = useState('');
 const [nachname, setnachname] = useState('');
+const [zweitername, setzweitername] = useState('');
 const [email, setemail] = useState('');
 const [password, setpassword] = useState('');
+const [passwordRepeat, setpasswordRepeat] = useState('');
 const [loading, setloading] = useState(false);
 const [errorMsg, seterrorMsg] = useState('');
 const [colormail, setcolormail] = useState('')
 const [coloruser, setcoloruser] = useState('')
 const [colorpas, setcolorpas] = useState('')
+
+const [Users, setUsers] = useState('');
+const [slideIndexRegister, setslideIndexRegister] = useState('');
+const [slideIndexBack, setslideIndexBack] = useState('');
+const [RegisterButtonText, setRegisterButtonText] = useState('Weiter');
 
 
 const auth = firebase.auth();
@@ -43,6 +51,7 @@ const passwordRef = React.createRef();
 const passwordrepeatRef = React.createRef();
 const emailRef = React.createRef();
 const vornameRef = React.createRef();
+const zweiternameRef = React.createRef();
 const nachnameRef = React.createRef();
 const emailLogRef = React.createRef();
 const passwordLogRef = React.createRef();
@@ -51,9 +60,76 @@ const passwordLogRef = React.createRef();
 const LoginAndRegisterRef = useRef(null);
 const LoginRef = useRef(null);
 const RegisterRef = useRef(null);
+const RegisterSwapRef = useRef(null);
 
 
-const [Users, setUsers] = useState('');
+const width = Dimensions.get('window').width;
+
+
+const secureText = (type) => {
+    if(type === 'secure'){
+        return true
+    } else {
+        return false
+    }
+}
+
+
+const getValue = (id) => {
+    if(id === 'email') {
+        return email
+    } else if(id === 'vorname') {
+        return vorname
+    } else if(id === 'nachname') {
+        return nachname
+    } else if(id === 'password') {
+        return password
+    } else if(id === 'passwordrepeat') {
+        return passwordRepeat
+    } else if(id === 'zweitername') {
+        return zweitername
+    } else {
+        return ''
+    }
+  }
+
+
+const onValueChange = (id) => {
+    if(id === 'vorname') {
+        return (text) =>setvorname(text)
+    } else if(id === 'nachname') {
+        return (text) => setnachname(text)
+    } else if(id === 'zweitername') {
+        return (text) => setzweitername(text)
+    } else if(id === 'password') {
+        return (text) => setpassword(text)
+    } else if(id === 'passwordrepeat') {
+        return (text) => setpasswordRepeat(text)
+    } else if(id === 'email') {
+        return (text) => setemail(text)
+    } else {
+      return () => {}
+    }
+}
+
+const setRef = (id) => {
+    if(id === 'vorname') {
+        return vornameRef
+    } else if(id === 'nachname') {
+        return nachnameRef
+    } else if(id === 'zweitername') {
+        return zweiternameRef
+    } else if(id === 'password') {
+        return passwordRef
+    } else if(id === 'passwordrepeat') {
+        return passwordrepeatRef
+    } else if(id === 'email') {
+        return emailRef
+    } else {
+      return () => {}
+    }
+}
+
 
 
 useEffect(() => {
@@ -98,7 +174,6 @@ const handleSignUp = async () => {
      .createUserWithEmailAndPassword(email, password)
      .then(async userCredentials => {
        const user = userCredentials.user;
-       console.log(user.email);
        const db = firebase.firestore();
 
        await db.collection('users').doc(user.uid)
@@ -319,7 +394,7 @@ const resetInvalid = () => {
 
 
               <Button
-                onPress={() => {handleLogin()}}
+                onPress={() => handleLogin()}
                 buttonStyle={styles.button}
                 title='Anmelden'
                 loading={loading}
@@ -398,8 +473,17 @@ const resetInvalid = () => {
         >
             {/* back button */}
             <TouchableOpacity
-                  onPress={() => {RegisterRef.current?.dismiss()}}
-                  style={{alignSelf: 'flex-start', paddingLeft: 30, top: 40}}
+                  onPress={() => {
+                    if(slideIndexBack === 1) {
+                        RegisterRef.current?.dismiss();
+                    } else {
+                        RegisterSwapRef.current?.prev();
+                        setslideIndexRegister(0);
+                        setslideIndexBack(1);
+                        setRegisterButtonText('Weiter');
+                    }
+                }}
+                  style={{alignSelf: 'flex-start', paddingLeft: 30, top: 40, flex: 0.1}}
                   >
                 <Text style={styles.backbuttonIcon}>
                   <Icon
@@ -410,17 +494,24 @@ const resetInvalid = () => {
                 </Text>
             </TouchableOpacity>
 
-            <Text style={{fontSize: 40, top: 130}}>Registrieren</Text>
-            <Text style={{fontSize: 15, top: 140}}>Erstelle dein eigenes Konto</Text>
 
             <Text style={styles.errorMsgRegister}>{errorMsg}</Text>
 
             {/* Register Button */}
-            <View style={{top :'70%', flex: 0.4}}>
+            <View style={{top :'76%', flex: 0.3}}>
               <Button
-                onPress={() => {handleSignUp()}}
+                onPress={() => {
+                    if(slideIndexRegister === 1) {
+                        handleSignUp();       
+                    } else {
+                        RegisterSwapRef.current?.next();
+                        setslideIndexBack(0);
+                        setslideIndexRegister(1);
+                        setRegisterButtonText('Registrieren')
+                    }
+                }}
                 buttonStyle={styles.button}
-                title='Registrieren'
+                title={RegisterButtonText}
                 loading={loading}
                 loadingProps={{
                   size: 'small',
@@ -436,7 +527,15 @@ const resetInvalid = () => {
                 <View/>
                 <View style={{paddingLeft: '5%'}}>
                     <TouchableOpacity
-                      onPress={() => {[RegisterRef.current?.dismiss(), LoginRef.current?.present(), resetInvalid()]}}
+                      onPress={() => {[
+                        RegisterRef.current?.dismiss(),
+                        LoginRef.current?.present(),
+                        resetInvalid(),
+                        RegisterSwapRef.current?.prev(),
+                        setslideIndexRegister(0),
+                        setslideIndexBack(0),
+                        setRegisterButtonText('Weiter')
+                    ]}}
                     >
                       <Text style={{color: 'blue'}}>Anmelden</Text>
                     </TouchableOpacity>
@@ -444,56 +543,56 @@ const resetInvalid = () => {
               </View>
             </View>
 
-            {/* User Inputs for Register */}
-            <View style={{width: '80%', top: '3%'}}>
-              <Input 
-                placeholder='Vorname'
-                placeholderTextColor={coloruser}
-                inputStyle={styles.input}
-                leftIcon={{name: 'person-outline', color: coloruser}}
-                value={vorname}
-                onChangeText={(text) => setvorname(text)}
-                ref={vornameRef}
-              />
-              <Input 
-                placeholder='Nachname'
-                placeholderTextColor={coloruser}
-                inputStyle={styles.input}
-                leftIcon={{name: 'person-outline', color: coloruser}}
-                value={nachname}
-                onChangeText={(text) => setnachname(text)}
-                ref={nachnameRef}
-              />
-              <Input
-                placeholder='Email'
-                placeholderTextColor={colormail}
-                inputStyle={styles.input}
-                leftIcon={{name: 'mail-outline', color: colormail}}
-                value={email}
-                onChangeText={(text) => setemail(text)}
-                ref={emailRef}
-              />
-              <Input 
-                placeholder='Passwort'
-                placeholderTextColor={colorpas}
-                inputStyle={styles.input}
-                secureTextEntry
-                leftIcon={{name: 'lock-outline', color: colorpas}}
-                value={password}
-                onChangeText={(text) => setpassword(text)}
-                ref={passwordRef}
-              />
-              <Input 
-                placeholder='Passwort bestätigen'
-                placeholderTextColor={colorpas}
-                inputStyle={styles.input}
-                secureTextEntry
-                leftIcon={{name: 'lock-outline', color: colorpas}}
-                value={repeatPassword}
-                onChangeText={(text) => setrepeatPassword(text)}
-                ref={passwordrepeatRef}
-              />
-            </View>
+            <Carousel
+                ref={RegisterSwapRef}
+                loop={false}
+                width={width}
+                height={height / 2}
+                autoPlay={false}
+                data={RegisterList}
+                enabled={false}
+                scrollAnimationDuration={1000}
+                style={{top: '-10%'}}
+                mode='default'
+                renderItem={({ item }) => (
+
+                    <View style={{width: '80%', alignSelf: 'center', alignItems: 'center', flex: 1}}>
+                    {item.header === 'image' &&
+                        <View style={{height: 55}}>
+                            <TouchableOpacity
+                                style={[styles.profilepicture, {top: 10}]}
+                                //change profile picture onPress
+                            >
+                                <Image source={require('../assets/pictures/profilepicture.png')} style={[styles.profilepicture, {borderColor: 'white', borderWidth: 1}]} />
+                            </TouchableOpacity>
+                            <Text style={{alignSelf: 'center', top: '30%', fontWeight: 300}}>Profilbild anpassen</Text>
+                        </View>
+                    }
+                    {item.header !== 'image' &&
+                        <View style={{alignItems: 'center', top: '10%'}}>
+                            <Text style={{fontSize: 40}}>{item.header}</Text>
+                            <Text style={{fontSize: 15}}>{item.subheader}</Text>
+                        </View>
+                    }
+                    {item.buttons.map(({id, icon, placeholder, type}) => {
+                    return (
+                    <View key={id} style={{width: '100%', alignSelf: 'center', alignItems: 'center', top: item.top}}>
+                      <Input
+                        placeholder={placeholder}
+                        placeholderTextColor={coloruser}
+                        inputStyle={styles.input}
+                        leftIcon={{name: icon, color: coloruser}}
+                        value={getValue(id)}
+                        onChangeText={onValueChange(id)}
+                        ref={setRef(id)}
+                        secureTextEntry={secureText(type)}
+                        />
+                     </View>
+                    )})}
+                  </View>
+                )}
+            />
+
           </KeyboardAwareScrollView>
         </BottomSheetModal>
       </BottomSheetModalProvider>
@@ -583,7 +682,13 @@ errorMsgRegister: {
 errorMsgLogin: {
   top: '63%',
   color: 'red'
-}
+},
+profilepicture: {
+    width: 120,
+    height: 120,
+    borderRadius: 9999,
+    alignSelf: 'center',
+  },
 
 });
 
