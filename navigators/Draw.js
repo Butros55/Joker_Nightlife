@@ -7,6 +7,7 @@ import { useContext, useState } from 'react';
 import firebase  from '../components/firebaseConfig';
 import { useEffect } from 'react';
 import { setItem } from '../components/asyncStorage'
+import userDataContext from '../context/userDataContext'
 
 
 //screens
@@ -22,6 +23,7 @@ const Draw = () => {
   
   
   const theme = useContext(themeContext)
+  const userData = useContext(userDataContext)
   
   useEffect(() => {
     fetchUserData();
@@ -32,9 +34,10 @@ const Draw = () => {
     .collection('users')
     .doc(auth.currentUser.uid)
     .onSnapshot(documentSnapshot => {
-      console.log('User data: ', documentSnapshot.data());
-      setItem('vorname',documentSnapshot.data().vorname);
-      setItem('nachname',documentSnapshot.data().nachname);
+      userData.setvorname(documentSnapshot.data().vorname)
+      userData.setnachname(documentSnapshot.data().nachname)
+      userData.setcheckvorname(documentSnapshot.data().vorname)
+      userData.setchecknachname(documentSnapshot.data().nachname)
     });
 
   // Stop listening for updates when no longer required

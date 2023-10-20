@@ -9,7 +9,8 @@ const theme = {
         focused: 'rgba(20,20,20,0.1)',
         notFocused: 'white',
         layout: 'white',
-        placeholder: 'rgba(0,0,0,0.3)'
+        placeholder: 'rgba(0,0,0,0.3)',
+        submitButton: 'rgba(190,190,190,1)'
     },
     dark: {
         isOn: true,
@@ -21,7 +22,8 @@ const theme = {
         focused: 'rgba(20,20,20,1)',
         notFocused: 'rgba(10,10,10,0.1)',
         layout: 'rgb(10,10,10)',
-        placeholder: 'rgba(255,255,255,0.5)'
+        placeholder: 'rgba(255,255,255,0.5)',
+        submitButton: 'rgba(30,30,30,1)'
     }
 }
 

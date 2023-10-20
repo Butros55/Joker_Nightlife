@@ -7,39 +7,38 @@ import { EventRegister } from 'react-native-event-listeners';
 import themeContext from '../context/themeContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import firebase from './firebaseConfig';
-import { getItem } from './asyncStorage';
+import userDataContext from '../context/userDataContext'
 
 
 const SettingButtons = ({navigation, source}) => {
-
+  
   const auth = firebase.auth();
+  const userData = useContext(userDataContext)
   const theme = useContext(themeContext)
   const [darkMode, setdarkMode] = useState(false);
-
-  const [vorname, setvorname] = useState();
-  const [nachname, setnachname] = useState();
-
-  const getUserItems = async () => {
-    let vorname = await getItem('vorname');
-    let nachname = await getItem('nachname');
-    setvorname(vorname)
-    setnachname(nachname)
-  }
-
-  useEffect(()=>{
-    getUserItems();
-  },[])
 
   const getValue = (inputValue) => {
     if(inputValue === 'email') {
         return auth.currentUser.email
     } else if(inputValue === 'vorname') {
-        return vorname
+        return userData.vorname
     } else if(inputValue === 'nachname') {
-        return nachname
+        return userData.nachname
     } else {
         return ''
     }
+  }
+
+  const onValueChange = (inputValue) => {
+    if(inputValue === 'vorname') {
+      return (text) => userData.setvorname(text)
+  } else if(inputValue === 'nachname') {
+      return (text) => userData.setnachname(text)
+  } else if(inputValue === 'zweitername') {
+      return (text) => userData.setnachname(text)
+  } else {
+      return () => {}
+  }
   }
   
   return (
@@ -62,7 +61,7 @@ const SettingButtons = ({navigation, source}) => {
               }
               {items.map(({ id, label, type, icon, icontype, color, navigate, placeholder, subText, inputValue}) => {
                 return (
-                <View>
+                <View key={id}>
                   {type === 'link' &&
                   <View>
                     <TouchableOpacity
@@ -150,14 +149,8 @@ const SettingButtons = ({navigation, source}) => {
                             textAlign='left'
                             style={{width: 140, alignSelf: 'center', paddingRight: 20, color: theme.text}}
                             value={getValue(inputValue)}
+                            onChangeText={onValueChange(inputValue)}
                           />
-                          <Icon
-                            type='font-awesome'
-                            name='chevron-right'
-                            size={10}
-                            iconStyle={{color: theme.text}}
-                          />
-    
                       </View>
                     </View>
                   }

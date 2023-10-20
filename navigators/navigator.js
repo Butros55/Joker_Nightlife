@@ -14,11 +14,11 @@ import MehrScreen from '../screens/Mehr/Mehr'
 import SettingsScreen from '../screens/settings/Settings';
 import Muttizettel from '../screens/Mehr/Muttizettel';
 import ProfileSettings from '../screens/settings/profileSettings/ProfilSettings'
-import profileSettingsName from '../screens/settings/profileSettings/profileSettingsName';
+import profileSettingsName from '../screens/settings/profileSettings/profileSettingsName/profileSettingsName';
 import profileSettingsSecurity from '../screens/settings/profileSettings/profileSettingsSecurity';
 import PrivacySettings from '../screens/settings/privacy/privacySettings';
 import NotificationsSettings from '../screens/settings/notifications/notificationsSettings';
-import Test from '../components/addData';
+import profileSettingsEmail from '../screens/settings/profileSettings/profileSettingsName/profileSettingsEmail';
 
 const Stack = createNativeStackNavigator();
 
@@ -74,7 +74,7 @@ const Navigator = () => {
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsName" component={profileSettingsName} />
             <Stack.Screen options={{headerShown: false }} name="NotificationsSettings" component={NotificationsSettings} />
             <Stack.Screen options={{headerShown: false }} name="PrivacySettings" component={PrivacySettings} />
-            <Stack.Screen options={{headerShown: false }} name="Test" component={Test} />
+            <Stack.Screen options={{headerShown: false }} name="ProfileSettingsEmail" component={profileSettingsEmail} />
           </Stack.Navigator>
         </NavigationContainer>
       </themeContext.Provider>
@@ -83,7 +83,7 @@ const Navigator = () => {
     return (
       <themeContext.Provider value={darkMode === true ? theme.dark : theme.light}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='Login' screenOptions={{ gestureEnabled: false, animationTypeForReplace: 'none' }}>
+          <Stack.Navigator initialRouteName='Login' screenOptions={{ gestureEnabled: false }}>
             <Stack.Screen options={{headerShown: false }}  name="Onboarding" component={OnboardingScreen} />
             <Stack.Screen options={{headerShown: false, animation: 'fade' }} name="Login" component={LoginScreen} />
             <Stack.Screen options={{headerShown: false }} name="Drawer" component={DrawerScreen} />
@@ -95,7 +95,7 @@ const Navigator = () => {
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsName" component={profileSettingsName} />
             <Stack.Screen options={{headerShown: false }} name="NotificationsSettings" component={NotificationsSettings} />
             <Stack.Screen options={{headerShown: false }} name="PrivacySettings" component={PrivacySettings} />
-            <Stack.Screen options={{headerShown: false }} name="Test" component={Test} />
+            <Stack.Screen options={{headerShown: false }} name="ProfileSettingsEmail" component={profileSettingsEmail} />
           </Stack.Navigator>
         </NavigationContainer>
       </themeContext.Provider>

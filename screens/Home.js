@@ -9,8 +9,7 @@ import VIPListItems from '../components/UnsereBereicheItems'
 import { useState, useRef } from 'react';
 import themeContext from '../context/themeContext';
 import { useContext } from 'react'
-import { useEffect } from 'react'
-import { getItem } from '../components/asyncStorage';
+import userDataContext from '../context/userDataContext'
 
 
 const width = Dimensions.get('window').width;
@@ -18,6 +17,7 @@ const width = Dimensions.get('window').width;
 
 const Home = () => {
     
+    const userData = useContext(userDataContext)
     const theme = useContext(themeContext)
 
     const ModalRef = useRef(null);
@@ -30,20 +30,7 @@ const Home = () => {
     const [Images, setImages] = useState('');
     const [Title, setTitle] = useState('');
     const [Description, setDescription] = useState('');
-    
-    useEffect(()=>{
-      getUserItems();
-    },[])
 
-    const [vorname, setvorname] = useState();
-    const [nachname, setnachname] = useState();
-  
-    const getUserItems = async () => {
-      let vorname = await getItem('vorname');
-      let nachname = await getItem('nachname');
-      setvorname(vorname)
-      setnachname(nachname)
-    }
   
 
     return (
@@ -55,7 +42,7 @@ const Home = () => {
             >
                 <View style={{flex: .2, height: 150, justifyContent: 'flex-end'}}>
                     <Text style={{ fontSize: 40, fontWeight: 700, paddingLeft: 25, color: theme.text}}>Hallo,</Text>
-                    <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>{vorname}</Text>
+                    <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>{userData.vorname}</Text>
                 </View>
                 <View style={{flex: .8}}>
                     <Carousel list={carouselList} width={width} />

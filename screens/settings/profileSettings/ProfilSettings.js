@@ -7,30 +7,17 @@ import themeContext from '../../../context/themeContext';
 import SettingButtons from '../../../components/SettingButtons';
 import ITEMS from '../../../Items/Settings/Profile/profileSettingsItems';
 import firebase  from '../../../components/firebaseConfig';
-import { getItem } from '../../../components/asyncStorage';
-
+import userDataContext from '../../../context/userDataContext';
 
 
 const ProfileSettings = ({navigation}) => {
   
   const auth = firebase.auth();
+
   const theme = useContext(themeContext)
+  const userData = useContext(userDataContext)
+
   const { height } = Dimensions.get("window");
-
-  const [vorname, setvorname] = useState();
-  const [nachname, setnachname] = useState();
-
-  const getUserItems = async () => {
-    let vorname = await getItem('vorname');
-    let nachname = await getItem('nachname');
-    setvorname(vorname)
-    setnachname(nachname)
-  }
-
-  useEffect(()=>{
-    getUserItems();
-  },[])
-  
   
   return (
     <GestureHandlerRootView style={{flex: 1, backgroundColor: theme.background}}>
@@ -55,7 +42,7 @@ const ProfileSettings = ({navigation}) => {
       >
         <Image source={require('../../../assets/pictures/profilepicture.png')} style={[styles.profilepicture, {borderColor: 'white', borderWidth: 1}]} />
       </TouchableOpacity>
-      <Text style={[styles.profilename, {fontWeight: 500, color: theme.text}]}>{vorname} {nachname}</Text>
+      <Text style={[styles.profilename, {fontWeight: 500, color: theme.text}]}>{userData.vorname} {userData.nachname}</Text>
       <Text style={[styles.profileadress, {fontWeight: 200, color: theme.text}]}>{auth.currentUser.email}</Text>
     </View>
   

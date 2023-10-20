@@ -8,29 +8,21 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {  Button, Icon } from '@rneui/themed';
 import firebase from './firebaseConfig';
 import { getItem } from '../components/asyncStorage';
+import userDataContext from '../context/userDataContext'
 
 
 
 const CoustomDrawer = (props) => {
-    
-    const getUserItems = async () => {
-        console.log(firebase.auth().currentUser.uid)
-      let vorname = await getItem('vorname');
-      let nachname = await getItem('nachname');
-      setvorname(vorname)
-      setnachname(nachname)
-    }
-  
-    useEffect(()=>{
-      getUserItems();
-    },[])
 
     const { height } = Dimensions.get("window");
     const [focused, setfocused] = useState('Mein Joker');
-
+    
     const auth = firebase.auth();
+
     const navigation = useNavigation();
+
     const theme = useContext(themeContext)
+    const userData = useContext(userDataContext)
     
     const [vorname, setvorname] = useState();
     const [nachname, setnachname] = useState();
@@ -69,8 +61,8 @@ const CoustomDrawer = (props) => {
                             </TouchableOpacity>
                             
                             <Text style={{color: 'white', paddingLeft: 10}}>
-                                {vorname}{'\n'}
-                                {nachname}
+                                {userData.vorname}{'\n'}
+                                {userData.nachname}
                             </Text>
                         </View>
                     </Text>

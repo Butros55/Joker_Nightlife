@@ -38,10 +38,10 @@ export default [
             {
                 id: 'E-Mail',
                 icon: '',
-                color: 'black',
                 label: 'E-Mail',
-                type: 'input',
-                inputValue: 'email'         
+                navigate: 'ProfileSettingsEmail',
+                type: 'link',
+                inputValue: 'email',
             },
             {
                 id: 'Handynummer',
