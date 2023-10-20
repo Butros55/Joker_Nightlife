@@ -34,7 +34,7 @@ const ProfileSettingsName = ({navigation}) => {
             onPress: () => {
 
             },
-            style: 'cancel',
+            style: 'default',
           },
           {
             text: 'Weiter',
@@ -42,7 +42,7 @@ const ProfileSettingsName = ({navigation}) => {
               await userData.setvorname(userData.checkvorname)
               await userData.setnachname(userData.checknachname)
               navigation.goBack()},
-            style: 'default',
+            style: 'destructive',
           }
         ],
       )
