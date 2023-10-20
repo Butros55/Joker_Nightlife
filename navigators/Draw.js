@@ -36,8 +36,10 @@ const Draw = () => {
     .onSnapshot(documentSnapshot => {
       userData.setvorname(documentSnapshot.data().vorname)
       userData.setnachname(documentSnapshot.data().nachname)
+      userData.setzweitername(documentSnapshot.data().zweitername)
       userData.setcheckvorname(documentSnapshot.data().vorname)
       userData.setchecknachname(documentSnapshot.data().nachname)
+      userData.setcheckzweitername(documentSnapshot.data().zweitername)
     });
 
   // Stop listening for updates when no longer required

@@ -3,6 +3,7 @@ export default [
         header: 'Registrieren',
         subheader: 'Erstelle dein eigenes Konto',
         top: '35%',
+        headertype: 'default',
         buttons: [
             {
                 id: 'email',
@@ -27,9 +28,17 @@ export default [
         ]
     },
     {
-        header: 'image',
-        subheader: 'Erstelle dein eigenes Konto2',
+        header: 'Es wurde ihnen eine verifizierungs E-Mail geschickt',
+        subheader: '',
         top: '35%',
+        headertype: 'icon',
+        buttons: []
+    },
+    {
+        header: '',
+        subheader: '',
+        top: '35%',
+        headertype: 'image',
         buttons: [
             {
                 id: 'vorname',

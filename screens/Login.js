@@ -12,6 +12,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import RegisterList from '../Items/RegisterSwapItems'
 
 
+
 //styles
 import {
   LoginWithEmailButton,
@@ -22,7 +23,7 @@ import {
 } from '../components/styles';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { keyframes } from 'styled-components';
+
 
 const Login = ({navigation}) => {
 
@@ -39,10 +40,11 @@ const [errorMsg, seterrorMsg] = useState('');
 const [colormail, setcolormail] = useState('')
 const [coloruser, setcoloruser] = useState('')
 const [colorpas, setcolorpas] = useState('')
+const [loggingIn, setloggingIn] = useState()
 
 const [Users, setUsers] = useState('');
-const [slideIndexRegister, setslideIndexRegister] = useState('');
-const [slideIndexBack, setslideIndexBack] = useState('');
+const [slideIndexRegister, setslideIndexRegister] = useState(0);
+const [slideIndexBack, setslideIndexBack] = useState(0);
 const [RegisterButtonText, setRegisterButtonText] = useState('Weiter');
 
 
@@ -135,11 +137,24 @@ const setRef = (id) => {
 useEffect(() => {
   const unsubscribe = auth.onAuthStateChanged(user => {
     if(user) {
-      navigation.navigate('Drawer')
+        navigation.navigate('Drawer')
+      }
     }
-  })
+  )
   return unsubscribe
 }, [])
+
+
+useEffect(() => {
+  console.log(loggingIn)
+  if(slideIndexBack === 0){
+      setRegisterButtonText('Registrieren')
+  } else if(slideIndexBack === 1){
+      setRegisterButtonText('Weiter')
+  } else {
+      setRegisterButtonText('Starten')
+  }
+})
 
  const handleLogin = async () => {
    setloading(true);
@@ -168,22 +183,19 @@ useEffect(() => {
 const handleSignUp = async () => {
   setloading(true);
   resetInvalid();
-  verifyUserDataRegister();
   console.log(Users)
    auth
      .createUserWithEmailAndPassword(email, password)
      .then(async userCredentials => {
        const user = userCredentials.user;
        const db = firebase.firestore();
-
-       await db.collection('users').doc(user.uid)
-          .set({
-            email: email,
-            vorname: vorname,
-            nachname: nachname,
-            zweitername: zweitername
-          });
-        console.log('test')
+       await db.collection('users').doc(auth.currentUser.uid)
+       .set({
+         email: auth.currentUser.email,
+         vorname: vorname,
+         nachname: nachname,
+         zweitername: zweitername
+       });
      })
      .catch(e => {
        console.log(e);
@@ -206,13 +218,13 @@ const verifyUserDataRegister = () => {
         emailRef.current?.shake();
         emailLogRef.current?.shake();
       }
-      if ( password == '' | repeatPassword == '' | password != repeatPassword) {
+      else if ( password == '' | repeatPassword == '' | password != repeatPassword) {
         setcolorpas('red')
         passwordrepeatRef.current?.shake();
         passwordRef.current?.shake();
         passwordLogRef.current?.shake();
       }
-      if ( vorname == '') {
+      else if ( vorname == '') {
         setcoloruser('red')
         vornameRef.current?.shake();
       }
@@ -337,7 +349,7 @@ const resetInvalid = () => {
               <ButtonContainer_start>
                 {/* Login Button */}
                 <Button
-                  onPress={() => { [LoginAndRegisterRef.current?.dismiss(), LoginRef.current?.present()] }}
+                  onPress={() => { [LoginAndRegisterRef.current?.dismiss(), LoginRef.current?.present(), setloggingIn(true)] }}
                   buttonStyle={styles.button}
                   title='Anmelden'
                   containerStyle={{paddingBottom: 10}}
@@ -346,7 +358,7 @@ const resetInvalid = () => {
 
                 {/* Register Button */}
                 <Button
-                  onPress={() => {[LoginAndRegisterRef.current?.dismiss(), RegisterRef.current?.present()]}}
+                  onPress={() => {[LoginAndRegisterRef.current?.dismiss(), RegisterRef.current?.present(), setloggingIn(false)]}}
                   buttonStyle={[styles.button, styles.buttonOutline]}
                   title='Registrieren'
                   titleStyle={styles.buttonOutlineText}
@@ -475,12 +487,12 @@ const resetInvalid = () => {
             {/* back button */}
             <TouchableOpacity
                   onPress={() => {
-                    if(slideIndexBack === 1) {
+                    if(slideIndexBack === 0) {
                         RegisterRef.current?.dismiss();
                     } else {
                         RegisterSwapRef.current?.prev();
-                        setslideIndexRegister(0);
-                        setslideIndexBack(1);
+                        setslideIndexBack(slideIndexBack - 1);
+                        setslideIndexRegister(slideIndexRegister - 1);  
                         setRegisterButtonText('Weiter');
                     }
                 }}
@@ -501,15 +513,18 @@ const resetInvalid = () => {
             {/* Register Button */}
             <View style={{top :'76%', flex: 0.3}}>
               <Button
-                onPress={() => {
-                    if(slideIndexRegister === 1) {
-                        handleSignUp();       
-                    } else {
+                onPress={ async () => {
+                    if(slideIndexRegister === 2) {
+                        await handleSignUp();
+                    } else if(slideIndexRegister === 1) {
                         RegisterSwapRef.current?.next();
-                        setslideIndexBack(0);
-                        setslideIndexRegister(1);
-                        setRegisterButtonText('Registrieren')
-                    }
+                        setslideIndexBack(slideIndexBack + 1);
+                        setslideIndexRegister(slideIndexRegister + 1);
+                      } else if(slideIndexRegister === 0) {
+                        RegisterSwapRef.current?.next();
+                        setslideIndexBack(slideIndexBack + 1);
+                        setslideIndexRegister(slideIndexRegister + 1);
+                      }
                 }}
                 buttonStyle={styles.button}
                 title={RegisterButtonText}
@@ -552,13 +567,13 @@ const resetInvalid = () => {
                 autoPlay={false}
                 data={RegisterList}
                 enabled={false}
-                scrollAnimationDuration={1000}
+                scrollAnimationDuration={500}
                 style={{top: '-10%'}}
                 mode='default'
                 renderItem={({ item }) => (
 
                     <View style={{width: '80%', alignSelf: 'center', alignItems: 'center', flex: 1}}>
-                    {item.header === 'image' &&
+                    {item.headertype === 'image' &&
                         <View style={{height: 55}}>
                             <TouchableOpacity
                                 style={[styles.profilepicture, {top: 10}]}
@@ -569,11 +584,18 @@ const resetInvalid = () => {
                             <Text style={{alignSelf: 'center', top: '30%', fontWeight: 300}}>Profilbild anpassen</Text>
                         </View>
                     }
-                    {item.header !== 'image' &&
-                        <View style={{alignItems: 'center', top: '10%'}}>
-                            <Text style={{fontSize: 40}}>{item.header}</Text>
-                            <Text style={{fontSize: 15}}>{item.subheader}</Text>
-                        </View>
+                    <View style={{alignItems: 'center', top: '10%'}}>
+                        <Text style={{fontSize: 40}}>{item.header}</Text>
+                        <Text style={{fontSize: 15}}>{item.subheader}</Text>
+                    </View>
+                    {item.headertype === 'icon' &&
+                      <View style={{top: '30%'}}>
+                        <Icon
+                          type='ionicon'
+                          name='send-outline'
+                          size={150}
+                        />
+                      </View>
                     }
                     {item.buttons.map(({id, icon, placeholder, type}) => {
                     return (

@@ -20,7 +20,7 @@ const ProfileSettingsName = ({navigation}) => {
 
   useEffect(() => {
     checkSettingsChange();
-    console.log(userData.zweitername)
+    console.log(userData.checkzweitername)
   })
 
   const goBackOnSave = async () => {
@@ -66,7 +66,7 @@ const ProfileSettingsName = ({navigation}) => {
   const checkSettingsChange = async () => {
     if(userData.checkvorname !== userData.vorname ||
       userData.checknachname !== userData.nachname ||
-      userData. checkzweitername !== userData.zweitername) {
+      userData.checkzweitername !== userData.zweitername) {
       setchanged(true)
     } else {
       setchanged(false)

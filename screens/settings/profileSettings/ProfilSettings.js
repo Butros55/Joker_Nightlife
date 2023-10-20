@@ -8,6 +8,7 @@ import SettingButtons from '../../../components/SettingButtons';
 import ITEMS from '../../../Items/Settings/Profile/profileSettingsItems';
 import firebase  from '../../../components/firebaseConfig';
 import userDataContext from '../../../context/userDataContext';
+import { Alert } from 'react-native'
 
 
 const ProfileSettings = ({navigation}) => {
@@ -21,11 +22,15 @@ const ProfileSettings = ({navigation}) => {
   
   return (
     <GestureHandlerRootView style={{flex: 1, backgroundColor: theme.background}}>
-    <View style={{height: height * 0.28, backgroundColor: theme.background}}>
+    <View style={{height: height * 0.33, backgroundColor: theme.background}}>
+    <View style={{ alignItems: 'center', top: '19%'}}>
+        <Text style={{fontSize: 17, fontWeight: 500, color: theme.text}}>Profil</Text>
+      </View>
+      <View>
         {/* back button */}
         <TouchableOpacity
-          onPress={() => {[navigation.goBack()]}}
-          style={{alignSelf: 'flex-start', paddingLeft: 30, top: 45, height: 40}}
+          onPress={() => navigation.goBack()}
+          style={{alignSelf: 'flex-start', paddingLeft: 30, top: 30, height: 60, width: 60}}
         >
           <Text>
             <Icon
@@ -35,7 +40,8 @@ const ProfileSettings = ({navigation}) => {
               color={theme.text}
             />
           </Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity
         style={[styles.profilepicture, {top: 10}]}
         //change profile picture onPress
@@ -57,6 +63,29 @@ const ProfileSettings = ({navigation}) => {
                 type='clear'
                 title={'Konto löschen'}
                 titleStyle={{color: 'red', fontSize: 15}}
+                onPress={() => {
+                  Alert.alert(
+                  'Schade dass sie gehen wollen',
+                  'Mit "Konto löschen" werden alle ihre Date unwiederrufflich gelöscht.',
+                  [
+                    {
+                      text: 'Abbrechen',
+                      onPress: () => {
+          
+                      },
+                      style: 'default',
+                    },
+                    {
+                      text: 'Konto löschen',
+                      onPress: async () => {
+                        auth.currentUser.delete()
+                        navigation.replace('Login')
+                      },
+                      style: 'destructive',
+                    }
+                  ],
+                )
+              }}
             />
         </View>
   </GestureHandlerRootView>

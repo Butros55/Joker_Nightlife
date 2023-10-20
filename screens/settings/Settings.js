@@ -16,12 +16,16 @@ const Settings = ({navigation}) => {
   return (
     <GestureHandlerRootView style={{flex: 1, backgroundColor: theme.background}}>
     <View style={{flex: 0.4, backgroundColor: theme.background}}>
+      <View style={{ alignItems: 'center', top: '21%'}}>
+        <Text style={{fontSize: 17, fontWeight: 500, color: theme.text}}>Einstellungen</Text>
+      </View>
+      <View>
         {/* back button */}
         <TouchableOpacity
-          onPress={() => {[navigation.goBack()]}}
-          style={{alignSelf: 'flex-start', paddingLeft: 30, top: 45}}
+          onPress={() => navigation.goBack()}
+          style={{alignSelf: 'flex-start', paddingLeft: 30, top: 30, height: 60, width: 60}}
         >
-          <Text style={styles.backbuttonIcon}>
+          <Text>
             <Icon
               type='font-awesome'
               name='chevron-left'
@@ -29,7 +33,8 @@ const Settings = ({navigation}) => {
               color={theme.text}
             />
           </Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity
         style={[styles.profilepicture, {top: 20}]}
         //change profile picture onPress
