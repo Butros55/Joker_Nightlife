@@ -1,37 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo_source from './../assets/pictures/logo.png'
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import { Image } from 'expo-image';
 import * as AppleAuthentication from 'expo-apple-authentication';
-import SlidingUpPanel from 'rn-sliding-up-panel';
-import { useNavigation } from '@react-navigation/native';
 import { Input, Icon, Button } from '@rneui/themed';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState, useRef } from 'react';
-import { firebase_auth } from '../components/firebaseConfig';
+import firebase from '../components/firebaseConfig';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { setItem } from '../components/asyncStorage'
 
 //styles
 import {
-  StyledContainer,
-  Wrapper,
   LoginWithEmailButton,
   Panel_Up,
   InputContainer_login,
   InputContainer_register,
   ButtonContainer_start,
-  ButtonContainer_login
+  ButtonContainer_login,
 } from '../components/styles';
-import { styled } from 'styled-components';
+
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { FirebaseError } from 'firebase/app';
 
-const Login = () => {
+const Login = ({navigation}) => {
 
-//useStates
+//useState
 const [repeatPassword, setrepeatPassword] = useState('');
-const [username, setusername] = useState('');
+const [vorname, setvorname] = useState('');
+const [nachname, setnachname] = useState('');
 const [email, setemail] = useState('');
 const [password, setpassword] = useState('');
 const [loading, setloading] = useState(false);
@@ -40,11 +37,13 @@ const [colormail, setcolormail] = useState('')
 const [coloruser, setcoloruser] = useState('')
 const [colorpas, setcolorpas] = useState('')
 
-const auth = firebase_auth;
+
+const auth = firebase.auth();
 const passwordRef = React.createRef();
 const passwordrepeatRef = React.createRef();
 const emailRef = React.createRef();
-const userRef = React.createRef();
+const vornameRef = React.createRef();
+const nachnameRef = React.createRef();
 const emailLogRef = React.createRef();
 const passwordLogRef = React.createRef();
 
@@ -54,50 +53,78 @@ const LoginRef = useRef(null);
 const RegisterRef = useRef(null);
 
 
+const [Users, setUsers] = useState('');
+
+
+useEffect(() => {
+  const unsubscribe = auth.onAuthStateChanged(user => {
+    if(user) {
+      navigation.navigate('Drawer')
+    }
+  })
+  return unsubscribe
+}, [])
 
  const handleLogin = async () => {
    setloading(true);
    resetInvalid();
    verifyUserDataLogin();
-  try {
-    const response = await signInWithEmailAndPassword(auth, email, password);
-    navigation.navigate('Home');
-  }catch (e){
-    console.log(e);
-    if (e.code == 'auth/invalid-email' | e.code == 'auth/wrong-password') {
-      seterrorMsg('E-Mail Adresse oder Passwort falsch')
-      setcolormail('red')
-      setcolorpas('red')
-      emailRef.current?.shake();
-    }
-  }finally{
-    setloading(false);
-  }
+    auth
+    .signInWithEmailAndPassword(email, password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log('logged in with', user.email)
+    })
+    .catch (e => {
+      console.log(e);
+      if (e.code == 'auth/invalid-email' | e.code == 'auth/wrong-password') {
+        seterrorMsg('E-Mail Adresse oder Passwort falsch')
+        setcolormail('red')
+        setcolorpas('red')
+        emailRef.current?.shake();
+      }})
+    .finally(() => {
+      setloading(false);
+    })
 }
+
 
 const handleSignUp = async () => {
   setloading(true);
   resetInvalid();
   verifyUserDataRegister();
-  try {
-    const response = await createUserWithEmailAndPassword(auth, email, password);
-  }catch (e) {
-    console.log(e.code);
-    if (e.code == 'auth/email-already-in-use') {
-      seterrorMsg('Diese E-Mail wird bereits verwendet')
-      setcolormail('red')
-      emailRef.current?.shake();
-    } else if (e.code == 'auth/weak-password') {
-      seterrorMsg('Das Passwort muss mindestens 6 Zeichen enthalten')
-      setcolorpas('red')
-    }
-  }finally{
-    setloading(false);
-  }
+  console.log(Users)
+   auth
+     .createUserWithEmailAndPassword(email, password)
+     .then(async userCredentials => {
+       const user = userCredentials.user;
+       console.log(user.email);
+       const db = firebase.firestore();
+
+       await db.collection('users').doc(user.uid)
+          .set({
+            email: email,
+            vorname: vorname,
+            nachname: nachname,
+          });
+        console.log('test')
+     })
+     .catch(e => {
+       console.log(e);
+       if (e.code == 'auth/invalid-email' | e.code == 'auth/wrong-password') {
+         seterrorMsg('E-Mail Adresse oder Passwort falsch')
+         setcolormail('red')
+         setcolorpas('red')
+         emailRef.current?.shake();
+       }
+     })
+     .finally(async () => {
+       setloading(false);
+   })
 }
 
 const verifyUserDataRegister = () => {
-    if (email == '' | password == '' | repeatPassword == '' | username == '') {
+    if (email == '' | password == '' | repeatPassword == '' | vorname == '') {
       if (email == '') {
         setcolormail('red')
         emailRef.current?.shake();
@@ -109,9 +136,9 @@ const verifyUserDataRegister = () => {
         passwordRef.current?.shake();
         passwordLogRef.current?.shake();
       }
-      if ( username == '') {
+      if ( vorname == '') {
         setcoloruser('red')
-        userRef.current?.shake();
+        vornameRef.current?.shake();
       }
       seterrorMsg('Bitte Füllen Sie die roten Felder aus')
     } else if (password != repeatPassword) {
@@ -148,7 +175,6 @@ const resetInvalid = () => {
 }
 
 
-  const navigation = useNavigation();
   const video = React.useRef(null);
 
   const { height } = Dimensions.get("window");
@@ -192,7 +218,7 @@ const resetInvalid = () => {
                   ],
                 });
                 // signed in
-                navigation.navigate('Home')
+                navigation.navigate('Drawer')
               } catch (e) {
                 if (e.code === 'ERR_REQUEST_CANCELED') {
                   // handle that the user canceled the sign-in flow
@@ -360,10 +386,16 @@ const resetInvalid = () => {
             enableHandlePanningGesture={false}
             handleIndicatorStyle={{ display: "none" }}
         >
-          <Panel_Up 
-            style={{borderRadius: 25}}
-            behavior={Platform.OS === 'ios' ? 'height' : "height"}
-          >
+        <KeyboardAwareScrollView
+            contentContainerStyle={{ flex: 1, alignItems: 'center', alignContent: 'center' }}  
+            showsVerticalScrollIndicator={false}
+            enableOnAndroid={true}
+            scrollEnabled={true}
+            extraScrollHeight={20}
+            keyboardShouldPersistTaps='handled'
+            scrollToOverflowEnabled={true}
+            enableAutomaticScroll={true}
+        >
             {/* back button */}
             <TouchableOpacity
                   onPress={() => {RegisterRef.current?.dismiss()}}
@@ -384,7 +416,7 @@ const resetInvalid = () => {
             <Text style={styles.errorMsgRegister}>{errorMsg}</Text>
 
             {/* Register Button */}
-            <ButtonContainer_login>
+            <View style={{top :'70%', flex: 0.4}}>
               <Button
                 onPress={() => {handleSignUp()}}
                 buttonStyle={styles.button}
@@ -410,18 +442,27 @@ const resetInvalid = () => {
                     </TouchableOpacity>
                 </View>
               </View>
-            </ButtonContainer_login>
+            </View>
 
-            {/* User Inputs for Login */}
-            <InputContainer_register>
+            {/* User Inputs for Register */}
+            <View style={{width: '80%', top: '3%'}}>
               <Input 
-                placeholder='Benutzername'
+                placeholder='Vorname'
                 placeholderTextColor={coloruser}
                 inputStyle={styles.input}
                 leftIcon={{name: 'person-outline', color: coloruser}}
-                value={username}
-                onChangeText={(text) => setusername(text)}
-                ref={userRef}
+                value={vorname}
+                onChangeText={(text) => setvorname(text)}
+                ref={vornameRef}
+              />
+              <Input 
+                placeholder='Nachname'
+                placeholderTextColor={coloruser}
+                inputStyle={styles.input}
+                leftIcon={{name: 'person-outline', color: coloruser}}
+                value={nachname}
+                onChangeText={(text) => setnachname(text)}
+                ref={nachnameRef}
               />
               <Input
                 placeholder='Email'
@@ -452,11 +493,9 @@ const resetInvalid = () => {
                 onChangeText={(text) => setrepeatPassword(text)}
                 ref={passwordrepeatRef}
               />
-            </InputContainer_register>
-          </Panel_Up>
+            </View>
+          </KeyboardAwareScrollView>
         </BottomSheetModal>
-            
-
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
@@ -490,18 +529,18 @@ input: {
 
 button: {
   height: 45,
-  backgroundColor: 'rgba(0, 48, 135, 1)',
+  backgroundColor: 'rgb(20,20,20)',
   borderRadius: 25
 },
 
 buttonOutline: {
   backgroundColor: 'rgba(255, 255, 255, 1)',
-  borderColor: 'rgb(0, 48, 135)',
+  borderColor: 'rgb(20,20,20)',
   borderWidth: 1,
 },
 
 buttonOutlineText: {
-  color: 'rgb(0, 48, 135)',
+  color: 'rgb(20,20,20)',
   height: 22
 },
 

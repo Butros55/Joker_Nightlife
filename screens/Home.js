@@ -1,45 +1,57 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
-import { removeItem } from '../components/asyncStorage'
-import { Button } from '@rneui/themed';
-import { useNavigation } from '@react-navigation/native';
-//styles
-import {
-    ButtonContainer_login
-  } from '../components/styles';
+import Carousel from '../components/carousel'
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler'
+import carouselList from '../Items/carouselItems'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import VIPList from '../components/UnsereBereiche'
+import VIPListItems from '../components/UnsereBereicheItems'
+import { useState, useRef } from 'react';
+import themeContext from '../context/themeContext';
+import { useContext } from 'react'
+import userDataContext from '../context/userDataContext'
+
+
+const width = Dimensions.get('window').width;
+
 
 const Home = () => {
-
-    const navigation = useNavigation();
-
-    const resetAsync = async () => {
-        await removeItem('onboarded');
-        navigation.push('Onboarding');
-    }
     
+    const userData = useContext(userDataContext)
+    const theme = useContext(themeContext)
 
-  return (
-    <View style={{ alignItems: 'center', top: '45%'}}>
-        <ButtonContainer_login>
-            <Button
-            onPress={() => { resetAsync() }}
-            buttonStyle={styles.button}
-            title='Reset AsyncStorage'
+    const ModalRef = useRef(null);
+    const openEvents = ( item ) => {
+        setImages(item.image);
+        setTitle(item.title);
+        setDescription(item.description);
+    }
+
+    const [Images, setImages] = useState('');
+    const [Title, setTitle] = useState('');
+    const [Description, setDescription] = useState('');
+
+  
+
+    return (
+        <GestureHandlerRootView style={{flex: 1}}>
+        <BottomSheetModalProvider>
+            <ScrollView
+                style={{backgroundColor: theme.background}}
+                showsVerticalScrollIndicator={false}
             >
-            </Button>
-        </ButtonContainer_login>
-    </View>
+                <View style={{flex: .2, height: 150, justifyContent: 'flex-end'}}>
+                    <Text style={{ fontSize: 40, fontWeight: 700, paddingLeft: 25, color: theme.text}}>Hallo,</Text>
+                    <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>{userData.vorname}</Text>
+                </View>
+                <View style={{flex: .8}}>
+                    <Carousel list={carouselList} width={width} />
+                    <VIPList list={VIPListItems} width={width}/>
+                </View>
+            </ScrollView>
+        </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   )
 }
 
 export default Home
-
-const styles = StyleSheet.create({
-
-    button: {
-        height: 45,
-        backgroundColor: 'rgba(0, 48, 135, 1)',
-        borderRadius: 25
-      },
-
-})

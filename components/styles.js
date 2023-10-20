@@ -40,7 +40,7 @@ export const InputContainer_login = styled.View`
 export const InputContainer_register = styled.View`
     alignSelf: center;
     width: 80%;
-    top: 15%;
+    top: 20%;
 `;
 
 export const ButtonContainer_start = styled.View`

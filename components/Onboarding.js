@@ -4,14 +4,13 @@ import styled from 'styled-components';
 import { FlatList } from 'react-native';
 import { Button } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
+import { setItem } from './asyncStorage';
 
 
 //screens
 import slides from '../screens/OnboardingScreen'
-import OnboardingItems from './OnboardingItems';
+import OnboardingItems from '../Items/OnboardingItems';
 import Paginator from './Paginator';
-import { setItem } from './asyncStorage';
-
 
 const OnboardingScreen = () => {
 
@@ -44,7 +43,7 @@ const OnboardingScreen = () => {
     }
 
     const slidesRef = useRef(null);
-
+    const video = React.useRef(null);
     const viewConfig = useRef({viewAreaCoveragePrecentThreshold: 58}).current;
 
     return (
@@ -65,7 +64,7 @@ const OnboardingScreen = () => {
                     viewabilityConfig={viewConfig.current}
                     ref={slidesRef}
                     onMomentumScrollEnd={checkLastPage}
-                    />
+                />
                 </View>
                 <View style={{position: 'absolute', alignSelf: 'center', top: '82%'}}>
                     <Button
@@ -98,5 +97,10 @@ const styles = StyleSheet.create ({
         height: 40,
         width: 190,
         backgroundColor: 'black'
-    }
+    },
+    image: {
+        flex: 1,
+        width: '100%',
+        opacity: 0.6
+    },
 })
