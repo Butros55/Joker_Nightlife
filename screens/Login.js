@@ -9,7 +9,7 @@ import firebase from '../components/firebaseConfig';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Carousel from 'react-native-reanimated-carousel';
-import RegisterList from '../Items/RegisterSwapItems'
+import RegisterList from '../Items/RegisterSwapItems';
 
 //styles
 import {
@@ -57,6 +57,7 @@ const LoginAndRegisterRef = useRef(null);
 const LoginRef = useRef(null);
 const RegisterRef = useRef(null);
 const RegisterSwapRef = useRef(null);
+const unsubscribeSetInterval = useRef(null);
 
 const width = Dimensions.get('window').width;
 
@@ -137,27 +138,40 @@ useEffect(() => {
   return unsubscribe
 }, [])
 
+
 useEffect(() => {
-  if(slideIndexBack === 0){
+  if(slideIndexRegister === 0){
+      setloading(false)
       setRegisterButtonText('Registrieren')
-  } else if(slideIndexBack === 1) {
-      setRegisterButtonText('Weiter')
-      setloading(!auth.currentUser.emailVerified)
-  } else {
+    } else if(slideIndexRegister === 2) {
       setRegisterButtonText('Starten')
-  }
+      setloading(false)
+    }
 })
 
 const verifyBeforeUpdateEmail = async () => {
   try {
     RegisterSwapRef.current?.next();
-    await auth.currentUser.sendEmailVerification();
+    await auth
+      .currentUser
+      .sendEmailVerification()
+      .then(user => {
+        unsubscribeSetInterval.current = setInterval(() => {
+          auth.currentUser.reload();
+          if (auth.currentUser.emailVerified) {
+            clearInterval(unsubscribeSetInterval.current)
+            RegisterSwapRef.current?.next();
+            setslideIndexBack(2);
+            setslideIndexRegister(1);
+            setloading(false)
+          }
+        }, 3000);
+      })
   }
   catch {
 
   }
   finally {
-
   }
 }
 
@@ -182,7 +196,6 @@ const uploadData = async () => {
     .signInWithEmailAndPassword(email, password)
     .then(userCredentials => {
       const user = userCredentials.user;
-      console.log('logged in with', user.email)
     })
     .catch (e => {
       console.log(e);
@@ -206,6 +219,7 @@ const handleSignUp = async () => {
        const user = userCredentials.user;
        setslideIndexBack(slideIndexBack + 1);
        setslideIndexRegister(slideIndexRegister + 1);
+       setloading(true);
        verifyBeforeUpdateEmail();
      })
      .catch(e => {
@@ -493,14 +507,16 @@ const resetInvalid = () => {
             enableAutomaticScroll={true}
         >
             {/* back button */}
+            {slideIndexBack !== 2 &&
             <TouchableOpacity
                   onPress={() => {
                     if(slideIndexBack === 0) {
                         RegisterRef.current?.dismiss();
-                    } else {
+                    } else if(slideIndexBack === 1) {
                         RegisterSwapRef.current?.prev();
                         setslideIndexBack(slideIndexBack - 1);
-                        setslideIndexRegister(slideIndexRegister - 1);  
+                        setslideIndexRegister(slideIndexRegister - 1);
+                        clearInterval(unsubscribeSetInterval.current)
                     }
                 }}
                   style={{alignSelf: 'flex-start', paddingLeft: 30, top: 40, flex: 0.1}}
@@ -512,19 +528,18 @@ const resetInvalid = () => {
                     size={30}
                   />
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
 
 
             <Text style={styles.errorMsgRegister}>{errorMsg}</Text>
 
             {/* Register Button */}
             <View style={{top :'76%', flex: 0.3}}>
+            
               <Button
                 onPress={ async () => {
-                    if(slideIndexRegister === 2) {
+                    if(slideIndexRegister === 1) {
                       uploadData();
-                    } else if(slideIndexRegister === 1) {
-                      console.log(auth.currentUser.emailVerified)
                     } else if(slideIndexRegister === 0) {
                       setloading(true)
                       await handleSignUp();
@@ -555,7 +570,6 @@ const resetInvalid = () => {
                         RegisterSwapRef.current?.prev(),
                         setslideIndexRegister(0),
                         setslideIndexBack(0),
-                        setRegisterButtonText('Weiter')
                     ]}}
                     >
                       <Text style={{color: 'blue'}}>Anmelden</Text>
@@ -577,7 +591,7 @@ const resetInvalid = () => {
                 mode='default'
                 renderItem={({ item }) => (
 
-                    <View style={{width: '80%', alignSelf: 'center', alignItems: 'center', flex: 1}}>
+                    <View style={{width: '80%', alignSelf: 'center', alignItems: 'center', flex: 1, top: item.top}}>
                     {item.headertype === 'image' &&
                         <View style={{height: 55}}>
                             <TouchableOpacity
@@ -604,7 +618,7 @@ const resetInvalid = () => {
                     }
                     {item.buttons.map(({id, icon, placeholder, type}) => {
                     return (
-                    <View key={id} style={{width: '100%', alignSelf: 'center', alignItems: 'center', top: item.top}}>
+                    <View key={id} style={{width: '100%', alignSelf: 'center', alignItems: 'center', top: item.topInput}}>
                       <Input
                         placeholder={placeholder}
                         placeholderTextColor={coloruser}
