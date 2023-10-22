@@ -78,7 +78,7 @@ const ProfileSettings = ({navigation}) => {
                     {
                       text: 'Konto löschen',
                       onPress: async () => {
-                        auth.currentUser.delete()
+                        await auth.currentUser.delete()
                         navigation.replace('Login')
                       },
                       style: 'destructive',

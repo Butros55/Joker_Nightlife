@@ -11,8 +11,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Carousel from 'react-native-reanimated-carousel';
 import RegisterList from '../Items/RegisterSwapItems'
 
-
-
 //styles
 import {
   LoginWithEmailButton,
@@ -23,7 +21,6 @@ import {
 } from '../components/styles';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
 
 const Login = ({navigation}) => {
 
@@ -40,13 +37,10 @@ const [errorMsg, seterrorMsg] = useState('');
 const [colormail, setcolormail] = useState('')
 const [coloruser, setcoloruser] = useState('')
 const [colorpas, setcolorpas] = useState('')
-const [loggingIn, setloggingIn] = useState()
 
-const [Users, setUsers] = useState('');
 const [slideIndexRegister, setslideIndexRegister] = useState(0);
 const [slideIndexBack, setslideIndexBack] = useState(0);
 const [RegisterButtonText, setRegisterButtonText] = useState('Weiter');
-
 
 const auth = firebase.auth();
 const passwordRef = React.createRef();
@@ -63,7 +57,6 @@ const LoginAndRegisterRef = useRef(null);
 const LoginRef = useRef(null);
 const RegisterRef = useRef(null);
 const RegisterSwapRef = useRef(null);
-
 
 const width = Dimensions.get('window').width;
 
@@ -98,7 +91,7 @@ const getValue = (id) => {
 
 const onValueChange = (id) => {
     if(id === 'vorname') {
-        return (text) =>setvorname(text)
+        return (text) => {setvorname(text)}
     } else if(id === 'nachname') {
         return (text) => setnachname(text)
     } else if(id === 'zweitername') {
@@ -108,7 +101,7 @@ const onValueChange = (id) => {
     } else if(id === 'passwordrepeat') {
         return (text) => setpasswordRepeat(text)
     } else if(id === 'email') {
-        return (text) => setemail(text)
+        return (text) => {setemail(text)}
     } else {
       return () => {}
     }
@@ -133,33 +126,58 @@ const setRef = (id) => {
 }
 
 
-
 useEffect(() => {
   const unsubscribe = auth.onAuthStateChanged(user => {
-    if(user) {
+    if (user) {
+      if(user.emailVerified) {
         navigation.navigate('Drawer')
       }
     }
-  )
+  })
   return unsubscribe
 }, [])
 
-
 useEffect(() => {
-  console.log(loggingIn)
   if(slideIndexBack === 0){
       setRegisterButtonText('Registrieren')
-  } else if(slideIndexBack === 1){
+  } else if(slideIndexBack === 1) {
       setRegisterButtonText('Weiter')
+      setloading(!auth.currentUser.emailVerified)
   } else {
       setRegisterButtonText('Starten')
   }
 })
 
+const verifyBeforeUpdateEmail = async () => {
+  try {
+    RegisterSwapRef.current?.next();
+    await auth.currentUser.sendEmailVerification();
+  }
+  catch {
+
+  }
+  finally {
+
+  }
+}
+
+
+const uploadData = async () => {
+  const db = firebase.firestore();
+  await db.collection('users').doc(auth.currentUser.uid)
+  .set({
+    email: auth.currentUser.email,
+    vorname: vorname,
+    nachname: nachname,
+    zweitername: zweitername
+  });
+  navigation.navigate('Drawer')
+}
+
+
  const handleLogin = async () => {
    setloading(true);
    resetInvalid();
-   verifyUserDataLogin();
     auth
     .signInWithEmailAndPassword(email, password)
     .then(userCredentials => {
@@ -181,21 +199,14 @@ useEffect(() => {
 
 
 const handleSignUp = async () => {
-  setloading(true);
   resetInvalid();
-  console.log(Users)
    auth
      .createUserWithEmailAndPassword(email, password)
      .then(async userCredentials => {
        const user = userCredentials.user;
-       const db = firebase.firestore();
-       await db.collection('users').doc(auth.currentUser.uid)
-       .set({
-         email: auth.currentUser.email,
-         vorname: vorname,
-         nachname: nachname,
-         zweitername: zweitername
-       });
+       setslideIndexBack(slideIndexBack + 1);
+       setslideIndexRegister(slideIndexRegister + 1);
+       verifyBeforeUpdateEmail();
      })
      .catch(e => {
        console.log(e);
@@ -206,9 +217,6 @@ const handleSignUp = async () => {
          emailRef.current?.shake();
        }
      })
-     .finally(async () => {
-       setloading(false);
-   })
 }
 
 const verifyUserDataRegister = () => {
@@ -349,7 +357,7 @@ const resetInvalid = () => {
               <ButtonContainer_start>
                 {/* Login Button */}
                 <Button
-                  onPress={() => { [LoginAndRegisterRef.current?.dismiss(), LoginRef.current?.present(), setloggingIn(true)] }}
+                  onPress={() => { [LoginAndRegisterRef.current?.dismiss(), LoginRef.current?.present()] }}
                   buttonStyle={styles.button}
                   title='Anmelden'
                   containerStyle={{paddingBottom: 10}}
@@ -358,7 +366,7 @@ const resetInvalid = () => {
 
                 {/* Register Button */}
                 <Button
-                  onPress={() => {[LoginAndRegisterRef.current?.dismiss(), RegisterRef.current?.present(), setloggingIn(false)]}}
+                  onPress={() => {[LoginAndRegisterRef.current?.dismiss(), RegisterRef.current?.present()]}}
                   buttonStyle={[styles.button, styles.buttonOutline]}
                   title='Registrieren'
                   titleStyle={styles.buttonOutlineText}
@@ -493,7 +501,6 @@ const resetInvalid = () => {
                         RegisterSwapRef.current?.prev();
                         setslideIndexBack(slideIndexBack - 1);
                         setslideIndexRegister(slideIndexRegister - 1);  
-                        setRegisterButtonText('Weiter');
                     }
                 }}
                   style={{alignSelf: 'flex-start', paddingLeft: 30, top: 40, flex: 0.1}}
@@ -515,16 +522,14 @@ const resetInvalid = () => {
               <Button
                 onPress={ async () => {
                     if(slideIndexRegister === 2) {
-                        await handleSignUp();
+                      uploadData();
                     } else if(slideIndexRegister === 1) {
-                        RegisterSwapRef.current?.next();
-                        setslideIndexBack(slideIndexBack + 1);
-                        setslideIndexRegister(slideIndexRegister + 1);
-                      } else if(slideIndexRegister === 0) {
-                        RegisterSwapRef.current?.next();
-                        setslideIndexBack(slideIndexBack + 1);
-                        setslideIndexRegister(slideIndexRegister + 1);
-                      }
+                      console.log(auth.currentUser.emailVerified)
+                    } else if(slideIndexRegister === 0) {
+                      setloading(true)
+                      await handleSignUp();
+                      setloading(false)
+                    }
                 }}
                 buttonStyle={styles.button}
                 title={RegisterButtonText}
@@ -609,7 +614,7 @@ const resetInvalid = () => {
                         onChangeText={onValueChange(id)}
                         ref={setRef(id)}
                         secureTextEntry={secureText(type)}
-                        />
+                      />
                      </View>
                     )})}
                   </View>

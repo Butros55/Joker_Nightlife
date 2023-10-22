@@ -20,7 +20,6 @@ const ProfileSettingsName = ({navigation}) => {
 
   useEffect(() => {
     checkSettingsChange();
-    console.log(userData.checkzweitername)
   })
 
   const goBackOnSave = async () => {

@@ -9,7 +9,8 @@ export default [
                 color: 'blue',
                 label: 'Dark Mode',
                 type: 'toggle',
-                icontype: 'font-awesome-5'
+                icontype: 'font-awesome-5',
+                onPress: 'darkmode'
             },
             {
                 id: 'news',

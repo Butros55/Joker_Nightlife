@@ -60,7 +60,7 @@ const SettingButtons = ({navigation, source}) => {
               {header !== 'none' &&
                 <Text style={styles.settingssubTitle}>{header}</Text>
               }
-              {items.map(({ id, label, type, icon, icontype, color, navigate, placeholder, subText, inputValue}) => {
+              {items.map(({ id, label, type, icon, icontype, color, navigate, placeholder, subText, inputValue, onPress}) => {
                 return (
                 <View key={id}>
                   {type === 'link' &&
@@ -97,7 +97,6 @@ const SettingButtons = ({navigation, source}) => {
                   {type === 'toggle' &&
                     <View
                       key={icon}
-                      onPress={() => {navigation.navigate(navigate)}}
                     >
                       <View style={[styles.row, {backgroundColor: theme.button}]}>
                         {icon !== '' &&
@@ -117,8 +116,10 @@ const SettingButtons = ({navigation, source}) => {
                           <Switch 
                             value={theme.isOn}
                             onValueChange={(value) => {
-                              EventRegister.emit('ChangeTheme', value)
-                              setdarkMode(value);
+                              if(onPress === 'darkmode') {
+                                EventRegister.emit('ChangeTheme', value)
+                                setdarkMode(value);
+                              }
                           }}
                           />
                         
