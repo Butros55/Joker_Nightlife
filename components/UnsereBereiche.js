@@ -49,8 +49,8 @@ const VIPList = ({list, width}) => {
   
 
   return (
-    <View style={{paddingVertical: 55}}>
-      <Text style={{ fontSize: 20, top: -5, fontWeight: 700, alignSelf: 'center', paddingBottom: 10, color: theme.text}}>Unsere Locations</Text>
+    <View style={{paddingVertical: 30}}>
+      <Text style={{ fontSize: 20, top: -10, fontWeight: 200, color: theme.text, paddingLeft: 40}}>Unsere Locations</Text>
       <View style={styles.container}>
 
         {list.map((item, index) => {
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    left: '3%'
   },
   card: {
     width: CARD_WIDTH,
@@ -174,8 +175,8 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   cardContainer: {
-    marginLeft: '8%',
-    marginBottom: 40,
+    marginBottom: 20,
+    marginLeft: '3%'
   },
   imagePanel: {
       flex: 1,

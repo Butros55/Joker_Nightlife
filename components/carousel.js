@@ -33,7 +33,7 @@ function Carousels({list, width}) {
     return (
         
         <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0)', top: 20}}>
-            <Text style={{ fontSize: 20, top: 20, fontWeight: 700, alignSelf: 'center', color: theme.text}}>Unsere Events</Text>
+            <Text style={{ fontSize: 20, top: 10, fontWeight: 200, color: theme.text, paddingLeft: 40}}>Aktuelle Events</Text>
             <Carousel
                 loop={true}
                 width={width}
@@ -42,7 +42,7 @@ function Carousels({list, width}) {
                 data={list}
                 scrollAnimationDuration={1000}
                 autoPlayInterval={5000}
-                mode='parallax'
+                mode='default'
                 renderItem={({ item }) => (
                     <View
                     style={{
@@ -53,9 +53,9 @@ function Carousels({list, width}) {
                     >
                         <TouchableOpacity
                             onPress={() => {[openEvents( item ), ModalRef.current?.present()]}}
-                            style={{ height: '95%'}}
+                            style={{ height: '85%'}}
                             >
-                            <Image source={item.image} style={[styles.image, { width: '100%', borderRadius: 25}]} />
+                            <Image source={item.image} style={[styles.image, { width: '85%', borderRadius: 25}]} />
                         </TouchableOpacity>
 
                     </View>

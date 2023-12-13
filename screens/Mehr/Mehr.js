@@ -6,6 +6,7 @@ import { GestureHandlerRootView, ScrollView, Switch } from 'react-native-gesture
 import ITEMS from '../../Items/mehrItems';
 import SettingButtons from '../../components/SettingButtons';
 import themeContext from '../../context/themeContext';
+import { removeItem } from '../../components/asyncStorage';
 
 const Mehr = ({navigation}) => {
 
@@ -36,6 +37,15 @@ const Mehr = ({navigation}) => {
             <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text, top: 10}}>Noch Mehr</Text>
         </View>
         <SettingButtons source={ITEMS} navigation={navigation} />
+        <Button
+            onPress={() => removeItem('onboarded')}
+            buttonStyle={styles={top: -30}}
+            title='Reset Async'
+            loadingProps={{
+              size: 'small',
+              color: 'white',
+            }}
+        />
   </GestureHandlerRootView>
   )
 }
