@@ -23,13 +23,6 @@ const Pictures = ({navigation}) => {
   const test = useRef(null);
 
   // functions
-
-  const getSampleImage = async (source) => {
-      const imageRefs = await firebase.storage().ref().child('nightshots/' + source + '/images').listAll();
-      const urls = await Promise.all(imageRefs.items.map((ref) => ref.getDownloadURL()));
-      setSampleImage(urls);
-  }
-
   const getFolderNames = async () => {
     setFolderNames([])
     await ref
@@ -38,9 +31,8 @@ const Pictures = ({navigation}) => {
       res.prefixes.forEach(async ref => {
         const thumbnail = await firebase
         .storage()
-        .ref('nightshots/' + ref.name + '/thumbnail/thumbnail.jpg') //name in storage in firebase console
+        .ref('nightshots/' + ref.name + '/thumbnail/thumbnail.jpg')
         .getDownloadURL()
-        getSampleImage(ref.name)
         setFolderNames(prev => [...prev, {title: ref.name, thumbnail: thumbnail}])
       })
     })
@@ -53,31 +45,36 @@ useEffect(()=>{
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <ScrollView style={{ backgroundColor: theme.background, flex: 1}}>
-        <View style={{flex: .2, height: 150, justifyContent: 'flex-end', backgroundColor: theme.background}}>
+        <View style={{flex: .2, height: 180, justifyContent: 'flex-end', backgroundColor: theme.background, paddingBottom: 20}}>
           <Text style={{ fontSize: 40, fontWeight: 800, paddingLeft: 25, color: theme.text}}>Aktuelle,</Text>
           <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>Nightshots vom Abend</Text>
         </View>
-        {folderNames.map((item) => {
+          {folderNames.map((item) => {
             return (
               <TouchableOpacity
-                key={item.title}
-                onPress={() => {navigation.navigate('PicturesAll', { title: item.title })}}
-                style={styles.cardContainer}
-              >
-              <View style={[styles.card, {backgroundColor: theme.overlay}]}>
-                <View style={styles.imageBox}>
-                  <Image style={styles.imageHome} source={{uri: item.thumbnail}}/>
-                </View>
-                <View>
+              key={item.title}
+              onPress={() => {navigation.navigate('PicturesAll', { title: item.title })}}
+              style={styles.cardContainer}
+                >
+                <View style={[styles.card, {backgroundColor: theme.overlay}]}>
+                  <View style={styles.imageBox}>
+                    <Image style={styles.imageHome} source={{uri: item.thumbnail}}/>
+                  </View>
                   <View>
-                    <Text style={{paddingLeft: 10, fontWeight: 800, fontSize: 20, top: '20%', color: theme.text}}>{item.title}</Text>
-                    <Text style={{paddingLeft: 10, fontWeight: 500, fontSize: 15, top: '20%', color: theme.text}}>{item.music}</Text>
+                    <View>
+                      <Text style={{paddingLeft: 10, fontWeight: 800, fontSize: 20, top: '20%', color: theme.text}}>{item.title}</Text>
+                      <Text style={{paddingLeft: 10, fontWeight: 500, fontSize: 15, top: '20%', color: theme.text}}>vom (datum)</Text>
+                    </View>
                   </View>
                 </View>
+              </TouchableOpacity>
+              )
+            })}
+          {folderNames === null &&
+              <View>
+                <Text>Aktuell sind keine Nightshots verfügbar</Text>
               </View>
-            </TouchableOpacity>
-            )
-          })}
+          }
       </ScrollView>
     </GestureHandlerRootView>
   );
@@ -116,9 +113,8 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   cardContainer: {
-    marginBottom: 20,
+    marginBottom: 10,
     alignSelf: 'center',
-    top: '5%'
   },
   imagePanel: {
       flex: 1,

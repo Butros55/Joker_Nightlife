@@ -41,6 +41,11 @@ const PicturesAll = ({route, navigation}) => {
       <View style={{flex: .2, height: 40, justifyContent: 'flex-end', backgroundColor: theme.background}}>
         <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>{title}</Text>
       </View>
+        {!sampleImage.length &&
+          <View style={{alignItems: 'center', top: '160%'}}>
+            <Text style={{color: theme.text}}>Momentan sind noch keine Nightshots vorhanden!</Text>
+          </View>
+        }
       <View style={{top: 20}}>
         <GridImageView 
           data={sampleImage}
