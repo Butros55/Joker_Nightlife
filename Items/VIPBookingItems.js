@@ -1,9 +1,9 @@
 export default [
     {
         id: '1',
-        name: 'Mainhall',
+        name: 'VIP Lounge - Mainhall',
         music: 'RNG, HipHop, Dance',
-        imageHome : require('../assets/pictures/Bereiche/main/main.jpg'),
+        imageHome : require('../assets/pictures/VIP/main.jpeg'),
     },
     {
         id: '2',

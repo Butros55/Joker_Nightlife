@@ -48,16 +48,18 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const VIP = () => {
+const VIP = ({navigation}) => {
   const [expanded, setExpanded] = useState(false);
   const theme = useContext(themeContext)
   const [selected, setSelected] = useState();
+  const [buttonColor, setButtonColor] = useState('#f2f2f2')
+  const [textColor, setTextColor] = useState('rgb(0,0,0)')
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: theme.background}}>
         <View style={{height: 180, justifyContent: 'flex-end', backgroundColor: theme.background, paddingBottom: 20}}>
-            <Text style={{ fontSize: 40, fontWeight: 700, paddingLeft: 25, color: theme.text}}>VIP,</Text>
-            <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>Buchung</Text>
+            <Text style={{ fontSize: 40, fontWeight: 700, paddingLeft: 25, color: theme.text}}>VIP Lounge</Text>
+            <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>Reservieren</Text>
         </View>
         {list.map((item) => {
             return (
@@ -66,6 +68,8 @@ const VIP = () => {
                   onPress={() => {
                     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
                     setSelected('')
+                    setButtonColor('#f2f2f2')
+                    setTextColor('rgb(0,0,0)')
                     if (expanded === item.id) {
                       setExpanded();
                     } else {
@@ -81,7 +85,7 @@ const VIP = () => {
                   <View>
                     <View>
                       <Text style={{paddingLeft: 10, fontWeight: 400, fontSize: 20, top: '20%', color: theme.text}}>{item.name}</Text>
-                      <Text style={{paddingLeft: 10, fontWeight: 500, fontSize: 15, top: '20%', color: theme.text}}>{item.music}</Text>
+                      <Text style={{paddingLeft: 10, fontWeight: 300, fontSize: 15, top: '20%', color: theme.text}}>{item.music}</Text>
                     </View>
                   </View>
                 </View>
@@ -107,21 +111,30 @@ const VIP = () => {
                       key={item.id}
                       onDayPress={day => {
                         setSelected(day.dateString);
+                        setButtonColor('rgb(115,194,251)')
+                        setTextColor('rgb(255,255,255)')
                       }}
                       markedDates={{
                         [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
                       }}
                     />
                     <Button
-                      title={'Jetzt Buchen'}
-                      titleStyle={{color: theme.text}}
-                      buttonStyle={[styles.button, {backgroundColor: theme.button}]}
+                      title={'Jetzt Reservieren'}
+                      titleStyle={{color: textColor}}
+                      style={{paddingVertical: 10}}
+                      buttonStyle={[styles.button, {backgroundColor: buttonColor}]}
+                      onPress={() => selected && navigation.navigate('VIPBook', { item: item, date: selected })}
                     />
+                    <Text
+                      style={{fontSize: 10, fontWeight: 200, paddingHorizontal: 10, paddingVertical: 5}}
+                    >
+                      Für unsere Lounges berechnen wir eine Aufwandsgebühr von € 10,- pro Lounge + einen Mindestverzehr von € 10,- pro Person. (der Mindestverzehr entfällt bei Flaschenkauf).
+                    </Text>
                   </View>
                 </View>
                )}
               </View>
-            )
+              )
           })}
     </ScrollView>
   );
@@ -158,6 +171,8 @@ const styles = StyleSheet.create({
   },
   imageHome: {
     resizeMode: 'stretch',
+    height: 200,
+    width: 340
   },
   imageBox: {
     width: CARD_WIDTH,

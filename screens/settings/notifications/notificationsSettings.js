@@ -14,9 +14,9 @@ const NotificationsSettings = ({navigation}) => {
 
   return (
     <GestureHandlerRootView style={{flex: 1, backgroundColor: theme.background}}>
-        <View style={{ alignItems: 'center', top: '7.6%'}}>
-          <Text style={{fontSize: 17, fontWeight: 500, color: theme.text}}>Benachrichtigungen</Text>
-        </View>
+      <View style={{ alignItems: 'center', top: '7.6%'}}>
+        <Text style={{fontSize: 17, fontWeight: 500, color: theme.text}}>Benachrichtigungen</Text>
+      </View>
       <View>
         {/* back button */}
         <TouchableOpacity
