@@ -146,17 +146,17 @@ Will be available in the AppStore and PlayStore soon.
 
 - [ ] Add Screens
     - [x] Login Screen
-    - [ ] Home Screen
-    - [ ] Coupon Screen
-    - [ ] Event Screen
+    - [x] Home Screen
+    - [x] Coupon Screen
+    - [x] Event Screen
     - [ ] News Screen
-    - [ ] Image Screen
+    - [x] Image Screen
 - [ ] Add Login functionality w/ firebase,
-    - [ ] Login with E-Mail
-    - [ ] Login wiht Apple
+    - [x] Login with E-Mail
+    - [x] Login wiht Apple
     - [ ] Login with Facebook
     - [ ] Login with Google
-- [ ] Add "Muttizettel" print functionality
+- [x] Add "Muttizettel" print functionality
 - [ ] Add get data from Facebook for the News, Events and Images
 - [ ] Make a new Design for the App
 
