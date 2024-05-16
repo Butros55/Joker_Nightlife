@@ -21,6 +21,7 @@ import NotificationsSettings from '../screens/settings/notifications/notificatio
 import profileSettingsEmail from '../screens/settings/profileSettings/profileSettingsName/profileSettingsEmail';
 import PicturesAll from '../screens/PicturesAll';
 import VIPBook from '../screens/VIPBook';
+import VIPAbschluss from '../screens/VIPAbschluss'
 
 const Stack = createNativeStackNavigator();
 
@@ -79,6 +80,7 @@ const Navigator = () => {
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsEmail" component={profileSettingsEmail} />
             <Stack.Screen options={{headerShown: false }} name="PicturesAll" component={PicturesAll} />
             <Stack.Screen options={{headerShown: false }} name="VIPBook" component={VIPBook} />
+            <Stack.Screen options={{headerShown: false }} name="VIPAbschluss" component={VIPAbschluss} />
           </Stack.Navigator>
         </NavigationContainer>
       </themeContext.Provider>
@@ -102,6 +104,7 @@ const Navigator = () => {
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsEmail" component={profileSettingsEmail} />
             <Stack.Screen options={{headerShown: false }} name="PicturesAll" component={PicturesAll} />
             <Stack.Screen options={{headerShown: false }} name="VIPBook" component={VIPBook} />
+            <Stack.Screen options={{headerShown: false }} name="VIPAbschluss" component={VIPAbschluss} />
           </Stack.Navigator>
         </NavigationContainer>
       </themeContext.Provider>

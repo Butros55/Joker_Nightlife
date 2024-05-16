@@ -10,7 +10,7 @@ import {  Icon } from '@rneui/themed';
 //screens
 import HomeScreen from '../screens/Home';
 import Coupons from '../screens/Coupons';
-import News from '../screens/News';
+import News from '../screens/VIP';
 import Pictures from '../screens/Pictures'
 import Settings from '../screens/settings/Settings';
 

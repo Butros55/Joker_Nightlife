@@ -388,7 +388,6 @@ const resetInvalid = () => {
         >
           <Panel_Up 
             style={{borderRadius: 25}}
-            behavior={Platform.OS === 'ios' ? 'padding' : "height"}
           >
 
           <Text style={styles.errorMsgLogin}>{errorMsg}</Text>

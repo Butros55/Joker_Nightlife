@@ -13,20 +13,17 @@ import {
 } from 'react-native';
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import themeContext from '../context/themeContext';
-
+import firebase from '../components/firebaseConfig'
 
 const width = Dimensions.get('window').width;
 const CARD_WIDTH = 340;
 const CARD_HEIGHT = 550;
+const auth = firebase.auth();
 
 const VIPBook = ({route, navigation}) => {
 
     const { item, date } = route.params;
     const theme = useContext(themeContext)
-    const [expanded, setExpanded] = useState(false);
-    const [selected, setSelected] = useState();
-    const [buttonColor, setButtonColor] = useState('#f2f2f2')
-    const [textColor, setTextColor] = useState('rgb(0,0,0)')
 
   return (
     <GestureHandlerRootView style={{flex: 1, backgroundColor: theme.background}}>
@@ -34,7 +31,6 @@ const VIPBook = ({route, navigation}) => {
         <View style={{ alignItems: 'center', top: 67}}>
           <Text style={{fontSize: 17, fontWeight: 500, color: theme.text}}>Reservierung</Text>
         </View>
-        <View></View>
         {/* back button */}
         <TouchableOpacity
           onPress={() => {[navigation.goBack()]}}
@@ -49,37 +45,44 @@ const VIPBook = ({route, navigation}) => {
             />
           </Text>
         </TouchableOpacity>
-        <View
-          style={styles.cardContainer}
-        >
-          <View style={[styles.card, {backgroundColor: theme.overlay}]}>
-            <View style={styles.imageBox}>
-              <Image style={styles.imageHome} source={item.imageHome}/>
-              <View>
-                <Text style={{paddingLeft: 10, fontWeight: 600, fontSize: 20, top: '20%', color: theme.text}}>{item.name}</Text>
-                <Text style={{paddingLeft: 10, fontWeight: 300, fontSize: 15, top: '20%', color: theme.text}}>{item.description}</Text>
-              </View>
-              <View style={{ paddingTop: 30}}>
-                <Text style={{paddingLeft: 10, fontWeight: 300, fontSize: 15, top: '20%', color: theme.text, fontWeight: 300}}>Ausgewähltes Datum: {date}</Text>
-              </View>
+        <View style={{paddingTop: '10%', alignSelf: 'center'}}>
+            <View style={{alignSelf: 'center'}}>
+                <Text style={{fontWeight: 600, fontSize: 20, top: '20%', color: theme.text, alignSelf: 'center'}}>Vielen Dank für ihre Reservierung!</Text>
+                <Text style={{fontWeight: 300, fontSize: 15, top: '20%', color: theme.text}}>Bitte Überweisen Sie den unten genannten Betrag.</Text>
             </View>
-              <View>
-                <Text style={{paddingLeft: 10, fontSize: 11, top: '20%', color: theme.text, fontWeight: 200}}>
-                  Für die Reservierung wird eine Gebühr von 5€ berechnet. Bitte nach Reservierungsabschließung Überweisen.
-                </Text>
-                <Text style={{paddingLeft: 10, fontSize: 11, top: '20%', color: theme.text, fontWeight: 200}}>
-                  Der Restbetrag für die Reservierung wird Vorort abgerechnet.
-                </Text>
-              </View>
-          </View>
+            <View style={{}}>
+                <View style={[styles.Überweisung]}>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 600}}>Überweisungsdaten</Text>
+                </View>
+                <View style={styles.Überweisung}>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300}}>Empänger:</Text>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300, paddingLeft: 10}}>Joker Nightlife</Text>
+                </View>
+                <View style={styles.Überweisung}>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300}}>IBAN:</Text>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300, paddingLeft: 10}}>DE69 2666 0060 1601 0396 00</Text>
+                </View>
+                <View style={styles.Überweisung}>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300}}>BIC:</Text>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300, paddingLeft: 10}}>GENODEF1LIG</Text>
+                </View>
+                <View style={styles.Überweisung}>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300}}>Kreditinstitut:</Text>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300, paddingLeft: 10}}>Volksbank Lingen</Text>
+                </View>
+                <View style={styles.Überweisung}>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300}}>Verwendungszweck:</Text>
+                    <Text style={{fontSize: 15, top: '20%', color: theme.text, fontWeight: 300, paddingLeft: 10}}>{auth.currentUser.email}</Text>
+                </View>
+            </View>
         </View>
-        <View style={{flex: .8, top: '10%', width: '89%', alignSelf: 'center'}}>
+        <View style={{flex: .8, top: '145%', width: '89%', alignSelf: 'center'}}>
             <Button
-              title={'Reservierung abschließen'}
+              title={'Fertig'}
               titleStyle={{color: theme.background}}
               style={{paddingVertical: 10, alignContent: 'flex-end'}}
               buttonStyle={[styles.button, {backgroundColor: 'rgb(115,194,251)'}]}
-              onPress={() => navigation.navigate('VIPAbschluss', { item: item })}
+              onPress={() => navigation.navigate('AktuellesTab')}
               />
           </View>
       </ScrollView>
@@ -160,5 +163,9 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     color: '#555',
     height: 100
+  },
+  Überweisung: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
   });

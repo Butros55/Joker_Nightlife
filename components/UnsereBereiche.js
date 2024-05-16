@@ -87,7 +87,6 @@ const VIPList = ({list, width}) => {
             >
             <Panel_Up 
                 style={{ borderRadius: 40, backgroundColor: 'rgb(20, 20, 20)' }}
-                behavior={Platform.OS === 'ios' ? 'padding' : "height"}
                 >
                 <View style={{flex: 0.5}}>
                     <Image source={Images} style={[styles.imagePanel, { width, borderRadius: 30}]} />

@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../joker daten/Items"
+		},
+		{
+			"path": "../../../joker daten/navigators"
+		},
+		{
+			"path": "../../../joker daten/screens"
+		},
+		{
+			"path": "../../../joker daten/theme"
+		},
+		{
+			"path": "../../../joker daten/assets"
+		},
+		{
+			"path": "../../../joker daten/components"
+		},
+		{
+			"path": "../../../joker daten/context"
+		}
+	],
+	"settings": {}
+}
