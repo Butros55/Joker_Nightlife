@@ -99,11 +99,8 @@ const VIPList = ({list, width}) => {
                 <ScrollView style={{flex: 0.4, backgroundColor: 'rgb(20, 20, 20)'}}>
                   <View style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
                     <View>
-                      <Text style={{color: 'white', fontSize: 26, alignSelf: 'center', top: '12%'}}>Ambiente</Text>
-                      <Text style={{color: 'white', fontSize: 16, paddingLeft: 20, paddingTop: 20, paddingHorizontal: 20, paddingBottom: 20}}>{Ambiente}</Text>
-                    </View>
-                    <View>
                       <Text style={{color: 'white', fontSize: 26, alignSelf: 'center', top: '12%'}}>Musikrichtungen</Text>
+                      <Text style={{color: 'white', fontSize: 16, alignSelf: 'center', top: '12%'}}>{music_discription}</Text>
                     </View>
                     <Text style={{color: 'white', fontSize: 26, alignSelf: 'center', top: '9%'}}>Fotos zu dieser Location</Text>
                     <Carousel

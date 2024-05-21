@@ -115,5 +115,6 @@ const styles = StyleSheet.create ({
         color: 'white',
         fontSize: 14,
         top: '5%',
+        padding: 20
     }
 })
