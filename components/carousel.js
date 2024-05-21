@@ -79,6 +79,7 @@ function Carousels({list, width}) {
                             <Text style={styles.headtext}>{Title}</Text>
                             <Text style={styles.descriptiontext}>{Description}</Text>
                         </View>
+
                     </ScrollView>
                 </Panel_Up>
             </BottomSheetModal>

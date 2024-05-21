@@ -79,7 +79,7 @@ const VIPBook = ({route, navigation}) => {
         <View style={{flex: .8, top: '145%', width: '89%', alignSelf: 'center'}}>
             <Button
               title={'Fertig'}
-              titleStyle={{color: theme.background}}
+              titleStyle={{color: theme.text}}
               style={{paddingVertical: 10, alignContent: 'flex-end'}}
               buttonStyle={[styles.button, {backgroundColor: 'rgb(115,194,251)'}]}
               onPress={() => navigation.navigate('AktuellesTab')}

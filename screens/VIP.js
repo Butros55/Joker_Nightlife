@@ -109,6 +109,13 @@ const VIP = ({navigation}) => {
                   <View style={{padding: 20}}>
                     <Calendar
                       key={item.id}
+                      style={{
+                        borderRadius: 25,
+                        height: 380
+                      }}
+                      theme={{
+                        calendarBackground: 'white',
+                      }}
                       onDayPress={day => {
                         setSelected(day.dateString);
                         setButtonColor('rgb(115,194,251)')
@@ -126,7 +133,7 @@ const VIP = ({navigation}) => {
                       onPress={() => selected && navigation.navigate('VIPBook', { item: item, date: selected })}
                     />
                     <Text
-                      style={{fontSize: 10, fontWeight: 200, paddingHorizontal: 10, paddingVertical: 5}}
+                      style={{fontSize: 10, fontWeight: 200, paddingHorizontal: 10, paddingVertical: 5, color: theme.text}}
                     >
                       Für unsere Lounges berechnen wir eine Aufwandsgebühr von € 10,- pro Lounge + einen Mindestverzehr von € 10,- pro Person. (der Mindestverzehr entfällt bei Flaschenkauf).
                     </Text>

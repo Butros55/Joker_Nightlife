@@ -34,7 +34,6 @@ const VIPBook = ({route, navigation}) => {
         <View style={{ alignItems: 'center', top: 67}}>
           <Text style={{fontSize: 17, fontWeight: 500, color: theme.text}}>Reservierung</Text>
         </View>
-        <View></View>
         {/* back button */}
         <TouchableOpacity
           onPress={() => {[navigation.goBack()]}}
@@ -76,7 +75,7 @@ const VIPBook = ({route, navigation}) => {
         <View style={{flex: .8, top: '10%', width: '89%', alignSelf: 'center'}}>
             <Button
               title={'Reservierung abschließen'}
-              titleStyle={{color: theme.background}}
+              titleStyle={{color: theme.text}}
               style={{paddingVertical: 10, alignContent: 'flex-end'}}
               buttonStyle={[styles.button, {backgroundColor: 'rgb(115,194,251)'}]}
               onPress={() => navigation.navigate('VIPAbschluss', { item: item })}

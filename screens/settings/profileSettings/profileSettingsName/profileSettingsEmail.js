@@ -1,26 +1,27 @@
-import { View, Text } from 'react-native'
-import React, { useContext } from 'react'
-import firebase from '../../../../components/firebaseConfig'
-import themeContext from '../../../../context/themeContext';
-import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, TouchableOpacity, Dimensions } from 'react-native'
+import React from 'react'
 import { Icon } from '@rneui/themed';
+import ITEMS from '../../../../Items/Settings/Profile/profileSettingsEmail';
+import SettingButtons from '../../../../components/SettingButtons'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import themeContext from '../../../../context/themeContext';
+import { useContext } from 'react';
+
 
 const ProfileSettingsEmail = ({navigation}) => {
 
-  const auth = firebase.auth();
   const theme = useContext(themeContext)
-
-
+  const { width } = Dimensions.get("window");
 
   return (
     <GestureHandlerRootView style={{flex: 1, backgroundColor: theme.background}}>
-      <View style={{ alignItems: 'center', top: '5.8%'}}>
-        <Text style={{fontSize: 17, fontWeight: 500, color: theme.text}}>E-Mail</Text>
-      </View>
+        <View style={{ alignItems: 'center', top: '5.8%'}}>
+          <Text style={{fontSize: 17, fontWeight: 500, color: theme.text}}>E-Mail Adresse ändern</Text>
+        </View>
       <View>
         {/* back button */}
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() => {[navigation.goBack()]}}
           style={{alignSelf: 'flex-start', paddingLeft: 30, top: 30, height: 60, width: 60}}
         >
           <Text>
@@ -33,9 +34,12 @@ const ProfileSettingsEmail = ({navigation}) => {
           </Text>
       </TouchableOpacity>
       </View>
-        <View style={{justifyContent: 'center', alignSelf: 'center', flex: 1}}>
-          <Text>{auth.currentUser.email}</Text>
-        </View>
+      <View style={{flex: 1, top: '0%'}}>
+        <SettingButtons source={ITEMS} />
+      </View>
+      <View>
+        
+      </View>
     </GestureHandlerRootView>
   )
 }
