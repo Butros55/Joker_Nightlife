@@ -22,17 +22,18 @@ import PicturesAll from '../screens/PicturesAll';
 import VIPBook from '../screens/VIPBook';
 import VIPAbschluss from '../screens/VIPAbschluss'
 import Impressum from '../screens/settings/Impressum';
+import ProfileSettingsPwÄndern from '../screens/settings/profileSettings/passwortundsicherheit/profileSettingsPwÄndern';
 
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
 
 
-  const [darkMode, setdarkMode] = useState();
+  const [darkMode, setDarkMode] = useState();
   
   useEffect(() => {
     const listener = EventRegister.addEventListener('ChangeTheme', (data) => {
-      setdarkMode(data)
+      setDarkMode(data)
       console.log(data)
     })
     return() => {
@@ -55,7 +56,16 @@ const Navigator = () => {
       // show onboarding
       setShowOnboarding(true);
     }
+
+    let darkMode = await getItem('darkMode');
+    if(darkMode=='true'){
+      setDarkMode(true);
+    }else{
+      setDarkMode(false);
+    }
+    console.log(darkMode)
   }
+
 
   if(showOnboarding==null){
     return null;
@@ -81,6 +91,7 @@ const Navigator = () => {
             <Stack.Screen options={{headerShown: false }} name="VIPBook" component={VIPBook} />
             <Stack.Screen options={{headerShown: false }} name="VIPAbschluss" component={VIPAbschluss} />
             <Stack.Screen options={{headerShown: false }} name="Impressum" component={Impressum} />
+            <Stack.Screen options={{headerShown: false }} name="ProfileSettingsPwÄndern" component={ProfileSettingsPwÄndern} />
           </Stack.Navigator>
         </NavigationContainer>
       </themeContext.Provider>
@@ -105,6 +116,7 @@ const Navigator = () => {
             <Stack.Screen options={{headerShown: false }} name="VIPBook" component={VIPBook} />
             <Stack.Screen options={{headerShown: false }} name="VIPAbschluss" component={VIPAbschluss} />
             <Stack.Screen options={{headerShown: false }} name="Impressum" component={Impressum} />
+            <Stack.Screen options={{headerShown: false }} name="ProfileSettingsPwÄndern" component={ProfileSettingsPwÄndern} />
           </Stack.Navigator>
         </NavigationContainer>
       </themeContext.Provider>

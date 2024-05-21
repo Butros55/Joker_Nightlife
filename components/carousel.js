@@ -17,7 +17,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
-function Carousels({list, width}) {
+function Carousels({list, width, height}) {
     const theme = useContext(themeContext)
     const ModalRef = useRef(null);
     const openEvents = ( item ) => {
@@ -64,7 +64,7 @@ function Carousels({list, width}) {
             <BottomSheetModal
                 ref={ModalRef}
                 index={0}
-                snapPoints={['100%']}
+                snapPoints={['90%']}
                 handleIndicatorStyle={{ display: "none" }}
                 backgroundStyle={{ backgroundColor: 'rgba(0.0.0.0)' }}
             >
@@ -75,11 +75,12 @@ function Carousels({list, width}) {
                         <Image source={Images} style={[styles.image, { width, borderRadius: 30}]} />
                     </View>
                     <ScrollView style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
-                        <View style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
-                            <Text style={styles.headtext}>{Title}</Text>
+                        <View style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width, height: height/2}}>
+                            {Title != 'none' &&
+                                <Text style={styles.headtext}>{Title}</Text>
+                            }
                             <Text style={styles.descriptiontext}>{Description}</Text>
                         </View>
-
                     </ScrollView>
                 </Panel_Up>
             </BottomSheetModal>
@@ -104,17 +105,15 @@ const styles = StyleSheet.create ({
         color: 'white',
         fontSize: 30,
         paddingLeft: 20,
-        top: '30%',
     },
     subheaderText: {
         color: 'black',
         fontSize: 30,
         paddingLeft: 20,
-        top: '30%'
     },
     descriptiontext: {
         color: 'white',
-        fontSize: 16,
-        top: '10%',
+        fontSize: 14,
+        top: '5%',
     }
 })

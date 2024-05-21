@@ -34,8 +34,8 @@ const ProfileSettingsSecurity = ({navigation}) => {
           </Text>
       </TouchableOpacity>
       </View>
-      <View style={{flex: 1, top: '8%'}}>
-        <SettingButtons source={ITEMS} />
+      <View style={{flex: 1, top: '2%'}}>
+        <SettingButtons source={ITEMS} navigation={navigation}/>
       </View>
     </GestureHandlerRootView>
   )

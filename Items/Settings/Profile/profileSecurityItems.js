@@ -7,15 +7,9 @@ export default [
                 id: 'Passwort',
                 icon: '',
                 color: 'black',
+                type: 'link',
+                navigate: 'ProfileSettingsPwÄndern',
                 label: 'Passwort ändern',
-                type: 'link',
-            },
-            {
-                id: '2-Factor-Authetifizierung',
-                icon: '',
-                color: 'black',
-                label: '2-Factor-Authetifizierung',
-                type: 'link',
             },
         ]
     },

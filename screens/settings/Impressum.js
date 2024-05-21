@@ -36,8 +36,7 @@ const AboutUs = ({navigation}) => {
         <Text style={{textAlign: 'center', fontSize: 30, color: theme.text}}>Impressum</Text>
       </View>
       <View style={{flex: 1, top: '15%', flexGrow: 1, flexDirection: 'row'}}>
-        <Text style={{flex: 1, textAlign: 'center', color: theme.text}}>
-{"\n"}
+        <Text style={{flex: 1, textAlign: 'center', color: theme.text, paddingHorizontal: 20}}>
 Joker Music Hall{"\n"}
 {"\n"}
 Martin Timmer{"\n"}
@@ -56,12 +55,16 @@ Registergericht:{"\n"}
 Amtsgericht Lingen{"\n"}
 {"\n"}
 Inhaltlicher Verantwortlicher gemäß § 6 MDStV:{"\n"}
-Martin Timmer{"\n"}
-{"\n"}
-{"\n"}
+Martin Timmer{"\n"}{"\n"}
 Quellenangaben für das verwendete Bildmaterial:{"\n"}
-Adobe Stock, fotolia{"\n"}
+Adobe Stock, fotolia{"\n"}{"\n"}
 Gestaltung und technische Realisierung:{"\n"}
+Diese App wurde im Rahmen einer Projektarbeit, zur erlangung der Fachhochschulreife, erstellt.{"\n"}{"\n"}
+von:{"\n"}
+Leonie Drees{"\n"}
+Alina vom Bruch{"\n"}
+Maciej Brodazki{"\n"}
+Geret Wessling
         </Text>
       </View>
     </GestureHandlerRootView>

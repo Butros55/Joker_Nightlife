@@ -13,6 +13,7 @@ import userDataContext from '../context/userDataContext'
 
 
 const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 
 const Home = () => {
@@ -45,8 +46,8 @@ const Home = () => {
                     <Text style={{ fontSize: 35, fontWeight: 300, paddingLeft: 25, color: theme.text}}>{userData.vorname}</Text>
                 </View>
                 <View style={{flex: .8}}>
-                    <Carousel list={carouselList} width={width} />
-                    <VIPList list={VIPListItems} width={width}/>
+                    <Carousel list={carouselList} width={width} height={height} />
+                    <VIPList list={VIPListItems} width={width} height={height}/>
                 </View>
             </ScrollView>
         </BottomSheetModalProvider>
