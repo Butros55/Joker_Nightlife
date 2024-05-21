@@ -61,7 +61,7 @@ const Navigator = () => {
     return null;
   }
 
-  if(showOnboarding) {
+  if(false) {
     return (
       <themeContext.Provider value={[darkMode === true ? theme.dark : theme.light]}>
         <NavigationContainer>

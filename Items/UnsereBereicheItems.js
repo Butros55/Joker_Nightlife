@@ -2,7 +2,9 @@ export default [
     {
         id: '1',
         name: 'Mainhall',
-        music: 'RNG, HipHop, Dance',
+        music: 'RNB, HipHop, Dance, je nach Event',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/main/main.jpg'),
         images : [
             require('../assets/pictures/Bereiche/main/main1.jpg'),
@@ -17,17 +19,21 @@ export default [
     {
         id: '2',
         name: 'Cocktailbar',
-        music: 'Hardstyle, HipHop',
-        imageHome : require('../assets/pictures/Bereiche/cocktailbar.jpg'),
+        music: 'EDM, HipHop',
+        ambiente: '',
+        music_discription: '',
+        imageHome : require('../assets/pictures/Bereiche/cocktailbar/cocktail.jpg'),
         images : [
-            require('../assets/pictures/Bereiche/cocktailbar/cocktailbar1.jpg'),
-            require('../assets/pictures/Bereiche/cocktailbar/cocktailbar2.jpg'),
-            require('../assets/pictures/Bereiche/cocktailbar/cocktailbar3.jpg'),]
+            require('../assets/pictures/Bereiche/cocktailbar/cocktail1.jpg'),
+            require('../assets/pictures/Bereiche/cocktailbar/cocktail2.jpg'),
+            require('../assets/pictures/Bereiche/cocktailbar/cocktail3.jpg'),]
     },
     {
         id: '3',
         name: 'Jolly',
-        music: 'Pop, HipHop, RNG',
+        music: 'Techno, Rock',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/jolly/jolly.jpg'),
         images : [
             require('../assets/pictures/Bereiche/jolly/jolly1.jpg'),
@@ -39,40 +45,41 @@ export default [
     {
         id: '4',
         name: 'Outdoor',
-        music: 'Schlager, Dance',
+        music: '',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/outdoor.jpg'),
         images: [
-            require('../assets/pictures/Bereiche/outdoor/outdoor1.jpg'),
-            require('../assets/pictures/Bereiche/outdoor/outdoor2.jpg'),
-            require('../assets/pictures/Bereiche/outdoor/outdoor3.jpg'),
-            require('../assets/pictures/Bereiche/outdoor/outdoor4.jpg'),
-            require('../assets/pictures/Bereiche/outdoor/outdoor5.jpg'),]
+            require('../assets/pictures/Bereiche/outdoor/A1.jpg'),
+            require('../assets/pictures/Bereiche/outdoor/A2.jpg'),
+            require('../assets/pictures/Bereiche/outdoor/A3.jpg'),
+            require('../assets/pictures/Bereiche/outdoor/A4.jpg'),
+            require('../assets/pictures/Bereiche/outdoor/A5.jpg'),]
     },
     {
         id: '5',
         name: 'Black',
-        music: 'RNG, HipHop',
+        music: 'RNB, HipHop, Rap',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/black/black.jpg'),
         images: [
             require('../assets/pictures/Bereiche/black/black1.jpg'),
             require('../assets/pictures/Bereiche/black/black2.jpg'),
-            require('../assets/pictures/Bereiche/black/black3.jpg'),
-            require('../assets/pictures/Bereiche/black/black4.jpg'),
-            require('../assets/pictures/Bereiche/black/black5.jpg'),
-            require('../assets/pictures/Bereiche/black/black6.jpg'),
-            require('../assets/pictures/Bereiche/black/black7.jpg'),
-            require('../assets/pictures/Bereiche/black/black8.jpg'),
-            require('../assets/pictures/Bereiche/black/black9.jpg'),]
+]
     },
     {
         id: '6',
         name: 'Swing',
         music: 'Schlager, Dance',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/swings/swing.jpg'),
         images: [
-            require('../assets/pictures/Bereiche/swings/swings1.jpg'),
-            require('../assets/pictures/Bereiche/swings/swings2.jpg'),
-            require('../assets/pictures/Bereiche/swings/swings3.jpg'),
-            require('../assets/pictures/Bereiche/swings/swings4.jpg'),]
+            require('../assets/pictures/Bereiche/swings/swing1.jpg'),
+            require('../assets/pictures/Bereiche/swings/swing2.jpg'),
+            require('../assets/pictures/Bereiche/swings/swing3.jpg'),
+            require('../assets/pictures/Bereiche/swings/swing4.jpg'),
+            require('../assets/pictures/Bereiche/swings/swing5.jpg'),]
     },
 ];

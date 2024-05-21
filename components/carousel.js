@@ -68,15 +68,18 @@ function Carousels({list, width}) {
                 handleIndicatorStyle={{ display: "none" }}
                 backgroundStyle={{ backgroundColor: 'rgba(0.0.0.0)' }}
             >
-                <Panel_Up 
+                <Panel_Up
                     style={{ borderRadius: 40, backgroundColor: 'rgb(20, 20, 20)' }}
                 >
                     <View style={{flex: 0.5}}>
                         <Image source={Images} style={[styles.image, { width, borderRadius: 30}]} />
                     </View>
                     <ScrollView style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
-                        <Text style={styles.headtext}>{Title}</Text>
-                        <Text style={styles.descriptiontext}>{Description}</Text>
+                        <View style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
+                            <Text style={styles.headtext}>{Title}</Text>
+                            <Text style={styles.descriptiontext}>{Description}</Text>
+                        </View>
+
                     </ScrollView>
                 </Panel_Up>
             </BottomSheetModal>

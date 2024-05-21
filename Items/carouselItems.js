@@ -1,44 +1,28 @@
 export default [
     {
         id: '1',
-        title: 'Doppette am 20.10.23',
+        title: 'Doppette Joker am 17.05.24',
         description: 'Einlass ab 18 Jahren...',
-        image : require('../assets/pictures/Events/doppette.jpeg')
+        image : require('../assets/pictures/Events/D.jpeg')
+        
     },
     {
         id: '2',
-        title: 'Freitag der 13.',
-        description: 'Einlass ab 18 Jahren...',
-        image : require('../assets/pictures/Events/freitagder13..jpeg')
+        title: '',
+        description: '◾ SONNENBRILLEN: Mit Sonnenbrille zahlt ihr bis 23Uhr nur 3€ Eintritt.An unserem Promostand verteilen wir Sonnenbrillen von Jim Beam.\n\ \n\◾ GRATIS BURGER: Um 01Uhr verteilen wir in der Main 100x Burger for free.\n\ \n\ ◾ SALITOS IM ANGEBOT: Alle vier Sorten Salitos sind heute im Programm und die ganze Nacht im Angebot für 2,50€.\n\ \n\ ◾ FLIRTBÄNDER: Ihr habt Lust euren Flirtstatus zu zeigen? Wir verteilen heute Flirtbänder.\n\ \n\ GRÜN = Ja, ich möchte flirten\n\ GELB = Mal schauen\n\ ROT = Nein, ich möchte nicht flirten \n\ \n\ ____\n\ BLACK: HipHop / RnB / Dancehall \n\ SWING: Party / Schlager / Klassiker',
+        image : require('../assets/pictures/Events/G.jpeg')
     },
     {
         id: '3',
-        title: 'Fünf vor Zwölf am 14.10.23',
+        title: 'Liebe auf dem dancefloor am 18.05.2024',
         description: 'Einlass ab 18 Jahren...',
-        image : require('../assets/pictures/Events/fünf.jpeg')
+        image : require('../assets/pictures/Events/L.jpeg')
     },
     {
         id: '4',
-        title: 'Halloween Night am 27.10.22',
+        title: '9€ Ticket Party am 25.05.24',
         description: 'Einlass ab 18 Jahren...',
-        image : require('../assets/pictures/Events/halloween.jpeg')
+        image : require('../assets/pictures/Events/T.jpeg')
     },
-    {
-        id: '5',
-        title: 'Mädelsabend am 03.11.23',
-        description: 'Einlass ab 18 Jahren...',
-        image : require('../assets/pictures/Events/mädels.jpeg')
-    },
-    {
-        id: '6',
-        title: 'Sternzeichen am 21.10.23',
-        description: 'Einlass ab 18 Jahren...',
-        image : require('../assets/pictures/Events/sternzeichen.jpeg')
-    },
-    {
-        id: '7',
-        title: '1Euro Party am 30.10.23',
-        description: 'Einlass ab 18 Jahren...',
-        image : require('../assets/pictures/Events/1euro.jpeg')
-    }
+
 ];

@@ -22,6 +22,8 @@ const VIPList = ({list, width}) => {
   const [Title, setTitle] = useState('');
   const [Description, setDescription] = useState('');
   const [CarouselImageList, setCarouselImageList] = useState([]);
+  const [Ambiente, setAmbiente] = useState('');
+  const [music_discription, setMusic_discription] = useState('');
 
   const theme = useContext(themeContext)
   
@@ -30,6 +32,8 @@ const VIPList = ({list, width}) => {
       setImages(item.imageHome);
       setTitle(item.name);
       setDescription(item.music);
+      setMusic_discription(item.music_discription);
+      setAmbiente(item.ambiente);
     }
 
     
@@ -95,24 +99,13 @@ const VIPList = ({list, width}) => {
                 <ScrollView style={{flex: 0.4, backgroundColor: 'rgb(20, 20, 20)'}}>
                   <View style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
                     <View>
-                      <Text style={{color: 'white', fontSize: 30, alignSelf: 'center', top: '12%'}}>Ambiente</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, paddingTop: 20, top: '12%'}}>Beispiel</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, top: '12%'}}>Beispiel</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, top: '12%'}}>Beispiel</Text>
+                      <Text style={{color: 'white', fontSize: 26, alignSelf: 'center', top: '12%'}}>Ambiente</Text>
+                      <Text style={{color: 'white', fontSize: 16, paddingLeft: 20, paddingTop: 20, paddingHorizontal: 20, paddingBottom: 20}}>{Ambiente}</Text>
                     </View>
                     <View>
-                      <Text style={{color: 'white', fontSize: 30, alignSelf: 'center', top: '12%'}}>Musikrichtungen</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, paddingTop: 20, top: '12%'}}>Beispiel</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, top: '12%'}}>Beispiel</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, top: '12%'}}>Beispiel</Text>
+                      <Text style={{color: 'white', fontSize: 26, alignSelf: 'center', top: '12%'}}>Musikrichtungen</Text>
                     </View>
-                    <View>
-                      <Text style={{color: 'white', fontSize: 30, alignSelf: 'center', top: '12%'}}>Ambiente</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, paddingTop: 20, top: '12%'}}>Beispiel</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, top: '12%'}}>Beispiel</Text>
-                      <Text style={{color: 'white', fontSize: 20, paddingLeft: 20, top: '12%'}}>Beispiel</Text>
-                    </View>
-                    <Text style={{color: 'white', fontSize: 30, alignSelf: 'center', top: '9%'}}>Fotos zu dieser Location</Text>
+                    <Text style={{color: 'white', fontSize: 26, alignSelf: 'center', top: '9%'}}>Fotos zu dieser Location</Text>
                     <Carousel
                       loop={false}
                       width={width}
@@ -131,7 +124,7 @@ const VIPList = ({list, width}) => {
                         }}
                         >
                         <Image key={item.id} source={item.image} style={[styles.image, { width: '100%', borderRadius: 10}]} />
-                    </View>
+                  </View>
                 )}
                 />
                 </View>
@@ -159,7 +152,7 @@ const styles = StyleSheet.create({
     shadowOffset: 40,
   },
   imageHome: {
-    resizeMode: 'stretch',
+    resizeMode: 'repeat',
   },
   imageBox: {
     width: CARD_WIDTH,
