@@ -3,6 +3,8 @@ export default [
         id: '1',
         name: 'Mainhall',
         music: 'RNB, HipHop, Dance, je nach Event',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/main/main.jpg'),
         images : [
             require('../assets/pictures/Bereiche/main/main1.jpg'),
@@ -18,6 +20,8 @@ export default [
         id: '2',
         name: 'Cocktailbar',
         music: 'EDM, HipHop',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/cocktailbar/cocktail.jpg'),
         images : [
             require('../assets/pictures/Bereiche/cocktailbar/cocktail1.jpg'),
@@ -28,6 +32,8 @@ export default [
         id: '3',
         name: 'Jolly',
         music: 'Techno, Rock',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/jolly/jolly.jpg'),
         images : [
             require('../assets/pictures/Bereiche/jolly/jolly1.jpg'),
@@ -40,6 +46,8 @@ export default [
         id: '4',
         name: 'Outdoor',
         music: '',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/outdoor.jpg'),
         images: [
             require('../assets/pictures/Bereiche/outdoor/A1.jpg'),
@@ -52,6 +60,8 @@ export default [
         id: '5',
         name: 'Black',
         music: 'RNB, HipHop, Rap',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/black/black.jpg'),
         images: [
             require('../assets/pictures/Bereiche/black/black1.jpg'),
@@ -62,6 +72,8 @@ export default [
         id: '6',
         name: 'Swing',
         music: 'Schlager, Dance',
+        ambiente: '',
+        music_discription: '',
         imageHome : require('../assets/pictures/Bereiche/swings/swing.jpg'),
         images: [
             require('../assets/pictures/Bereiche/swings/swing1.jpg'),
