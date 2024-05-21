@@ -152,7 +152,10 @@ const styles = StyleSheet.create({
     shadowOffset: 40,
   },
   imageHome: {
-    resizeMode: 'repeat',
+    flex: 1,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    resizeMode: 'contain'
   },
   imageBox: {
     width: CARD_WIDTH,

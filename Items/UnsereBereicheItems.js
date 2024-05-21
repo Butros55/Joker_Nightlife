@@ -5,7 +5,7 @@ export default [
         music: 'RNB, HipHop, Dance, je nach Event',
         ambiente: '',
         music_discription: '',
-        imageHome : require('../assets/pictures/Bereiche/main/main.jpg'),
+        imageHome : require('../assets/pictures/Bereiche/main/main1.jpg'),
         images : [
             require('../assets/pictures/Bereiche/main/main1.jpg'),
             require('../assets/pictures/Bereiche/main/main2.jpg'),
