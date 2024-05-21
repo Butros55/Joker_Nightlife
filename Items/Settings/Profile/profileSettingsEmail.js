@@ -7,7 +7,6 @@ export default [
                 id: 'E-Mail',
                 icon: '',
                 label: 'E-Mail',
-                navigate: 'ProfileSettingsEmail',
                 type: 'input',
                 inputValue: 'email',
             },
@@ -17,6 +16,7 @@ export default [
                 color: 'black',
                 label: 'Neue E-Mail',
                 type: 'input',
+                inputValue: 'email_change1',
                 subText: 'Bitte geben sie hier ihre neue E-Mail Adresse an.'
             },
             {
@@ -25,6 +25,7 @@ export default [
                 color: 'black',
                 label: 'E-Mail wiederholen',
                 type: 'input',
+                inputValue: 'email_change2',
                 subText: 'Bitte wiederholen Sie ihr neue E-Mail Adresse.'
             },
         ]

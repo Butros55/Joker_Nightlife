@@ -13,7 +13,7 @@ import { useContext } from 'react';
 
 
 let nextId = 0;
-const CARD_WIDTH = 160;
+const CARD_WIDTH = 170;
 const CARD_HEIGHT = 220;
 
 const VIPList = ({list, width}) => {
@@ -54,7 +54,7 @@ const VIPList = ({list, width}) => {
 
   return (
     <View style={{paddingVertical: 30}}>
-      <Text style={{ fontSize: 20, top: -10, fontWeight: 200, color: theme.text, paddingLeft: 40}}>Unsere Locations</Text>
+      <Text style={{ fontSize: 20, top: -10, fontWeight: 200, color: theme.text, paddingLeft: 40}}>Unsere Bereiche</Text>
       <View style={styles.container}>
 
         {list.map((item, index) => {
@@ -84,7 +84,7 @@ const VIPList = ({list, width}) => {
       <BottomSheetModal
             ref={test}
             index={0}
-            snapPoints={['100%']}
+            snapPoints={['90%']}
             handleIndicatorStyle={{ display: "none" }}
             backgroundStyle={{ backgroundColor: 'rgba(0.0.0.0)' }}
             onDismiss={() => [setCarouselImageList([])]}
@@ -139,7 +139,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    left: '3%'
+    flex: 1,
+    justifyContent: 'center'
   },
   card: {
     width: CARD_WIDTH,
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignSelf: 'center',
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
   imageBox: {
     width: CARD_WIDTH,
@@ -171,7 +172,9 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     marginBottom: 20,
-    marginLeft: '3%'
+    paddingTop: 10,
+    marginLeft: '5%',
+    alignItems: 'center',
   },
   imagePanel: {
       flex: 1,

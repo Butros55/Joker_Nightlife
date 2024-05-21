@@ -7,7 +7,11 @@ import { EventRegister } from 'react-native-event-listeners';
 import themeContext from '../context/themeContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import firebase from './firebaseConfig';
+import { setItem } from '../components/asyncStorage';
 import userDataContext from '../context/userDataContext'
+import Dialog from "react-native-dialog";
+import { getAuth, reauthenticateWithCredential } from 'firebase/auth';
+import { EmailAuthCredential } from 'firebase/auth/cordova';
 
 
 const SettingButtons = ({navigation, source}) => {
@@ -16,6 +20,10 @@ const SettingButtons = ({navigation, source}) => {
   const userData = useContext(userDataContext)
   const theme = useContext(themeContext)
   const [darkMode, setdarkMode] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [pw, setPw] = useState('');
+  const user = auth.currentUser;
+
 
   const getValue = (inputValue) => {
     if(inputValue === 'email') {
@@ -26,6 +34,14 @@ const SettingButtons = ({navigation, source}) => {
         return userData.nachname
     } else if(inputValue === 'zweitername') {
         return userData.zweitername
+    } else if(inputValue === 'email_change1') {
+        return userData.email_change1
+    } else if(inputValue === 'email_change2') {
+        return userData.email_change2
+      } else if(inputValue === 'Pw_change1') {
+        return userData.Pw_change1
+      } else if(inputValue === 'Pw_change2') {
+        return userData.Pw_change2
     } else {
         return ''
     }
@@ -38,11 +54,19 @@ const SettingButtons = ({navigation, source}) => {
       return (text) => userData.setnachname(text)
   } else if(inputValue === 'zweitername') {
       return (text) => userData.setzweitername(text)
+  } else if(inputValue === 'email_change1') {
+      return (text) => userData.setEmail_change1(text)
+  } else if(inputValue === 'email_change2') {
+      return (text) => userData.setEmail_change2(text)
+  } else if(inputValue === 'Pw_change1') {
+      return (text) => userData.setPw_change1(text)
+  } else if(inputValue === 'Pw_change2') {
+      return (text) => userData.setPw_change2(text)
   } else {
       return () => {}
   }
   }
-  
+
   return (
   <KeyboardAwareScrollView
       contentContainerStyle={{ flex: 1 }}  
@@ -94,6 +118,72 @@ const SettingButtons = ({navigation, source}) => {
                     </TouchableOpacity>
                     </View>
                   }
+                  {type === 'secure-link' &&
+                  <View>
+                    <TouchableOpacity
+                      key={icon}
+                      onPress={() => {
+                        setVisible(true)
+                      }}
+                    >
+                      <View style={[styles.row, {backgroundColor: theme.button}]}>
+                        {icon !== '' &&
+                          <View style={[styles.rowIcon, {backgroundColor: color}]}>
+                            <Icon
+                              type={icontype}
+                              name={icon}
+                              size={15}
+                              iconStyle={{color: 'white'}}
+                            />
+                          </View>
+                        }
+                        <Text style={[styles.rowLabel, {color: theme.text}]}>{label}</Text>
+                        <View style={{flex: 1}}/>
+    
+                          <Icon
+                            type='font-awesome'
+                            name='chevron-right'
+                            size={10}
+                            iconStyle={{color: theme.text}}
+                          />
+    
+                      </View>
+                    </TouchableOpacity>
+                    <Dialog.Container visible={visible}>
+                      <Dialog.Title>Sicherheitsüberprüfung</Dialog.Title>
+                        <Dialog.Description>
+                          Bitte geben sie erneut ihr Passwort ein.
+                        </Dialog.Description>
+                        <Dialog.Input
+                          secureTextEntry
+                          onChangeText={(text)=> {
+                            setPw(text)
+                          }}
+                        ></Dialog.Input>
+                        <Dialog.Button label="Zurück" onPress={()=> {
+                          setVisible(false);
+                        }} />
+                        <Dialog.Button label="Weiter" onPress={()=> {
+                              try{
+                                const credential = EmailAuthCredential._fromEmailAndPassword(
+                                  auth.currentUser.email,
+                                  pw
+                                );
+                          
+                                reauthenticateWithCredential(user, credential)
+                                .then(()=> {
+                                  navigation.navigate(navigate)
+                                  setVisible(false)
+                                }).catch((e)=> {
+                                  console.log(e)
+                                })
+                              }catch(error) {
+                                console.log(error);
+                              }
+                        }} />
+                      </Dialog.Container>
+                    </View>
+                  }
                   {type === 'toggle' &&
                     <View
                       key={icon}
@@ -111,14 +201,17 @@ const SettingButtons = ({navigation, source}) => {
                         }
                         <Text style={[styles.rowLabel, {color: theme.text}]}>{label}</Text>
                         <View style={{flex: 1}}/>
-    
-
                           <Switch 
                             value={theme.isOn}
                             onValueChange={(value) => {
                               if(onPress === 'darkmode') {
                                 EventRegister.emit('ChangeTheme', value)
                                 setdarkMode(value);
+                                if (value == true) {
+                                  setItem('darkMode', 'true');
+                                } else {
+                                  setItem('darkMode', 'false');
+                                }
                               }
                           }}
                           />

@@ -32,7 +32,7 @@ export default [
                 icon: 'user',
                 color: 'black',
                 label: 'Profil',
-                type: 'link',
+                type: 'secure-link',
                 navigate: 'ProfileSettings',
                 icontype: 'font-awesome-5'
             },
