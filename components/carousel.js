@@ -13,7 +13,7 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import theme from '../theme/theme';
 
 //screens
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -74,10 +74,10 @@ function Carousels({list, width}) {
                     <View style={{flex: 0.5}}>
                         <Image source={Images} style={[styles.image, { width, borderRadius: 30}]} />
                     </View>
-                    <View style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
+                    <ScrollView style={{flex: 1, backgroundColor: 'rgb(20, 20, 20)', width}}>
                         <Text style={styles.headtext}>{Title}</Text>
                         <Text style={styles.descriptiontext}>{Description}</Text>
-                    </View>
+                    </ScrollView>
                 </Panel_Up>
             </BottomSheetModal>
         </View>
