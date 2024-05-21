@@ -16,12 +16,12 @@ import Muttizettel from '../screens/Mehr/Muttizettel';
 import ProfileSettings from '../screens/settings/profileSettings/ProfilSettings'
 import profileSettingsName from '../screens/settings/profileSettings/profileSettingsName/profileSettingsName';
 import profileSettingsSecurity from '../screens/settings/profileSettings/profileSettingsSecurity';
-import PrivacySettings from '../screens/settings/privacy/privacySettings';
 import NotificationsSettings from '../screens/settings/notifications/notificationsSettings';
 import profileSettingsEmail from '../screens/settings/profileSettings/profileSettingsName/profileSettingsEmail';
 import PicturesAll from '../screens/PicturesAll';
 import VIPBook from '../screens/VIPBook';
 import VIPAbschluss from '../screens/VIPAbschluss'
+import Impressum from '../screens/settings/Impressum';
 
 const Stack = createNativeStackNavigator();
 
@@ -76,11 +76,11 @@ const Navigator = () => {
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsSecurity" component={profileSettingsSecurity} />
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsName" component={profileSettingsName} />
             <Stack.Screen options={{headerShown: false }} name="NotificationsSettings" component={NotificationsSettings} />
-            <Stack.Screen options={{headerShown: false }} name="PrivacySettings" component={PrivacySettings} />
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsEmail" component={profileSettingsEmail} />
             <Stack.Screen options={{headerShown: false }} name="PicturesAll" component={PicturesAll} />
             <Stack.Screen options={{headerShown: false }} name="VIPBook" component={VIPBook} />
             <Stack.Screen options={{headerShown: false }} name="VIPAbschluss" component={VIPAbschluss} />
+            <Stack.Screen options={{headerShown: false }} name="Impressum" component={Impressum} />
           </Stack.Navigator>
         </NavigationContainer>
       </themeContext.Provider>
@@ -100,11 +100,11 @@ const Navigator = () => {
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsSecurity" component={profileSettingsSecurity} />
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsName" component={profileSettingsName} />
             <Stack.Screen options={{headerShown: false }} name="NotificationsSettings" component={NotificationsSettings} />
-            <Stack.Screen options={{headerShown: false }} name="PrivacySettings" component={PrivacySettings} />
             <Stack.Screen options={{headerShown: false }} name="ProfileSettingsEmail" component={profileSettingsEmail} />
             <Stack.Screen options={{headerShown: false }} name="PicturesAll" component={PicturesAll} />
             <Stack.Screen options={{headerShown: false }} name="VIPBook" component={VIPBook} />
             <Stack.Screen options={{headerShown: false }} name="VIPAbschluss" component={VIPAbschluss} />
+            <Stack.Screen options={{headerShown: false }} name="Impressum" component={Impressum} />
           </Stack.Navigator>
         </NavigationContainer>
       </themeContext.Provider>

@@ -41,7 +41,7 @@ const Tabs = () => {
                     : 'home-outline';
                   type='ionicon'
                 } else if (route.name === 'AktuellesTab') {
-                  iconName = focused ? 'notifications' : 'notifications-outline';
+                  iconName = focused ? 'calendar' : 'calendar-outline';
                   type='ionicon'
                 } else if (route.name === 'CouponsTab') {
                   iconName = focused ? 'percent' : 'percent-outline';

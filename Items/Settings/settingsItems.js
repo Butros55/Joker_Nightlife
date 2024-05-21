@@ -13,21 +13,12 @@ export default [
                 onPress: 'darkmode'
             },
             {
-                id: 'news',
-                icon: 'envelope',
-                color: 'green',
-                label: 'Benachrichtigungen',
-                type: 'link',
-                navigate: 'NotificationsSettings',
-                icontype: 'font-awesome-5'
-            },
-            {
-                id: 'Über uns',
+                id: 'Impressum',
                 icon: 'info',
                 color: 'black',
-                label: 'Über uns',
+                label: 'Impressum',
                 type: 'link',
-                navigate: 'Test',
+                navigate: 'Impressum',
                 icontype: 'font-awesome-5'
             },
         ]
@@ -45,14 +36,20 @@ export default [
                 navigate: 'ProfileSettings',
                 icontype: 'font-awesome-5'
             },
+        ]
+    },
+    {
+        header: 'Privatsphäre',
+        icon: 'Settings',
+        items: [
             {
-                id: 'Privatsphäre',
-                icon: 'lock',
-                color: 'black',
-                label: 'Privatsphäre',
+                id: 'news',
+                icon: 'envelope',
+                color: 'green',
+                label: 'Benachrichtigungen',
                 type: 'link',
-                navigate: 'PrivacySettings',
-                icontype: 'font-awesome'
+                navigate: 'NotificationsSettings',
+                icontype: 'font-awesome-5'
             },
         ]
     },
