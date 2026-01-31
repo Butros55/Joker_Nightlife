@@ -1,214 +1,188 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+# Joker Nightlife
 
+[![React Native](https://img.shields.io/badge/React_Native-0.74-61DAFB?logo=react&logoColor=white)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-51-000020?logo=expo&logoColor=white)](https://expo.dev/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-10.4-FFCA28?logo=firebase&logoColor=white)](https://firebase.google.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
+**Joker Nightlife** ist eine mobile App für die Joker Nightlife Diskothek in Lingen: eine **React Native + Expo App** mit **Firebase Backend**.  
+Die App bietet Clubgästen eine verbesserte Party-Erfahrung mit Coupons, Event-Benachrichtigungen, VIP-Buchungen und mehr.
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
+> **Hinweis:** Die App wird bald im AppStore und PlayStore verfügbar sein.
 
+---
 
+## Inhalt
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/Butros55/Joker_Nightlife">
-    <img src="assets/pictures/logo.png" alt="Logo" width="300" height="80">
-  </a>
+- [Überblick](#überblick)
+- [Features](#features)
+- [Projektstruktur](#projektstruktur)
+- [Voraussetzungen](#voraussetzungen)
+- [Quickstart](#quickstart)
+- [NPM Scripts](#npm-scripts)
+- [Wie es funktioniert](#wie-es-funktioniert)
+- [Nutzung](#nutzung)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [Autoren](#autoren)
+- [License](#license)
 
-  <p align="center">
-    An App for the Joker Nightlife Disco in Lingen
-    <br />
-    <br />
-    <a href="https://github.com/Butros55/Joker_Nightlife">View Demo</a>
-    ·
-    <a href="https://github.com/Butros55/Joker_Nightlife/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/Butros55/Joker_Nightlife/issues">Request Feature</a>
-  </p>
-</div>
+---
 
+## Überblick
 
+- **Frontend:** React Native 0.74 + Expo SDK 51 mit React Navigation
+- **Backend:** Firebase (Authentication, Firestore, Storage)
+- **Styling:** Styled Components + React Native Elements UI
+- **Plattformen:** iOS, Android, Web
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#authors">Author</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+## Features
 
+- **Login & Authentifizierung** – Anmeldung per E-Mail oder Apple Sign-In mit Firebase Auth
+- **Home Dashboard** – Personalisierte Begrüßung mit Karussell-Ansicht der wichtigsten Inhalte
+- **Events** – Übersicht aller kommenden Veranstaltungen im Club
+- **Coupons** – Digitale Gutscheine für Getränke und Angebote
+- **VIP-Buchungen** – VIP-Bereiche direkt über die App reservieren
+- **Bildergalerie** – Fotos von vergangenen Events durchstöbern
+- **Muttizettel** – Digitales Ausfüllen und Drucken des Muttizettels für Minderjährige
+- **Onboarding** – Einführung für neue Nutzer mit animiertem Walkthrough
+- **Dark/Light Mode** – Anpassbares Theme für die App
 
+## Projektstruktur
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+```text
+.
+├─ App.js               # Haupt-Einstiegspunkt der App
+├─ screens/             # Alle Screen-Komponenten
+│  ├─ Home.js           # Home-Dashboard
+│  ├─ Login.js          # Login & Registrierung
+│  ├─ Coupons.js        # Coupon-Übersicht
+│  ├─ Pictures.js       # Bildergalerie
+│  ├─ VIP.js            # VIP-Bereich
+│  └─ settings/         # Einstellungen-Screens
+├─ components/          # Wiederverwendbare Komponenten
+│  ├─ firebaseConfig.js # Firebase-Konfiguration
+│  ├─ carousel.js       # Karussell-Komponente
+│  └─ asyncStorage.js   # Lokale Datenspeicherung
+├─ navigators/          # Navigation (Tabs, Drawer)
+├─ context/             # React Context (Theme, User Data)
+├─ Items/               # Daten-Listen und Konfigurationen
+├─ assets/              # Bilder, Videos, Fonts, Animationen
+├─ theme/               # Theme-Konfiguration
+├─ app.json             # Expo-Konfiguration
+└─ package.json         # Dependencies und Scripts
+```
 
-We as a group of Students want to createate a App for the Joker Nightlife Club, as a group project for our technical diploma.
+## Voraussetzungen
 
-Here's why:
-* Make the life of the Party Members of Joker easy
-* Give them a whole new party expiriense with Coupons and more
-* Let them know if a new Event is starting
+- **Node.js** (empfohlen: v18 oder neuer)
+- **npm** oder **yarn**
+- **Expo CLI** (wird automatisch mit npx verwendet)
+- **Expo Go App** auf deinem Smartphone (für die Entwicklung)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Quickstart
 
+### 1. Repository klonen
 
+```bash
+git clone https://github.com/Butros55/Joker_Nightlife.git
+cd Joker_Nightlife
+```
 
-### Built With
+### 2. Dependencies installieren
 
-* [![React][React.js]][React-url]
-* [![Expo][Expo.dev]][Expo-url]
+```bash
+npm install
+```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### 3. App starten
 
+```bash
+npm start
+```
 
+### 4. App öffnen
 
-<!-- GETTING STARTED -->
-## Getting Started
+- **Smartphone:** Scanne den QR-Code mit der Expo Go App
+- **Android Emulator:** Drücke `a` im Terminal
+- **iOS Simulator:** Drücke `i` im Terminal (nur macOS)
+- **Web Browser:** Drücke `w` im Terminal
 
-To get a local copy up and running follow these simple example steps.
+---
 
-### Prerequisites
+## NPM Scripts
 
-* React and Expo
-  <br>
-  if you dont have Ract already installed we reccomend following the instructions from:
-  <p>(<a href="https://reactnative.dev/docs/environment-setup">React Native</a>)</p>
-  
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+| Script | Beschreibung |
+|--------|--------------|
+| `npm start` | Metro Bundler starten (Expo) |
+| `npm run android` | App auf Android starten |
+| `npm run ios` | App auf iOS starten (nur macOS) |
+| `npm run web` | App im Browser starten |
 
-### Installation
+## Wie es funktioniert
 
-Will be available in the AppStore and PlayStore soon.
+1. **Registrierung/Login** – Nutzer erstellen ein Konto mit E-Mail oder nutzen Apple Sign-In
+2. **E-Mail-Verifizierung** – Nach der Registrierung wird eine Verifizierungsmail gesendet
+3. **Profil einrichten** – Vorname, Nachname und optionaler Zweitername werden gespeichert
+4. **Features nutzen** – Zugriff auf Events, Coupons, VIP-Buchungen und Bildergalerie
+5. **Daten** – Nutzerdaten werden sicher in Firebase Firestore gespeichert
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/Butros55/Joker_Nightlife
-   ```
-2. Install NPM packages
-   ```sh
-   npm install expo@latest
-   ```
+## Nutzung
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+| Schritt | Aktion |
+|---------|--------|
+| **Start** | App öffnen → Login oder Registrierung |
+| **Home** | Übersicht mit personalisierten Inhalten und Event-Karussell |
+| **Events** | Kommende Events ansehen und Benachrichtigungen erhalten |
+| **Coupons** | Verfügbare Gutscheine einlösen |
+| **VIP** | VIP-Bereich buchen und Details einsehen |
+| **Bilder** | Galerie vergangener Events durchstöbern |
+| **Einstellungen** | Profil bearbeiten, Benachrichtigungen, Impressum |
 
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-1. Run the metro server.
-   ```sh
-   npm start
-   ```
-2. Scan QR code with Expo-Go or use a emulator
-   * Android: press "a" in terminal to run
-   * Web: press "w" in terminal to run
-
-<!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Add Screens
-    - [x] Login Screen
-    - [x] Home Screen
-    - [x] Coupon Screen
-    - [x] Event Screen
-    - [ ] News Screen
-    - [x] Image Screen
-- [ ] Add Login functionality w/ firebase,
-    - [x] Login with E-Mail
-    - [x] Login wiht Apple
-    - [ ] Login with Facebook
-    - [ ] Login with Google
-- [x] Add "Muttizettel" print functionality
-- [ ] Add get data from Facebook for the News, Events and Images
-- [ ] Make a new Design for the App
+- [x] **Screens**
+  - [x] Login Screen
+  - [x] Home Screen
+  - [x] Coupon Screen
+  - [x] Event Screen
+  - [ ] News Screen
+  - [x] Image Screen
+- [x] **Login Funktionalität**
+  - [x] Login mit E-Mail
+  - [x] Login mit Apple
+  - [ ] Login mit Facebook
+  - [ ] Login mit Google
+- [x] **Muttizettel** – Druck-Funktionalität
+- [ ] **Facebook Integration** – News, Events und Bilder von Facebook laden
+- [ ] **Neues Design** – Überarbeitetes App-Design
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+Siehe die [offenen Issues](https://github.com/Butros55/Joker_Nightlife/issues) für eine vollständige Liste der geplanten Features.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+Wenn du einen Vorschlag hast, der die App verbessern würde:
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Fork das Projekt
+2. Erstelle einen Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Committe deine Änderungen (`git commit -m 'Add some AmazingFeature'`)
+4. Push zum Branch (`git push origin feature/AmazingFeature`)
+5. Öffne einen Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Vergiss nicht, dem Projekt einen Stern zu geben! ⭐
 
+## Autoren
 
-<!-- Authors -->
-## Authors
+- **Maciej**
+- **Leonie**
+- **Alina**
+- **Geret Wessling**
 
-ex. Maciej
-<br>
-ex. Leonie
-<br>
-ex. Alina
-<br>
-ex. Geret Wessling
+📌 **Projekt-Link:** [https://github.com/Butros55/Joker_Nightlife](https://github.com/Butros55/Joker_Nightlife)
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/Butros55/Joker_Nightlife)
+---
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## License
 
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Butros55/Joker_Nightlife.svg?style=for-the-badge
-[contributors-url]: https://github.com/Butros55/Joker_Nightlife/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Butros55/Joker_Nightlife.svg?style=for-the-badge
-[forks-url]: https://github.com/Butros55/Joker_Nightlife/network/members
-[stars-shield]: https://img.shields.io/github/stars/Butros55/Joker_Nightlife.svg?style=for-the-badge
-[stars-url]: https://github.com/Butros55/Joker_Nightlife/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Butros55/Joker_Nightlife.svg?style=for-the-badge
-[issues-url]: https://github.com/Butros55/Joker_Nightlife/issues
-[product-screenshot]: images/screenshot.png
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Expo.dev]: https://img.shields.io/badge/Build-000.svg?style=for-the-badge&logo=EXPO&labelColor=000&logoColor=FFF
-[Expo-url]: https://expo.dev/
+Für dieses Projekt ist aktuell keine separate Lizenzdatei hinterlegt.
